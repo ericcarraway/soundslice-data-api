@@ -13,5 +13,13 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericcarraway/soundslice-data-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ericcarraway/soundslice-data-api/issues"
+  },
+  "homepage": "https://github.com/ericcarraway/soundslice-data-api#readme"
 }
