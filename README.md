@@ -44,7 +44,7 @@ function handleError(err) {
 
 ## Client Methods
 
-Each method returns an Axios Promise.
+Each method returns an [Axios](https://github.com/axios/axios) Promise.
 
 ### **NOTE:** Not all API methods have been implemented yet.
 
