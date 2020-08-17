@@ -88,7 +88,7 @@ apiClient.getSyncpointsByRecordingId('123456')
 
 #### `listFolders()`
 
-- Lists top-level folders within your account’s slice manager.
+- Lists **top-level** folders within your account’s slice manager.
 - Documentation: ["List folders"](https://www.soundslice.com/help/data-api/#listfolders)
 
 
