@@ -19,7 +19,7 @@ $ npm install @percuss.io/soundslice-data-api
 // https://www.soundslice.com/help/data-api/
 const { SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD } = process.env;
 
-const apiClient = require("@percuss.io/soundslice-data-api")({
+const apiClient = require('@percuss.io/soundslice-data-api')({
   SOUNDSLICE_APPLICATION_ID,
   SOUNDSLICE_PASSWORD,
 });
@@ -46,4 +46,25 @@ function handleError(err) {
 
 ## Implemented Methods:
 
-- `listSlices`: [List slices](https://www.soundslice.com/help/data-api/#listslices)
+Currently, two methods are implemented:
+
+| Method Name    | Soundslice Documentation |
+|----------------|--------------------------|
+| listSlices     | ["List slices"](https://www.soundslice.com/help/data-api/#listslices) |
+| getSliceBySlug | ["Get slice"](https://www.soundslice.com/help/data-api/#getslice) |
+
+---
+
+## Method Usage
+
+`listSlices()`
+
+```javascript
+apiClient.listSlices()
+```
+
+`getSliceBySlug(slug)`
+
+```javascript
+apiClient.getSliceBySlug('123456')
+```
