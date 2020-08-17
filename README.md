@@ -44,24 +44,14 @@ function handleError(err) {
 }
 ```
 
-## Implemented Methods:
+## Client Methods
 
-Currently, three methods are implemented:
-
-| Method Name    | Soundslice Documentation |
-|----------------|--------------------------|
-| listSlices     | ["List slices"](https://www.soundslice.com/help/data-api/#listslices) |
-| getSliceBySlug | ["Get slice"](https://www.soundslice.com/help/data-api/#getslice) |
-| getSliceRecordingsBySlug | ["Get slice’s recordings"](https://www.soundslice.com/help/data-api/#getrecordings) |
-| getSyncpointsByRecordingId | ["Get recording’s syncpoints"](https://www.soundslice.com/help/data-api/#getsyncpoints) |
-
----
-
-## Method Usage
+### **NOTE:** Not all API methods have been implemented yet.
 
 #### `listSlices()`
 
-Retrieves metadata for all slices in your account.
+- Retrieves metadata for all slices in your account.
+- Documentation: ["List slices"](https://www.soundslice.com/help/data-api/#listslices)
 
 ```javascript
 apiClient.listSlices()
@@ -69,7 +59,8 @@ apiClient.listSlices()
 
 #### `getSliceBySlug(slug)`
 
-Retrieves metadata for the slice with slug `slug`.
+- Retrieves metadata for the slice with slug `slug`.
+- Documentation: ["Get slice"](https://www.soundslice.com/help/data-api/#getslice)
 
 ```javascript
 apiClient.getSliceBySlug('123456')
@@ -77,7 +68,9 @@ apiClient.getSliceBySlug('123456')
 
 #### `getSliceRecordingsBySlug(slug)`
 
-Gets data about all recordings in the slice with slug `slug`.
+- Gets data about all recordings in the slice with slug `slug`.
+- Documentation: ["Get slice’s recordings"](https://www.soundslice.com/help/data-api/#getrecordings)
+
 
 ```javascript
 apiClient.getSliceRecordingsBySlug('123456')
@@ -85,8 +78,30 @@ apiClient.getSliceRecordingsBySlug('123456')
 
 #### `getSyncpointsByRecordingId(recordingId)`
 
-Sets the syncpoints for the recording with ID `recordingId`.
+- Gets the syncpoints for the recording with ID `recordingId`.
+- Documentation: ["Get recording’s syncpoints"](https://www.soundslice.com/help/data-api/#getsyncpoints)
+
 
 ```javascript
 apiClient.getSyncpointsByRecordingId('123456')
+```
+
+#### `listFolders()`
+
+- Lists top-level folders within your account’s slice manager.
+- Documentation: ["List folders"](https://www.soundslice.com/help/data-api/#listfolders)
+
+
+```javascript
+apiClient.listFolders()
+```
+
+#### `listSubfoldersByParentId(parentId)`
+
+- List subfolders within a given parent folder.
+- Documentation: ["List folders"](https://www.soundslice.com/help/data-api/#listfolders)
+
+
+```javascript
+apiClient.listSubfoldersByParentId('12345')
 ```
