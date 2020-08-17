@@ -1,12 +1,10 @@
 # soundslice-data-api
 
-https://www.npmjs.com/package/@percuss.io/soundslice-data-api
-
-> _Unofficial JavaScript client for the Soundslice data API_
-
-Each method returns an Axios Promise.
+Unofficial JavaScript client for the [Soundslice data API](https://www.soundslice.com/help/data-api/)
 
 ### 1. Install
+
+https://www.npmjs.com/package/@percuss.io/soundslice-data-api
 
 ```shell
 $ npm install @percuss.io/soundslice-data-api
@@ -45,6 +43,8 @@ function handleError(err) {
 ```
 
 ## Client Methods
+
+Each method returns an Axios Promise.
 
 ### **NOTE:** Not all API methods have been implemented yet.
 
