@@ -1,6 +1,6 @@
 {
   "name": "@percuss.io/soundslice-data-api",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "JavaScript adapter for the Soundslice data API",
   "main": "index.js",
   "scripts": {
@@ -10,5 +10,8 @@
     "Soundslice"
   ],
   "author": "Eric Carraway",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
 }
