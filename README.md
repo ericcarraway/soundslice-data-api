@@ -53,6 +53,7 @@ Currently, three methods are implemented:
 | listSlices     | ["List slices"](https://www.soundslice.com/help/data-api/#listslices) |
 | getSliceBySlug | ["Get slice"](https://www.soundslice.com/help/data-api/#getslice) |
 | getSliceRecordingsBySlug | ["Get slice’s recordings"](https://www.soundslice.com/help/data-api/#getrecordings) |
+| getSyncpointsByRecordingId | ["Get recording’s syncpoints"](https://www.soundslice.com/help/data-api/#getsyncpoints) |
 
 ---
 
@@ -68,7 +69,7 @@ apiClient.listSlices()
 
 #### `getSliceBySlug(slug)`
 
-Retrieves metadata for the slice with slug SLUG.
+Retrieves metadata for the slice with slug `slug`.
 
 ```javascript
 apiClient.getSliceBySlug('123456')
@@ -76,8 +77,16 @@ apiClient.getSliceBySlug('123456')
 
 #### `getSliceRecordingsBySlug(slug)`
 
-Gets data about all recordings in the slice with slug SLUG.
+Gets data about all recordings in the slice with slug `slug`.
 
 ```javascript
 apiClient.getSliceRecordingsBySlug('123456')
+```
+
+#### `getSyncpointsByRecordingId(recordingId)`
+
+Sets the syncpoints for the recording with ID `recordingId`.
+
+```javascript
+apiClient.getSyncpointsByRecordingId('123456')
 ```

@@ -24,10 +24,12 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
   const listSlices = () => get(`/scores/`);
   const getSliceBySlug = (slug) => get(`/scores/${slug}/`);
   const getSliceRecordingsBySlug = (slug) => get(`/scores/${slug}/recordings/`);
+  const getSyncpointsByRecordingId = (recordingId) => get(`/recordings/${recordingId}/syncpoints/`);
 
   return {
     listSlices,
     getSliceBySlug,
     getSliceRecordingsBySlug,
+    getSyncpointsByRecordingId,
   };
 };
