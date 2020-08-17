@@ -16,14 +16,18 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
 
   const axiosInstance = axios.create(axiosOpts);
 
+  const { get } = axiosInstance;
+
   // methods, ordered as they are in the Soundslice documentation
   // https://www.soundslice.com/help/data-api/
 
-  const listSlices = () => axiosInstance.get(`/scores/`);
-  const getSliceBySlug = (slug) => axiosInstance.get(`/scores/${slug}/`);
+  const listSlices = () => get(`/scores/`);
+  const getSliceBySlug = (slug) => get(`/scores/${slug}/`);
+  const getSliceRecordingsBySlug = (slug) => get(`/scores/${slug}/recordings/`);
 
   return {
     listSlices,
     getSliceBySlug,
+    getSliceRecordingsBySlug,
   };
 };

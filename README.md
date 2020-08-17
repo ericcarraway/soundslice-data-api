@@ -46,25 +46,38 @@ function handleError(err) {
 
 ## Implemented Methods:
 
-Currently, two methods are implemented:
+Currently, three methods are implemented:
 
 | Method Name    | Soundslice Documentation |
 |----------------|--------------------------|
 | listSlices     | ["List slices"](https://www.soundslice.com/help/data-api/#listslices) |
 | getSliceBySlug | ["Get slice"](https://www.soundslice.com/help/data-api/#getslice) |
+| getSliceRecordingsBySlug | ["Get slice’s recordings"](https://www.soundslice.com/help/data-api/#getrecordings) |
 
 ---
 
 ## Method Usage
 
-`listSlices()`
+#### `listSlices()`
+
+Retrieves metadata for all slices in your account.
 
 ```javascript
 apiClient.listSlices()
 ```
 
-`getSliceBySlug(slug)`
+#### `getSliceBySlug(slug)`
+
+Retrieves metadata for the slice with slug SLUG.
 
 ```javascript
 apiClient.getSliceBySlug('123456')
+```
+
+#### `getSliceRecordingsBySlug(slug)`
+
+Gets data about all recordings in the slice with slug SLUG.
+
+```javascript
+apiClient.getSliceRecordingsBySlug('123456')
 ```
