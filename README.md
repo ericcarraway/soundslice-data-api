@@ -66,6 +66,15 @@ apiClient.listSlices()
 apiClient.getSliceBySlug('123456')
 ```
 
+#### `getSliceNotationBySlug(slug)`
+
+- Retrieves the original notation file for the slice with slug `slug`.
+- Documentation: ["Get slice’s notation"](https://www.soundslice.com/help/data-api/#getnotation)
+
+```javascript
+apiClient.getSliceNotationBySlug('123456')
+```
+
 #### `getSliceRecordingsBySlug(slug)`
 
 - Gets data about all recordings in the slice with slug `slug`.

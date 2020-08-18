@@ -21,6 +21,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
   // https://www.soundslice.com/help/data-api/
 
   const getSliceBySlug = (slug) => get(`/scores/${slug}/`);
+  const getSliceNotationBySlug = (slug) => get(`/scores/${slug}/notation/`);
   const getSliceRecordingsBySlug = (slug) => get(`/scores/${slug}/recordings/`);
   const getSyncpointsByRecordingId = (recordingId) => get(`/recordings/${recordingId}/syncpoints/`);
   const listFolders = () => get(`/folders/`);
@@ -29,6 +30,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
 
   return {
     getSliceBySlug,
+    getSliceNotationBySlug,
     getSliceRecordingsBySlug,
     getSyncpointsByRecordingId,
     listFolders,
