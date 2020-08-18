@@ -1,6 +1,6 @@
 # soundslice-data-api
 
-Unofficial JavaScript client for the [Soundslice data API](https://www.soundslice.com/help/data-api/)
+Unofficial Node.js client for the [Soundslice data API](https://www.soundslice.com/help/data-api/)
 
 ### 1. Install
 
@@ -47,6 +47,37 @@ function handleError(err) {
 Each method returns an [Axios](https://github.com/axios/axios) Promise.
 
 ### **NOTE:** Not all API methods have been implemented yet.
+
+#### `createSlice()`
+
+- Creates a slice.
+- Documentation: ["Create slice"](https://www.soundslice.com/help/data-api/#createslice)
+
+```javascript
+// all params are optional
+apiClient.createSlice({
+  // "Title" in Soundslice's form modal
+  name: 'The Quick Brown Fox',
+
+  artist: 'Lazy Dog',
+
+  // allow embedding on whitelist domains
+  // disabled when omitted
+  embed_status: 4,
+
+  // the folder in which to create the slice
+  // created in the root folder when omitted
+  folder_id: '12345',
+
+  // allow printing
+  // disallowed when omitted
+  print_status: 3,
+
+  // viewable by anyone who knows its URL
+  // private when omitted
+  status: 3,
+})
+```
 
 #### `listSlices()`
 
@@ -114,3 +145,7 @@ apiClient.listFolders()
 ```javascript
 apiClient.listSubfoldersByParentId('12345')
 ```
+
+## Versioning
+
+Until this package reaches a 1.0 release, breaking changes may be released.

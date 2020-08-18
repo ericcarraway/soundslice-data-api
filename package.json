@@ -12,7 +12,8 @@
   "author": "Eric Carraway",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "form-data": "^3.0.0"
   },
   "repository": {
     "type": "git",
