@@ -51,7 +51,7 @@ Each method returns an [Axios](https://github.com/axios/axios) Promise.
 #### `createSlice()`
 
 - Creates a slice.
-- Documentation: ["Create slice"](https://www.soundslice.com/help/data-api/#createslice)
+- Soundslice documentation: ["Create slice"](https://www.soundslice.com/help/data-api/#createslice)
 
 ```javascript
 // all params are optional
@@ -82,7 +82,7 @@ apiClient.createSlice({
 #### `listSlices()`
 
 - Retrieves metadata for all slices in your account.
-- Documentation: ["List slices"](https://www.soundslice.com/help/data-api/#listslices)
+- Soundslice documentation: ["List slices"](https://www.soundslice.com/help/data-api/#listslices)
 
 ```javascript
 apiClient.listSlices()
@@ -91,7 +91,7 @@ apiClient.listSlices()
 #### `getSliceBySlug(slug)`
 
 - Retrieves metadata for the slice with slug `slug`.
-- Documentation: ["Get slice"](https://www.soundslice.com/help/data-api/#getslice)
+- Soundslice documentation: ["Get slice"](https://www.soundslice.com/help/data-api/#getslice)
 
 ```javascript
 apiClient.getSliceBySlug('123456')
@@ -100,7 +100,7 @@ apiClient.getSliceBySlug('123456')
 #### `getSliceNotationBySlug(slug)`
 
 - Retrieves the original notation file for the slice with slug `slug`.
-- Documentation: ["Get slice’s notation"](https://www.soundslice.com/help/data-api/#getnotation)
+- Soundslice documentation: ["Get slice’s notation"](https://www.soundslice.com/help/data-api/#getnotation)
 
 ```javascript
 apiClient.getSliceNotationBySlug('123456')
@@ -109,7 +109,7 @@ apiClient.getSliceNotationBySlug('123456')
 #### `getSliceRecordingsBySlug(slug)`
 
 - Gets data about all recordings in the slice with slug `slug`.
-- Documentation: ["Get slice’s recordings"](https://www.soundslice.com/help/data-api/#getrecordings)
+- Soundslice documentation: ["Get slice’s recordings"](https://www.soundslice.com/help/data-api/#getrecordings)
 
 
 ```javascript
@@ -119,7 +119,7 @@ apiClient.getSliceRecordingsBySlug('123456')
 #### `getSyncpointsByRecordingId(recordingId)`
 
 - Gets the syncpoints for the recording with ID `recordingId`.
-- Documentation: ["Get recording’s syncpoints"](https://www.soundslice.com/help/data-api/#getsyncpoints)
+- Soundslice documentation: ["Get recording’s syncpoints"](https://www.soundslice.com/help/data-api/#getsyncpoints)
 
 
 ```javascript
@@ -129,7 +129,7 @@ apiClient.getSyncpointsByRecordingId('123456')
 #### `listFolders()`
 
 - Lists **top-level** folders within your account’s slice manager.
-- Documentation: ["List folders"](https://www.soundslice.com/help/data-api/#listfolders)
+- Soundslice documentation: ["List folders"](https://www.soundslice.com/help/data-api/#listfolders)
 
 
 ```javascript
@@ -139,7 +139,7 @@ apiClient.listFolders()
 #### `listSubfoldersByParentId(parentId)`
 
 - List subfolders within a given parent folder.
-- Documentation: ["List folders"](https://www.soundslice.com/help/data-api/#listfolders)
+- Soundslice documentation: ["List folders"](https://www.soundslice.com/help/data-api/#listfolders)
 
 
 ```javascript
