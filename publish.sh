@@ -26,3 +26,6 @@ echo "OK"
 # we need to slightly adjust
 # the `npm publish` command
 npm publish --access public
+
+echo "- - -"
+echo "https://www.npmjs.com/package/@percuss.io/soundslice-data-api"
