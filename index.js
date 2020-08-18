@@ -16,8 +16,6 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     Authorization: `Basic ${SOUNDSLICE_API_KEY}`,
   };
 
-  const { get } = axios.create({ baseURL, headers });
-
   const createSlice = (paramsObj) => {
     const form = new FormData();
 
@@ -36,6 +34,12 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     return axios.post(`${baseURL}/scores/`, form, config);
   };
 
+  const axiosInstance = axios.create({ baseURL, headers });
+
+  const deleteSliceBySlug = (slug) => axiosInstance.delete(`/scores/${slug}/`);
+
+  const { get } = axiosInstance;
+
   const getSliceBySlug = (slug) => get(`/scores/${slug}/`);
   const getSliceNotationBySlug = (slug) => get(`/scores/${slug}/notation/`);
   const getSliceRecordingsBySlug = (slug) => get(`/scores/${slug}/recordings/`);
@@ -46,6 +50,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
 
   return {
     createSlice,
+    deleteSliceBySlug,
     getSliceBySlug,
     getSliceNotationBySlug,
     getSliceRecordingsBySlug,

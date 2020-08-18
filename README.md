@@ -79,6 +79,15 @@ apiClient.createSlice({
 })
 ```
 
+#### `deleteSliceBySlug(slug)`
+
+- Deletes the slice with slug `slug`, including all its associated data such as recordings.
+- Soundslice documentation: ["Delete slice"](https://www.soundslice.com/help/data-api/#deleteslice)
+
+```javascript
+apiClient.deleteSliceBySlug('123456')
+```
+
 #### `listSlices()`
 
 - Retrieves metadata for all slices in your account.
