@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "shipit": "bash ./scripts/publish.sh",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "bash ./scripts/test.sh"
   },
   "files": [
     "index.js"
@@ -18,6 +18,10 @@
   "dependencies": {
     "axios": "^0.19.2",
     "form-data": "^3.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.1.1"
   },
   "repository": {
     "type": "git",
