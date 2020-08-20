@@ -4,6 +4,7 @@
   "description": "Unofficial JavaScript client for the Soundslice data API",
   "main": "index.js",
   "scripts": {
+    "shipit": "bash ./scripts/publish.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
