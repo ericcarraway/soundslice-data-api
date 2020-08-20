@@ -1,11 +1,15 @@
 {
   "name": "@percuss.io/soundslice-data-api",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Unofficial JavaScript client for the Soundslice data API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "shipit": "bash ./scripts/publish.sh",
+    "test": "bash ./scripts/test.sh"
   },
+  "files": [
+    "index.js"
+  ],
   "keywords": [
     "Soundslice"
   ],
@@ -14,6 +18,11 @@
   "dependencies": {
     "axios": "^0.19.2",
     "form-data": "^3.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "mocha": "^8.1.1"
   },
   "repository": {
     "type": "git",
