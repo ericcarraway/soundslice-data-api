@@ -4,6 +4,7 @@
   "description": "Unofficial Node.js client for the Soundslice data API",
   "main": "index.js",
   "scripts": {
+    "lint": "bash ./scripts/lint.sh",
     "shipit": "bash ./scripts/publish.sh",
     "test": "bash ./scripts/test.sh"
   },
@@ -22,6 +23,9 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "dotenv": "^8.2.0",
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
     "mocha": "^8.1.2"
   },
   "repository": {

@@ -43,10 +43,12 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
   const getSliceBySlug = (slug) => get(`/scores/${slug}/`);
   const getSliceNotationBySlug = (slug) => get(`/scores/${slug}/notation/`);
   const getSliceRecordingsBySlug = (slug) => get(`/scores/${slug}/recordings/`);
-  const getSyncpointsByRecordingId = (recordingId) => get(`/recordings/${recordingId}/syncpoints/`);
+  const getSyncpointsByRecordingId = (recordingId) =>
+    get(`/recordings/${recordingId}/syncpoints/`);
   const listFolders = () => get(`/folders/`);
   const listSlices = () => get(`/scores/`);
-  const listSubfoldersByParentId = (parentId) => get(`/folders/?parent_id=${parentId}`);
+  const listSubfoldersByParentId = (parentId) =>
+    get(`/folders/?parent_id=${parentId}`);
 
   return {
     createSlice,
