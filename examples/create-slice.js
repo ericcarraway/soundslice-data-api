@@ -17,11 +17,7 @@ const main = async () => {
   } catch (err) {
     console.error(`ERROR:`);
 
-    const {
-      data,
-      status,
-      statusText,
-    } = err.response;
+    const { data, status, statusText } = err.response;
 
     // { status: 422, statusText: 'Unprocessable Entity' }
     console.log({
