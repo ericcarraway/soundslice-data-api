@@ -27,7 +27,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     Authorization: `Basic ${SOUNDSLICE_API_KEY}`,
   };
 
-  const createSlice = (paramsObj) => {
+  const post = (url, paramsObj) => {
     const formData = getFormDataFromObj(paramsObj);
 
     const config = {
@@ -37,8 +37,10 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
       },
     };
 
-    return axios.post(`${baseURL}/scores/`, formData, config);
+    return axios.post(url, formData, config);
   };
+
+  const createSlice = (paramsObj) => post(`${baseURL}/scores/`, paramsObj);
 
   const moveSliceToFolder = (paramsObj) => {
     const { slug } = paramsObj;
@@ -48,16 +50,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
 
     // required: folder_id
     // optional: user_id
-    const formData = getFormDataFromObj(paramsObjClone);
-
-    const config = {
-      headers: {
-        Authorization: headers.Authorization,
-        ...formData.getHeaders(),
-      },
-    };
-
-    return axios.post(`${baseURL}/scores/${slug}/move/`, formData, config);
+    return post(`${baseURL}/scores/${slug}/move/`, paramsObjClone);
   };
 
   const axiosInstance = axios.create({ baseURL, headers });
