@@ -24,6 +24,7 @@ describe(`soundslice-data-api`, () => {
         `listFolders`,
         `listSlices`,
         `listSubfoldersByParentId`,
+        `moveSliceToFolder`,
       ];
 
       expect(actual).to.eql(expected);
@@ -81,6 +82,12 @@ describe(`soundslice-data-api`, () => {
   describe(`listSubfoldersByParentId`, () => {
     it(`should be a function`, () => {
       expect(apiClient.listSubfoldersByParentId).to.be.a(`function`);
+    });
+  });
+
+  describe(`moveSliceToFolder`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.moveSliceToFolder).to.be.a(`function`);
     });
   });
 });
