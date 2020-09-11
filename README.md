@@ -115,6 +115,28 @@ apiClient.getSliceBySlug('123456')
 apiClient.getSliceNotationBySlug('123456')
 ```
 
+#### `moveSliceToFolder()`
+
+- Moves a slice to a folder.
+- Soundslice documentation: ["Move slice to folder"](https://www.soundslice.com/help/data-api/#moveslice)
+
+```javascript
+apiClient.moveSliceToFolder({
+  // Required - The slice's slug.
+  slug: `123456`,
+
+  // Required - The ID of the new folder.
+  // Use 0 (zero) to move the slice to your account's root folder.
+  folder_id: `2048`,
+
+  // Optional - The ID of the user account to move this slice into.
+  // This will only work for the ID of an organization you belong to.
+  // If not provided, this value will default to the user you're accessing the
+  // API with.
+  user_id: 4,
+})
+```
+
 #### `getSliceRecordingsBySlug(slug)`
 
 - Gets data about all recordings in the slice with slug `slug`.
