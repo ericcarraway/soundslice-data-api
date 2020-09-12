@@ -35,7 +35,7 @@ const main = async () => {
     // scorehash,
     // slug,
     url,
-    // embedUrl,
+    // embed_url,
   } = res.data;
 
   console.log(`https://www.soundslice.com${url}`);
