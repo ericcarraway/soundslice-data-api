@@ -1,11 +1,5 @@
 # TODO
 
-Duplicate slice
-- `duplicateSliceByScorehash`
-- https://www.soundslice.com/help/data-api/#duplicateslice
-- HTTP POST
-- No parameters
-
 Delete recording
 - `deleteRecordingByRecordingId`
 - https://www.soundslice.com/help/data-api/#deleterecording
