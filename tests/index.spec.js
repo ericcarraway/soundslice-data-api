@@ -17,6 +17,7 @@ describe(`soundslice-data-api`, () => {
       const expected = [
         `createSlice`,
         `deleteSliceBySlug`,
+        `duplicateSliceByScorehash`,
         `getSliceBySlug`,
         `getSliceNotationBySlug`,
         `getSliceRecordingsBySlug`,
