@@ -1,5 +1,8 @@
 # Changelog
 
+**2020-09-19**
+- Added `duplicateSliceByScorehash` in `v0.7.0`
+
 **2020-09-11**
 - Added `moveSliceToFolder`
 - Added `async` / `await` example for `createSlice`
