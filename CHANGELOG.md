@@ -1,9 +1,11 @@
 # Changelog
 
 **2020-09-19**
-- Added `duplicateSliceByScorehash` in `v0.7.0`
+- Published `v0.7.0`
+- Added `duplicateSliceByScorehash`
 
 **2020-09-11**
+- Published `v0.6.0`
 - Added `moveSliceToFolder`
 - Added `async` / `await` example for `createSlice`
 
@@ -11,12 +13,15 @@
 - Added examples for `listSlices` & `getSliceBySlug`
 
 **2020-08-20**
+- Published `v0.5.1`
 - Added basic smoke tests
 
 **2020-08-19**
+- Published `v0.5.0`
 - Added `deleteSliceBySlug`
 
 **2020-08-18**
+- Published `v0.2.0`
 - `createSlice`
 - `getSliceBySlug`
 - `getSliceNotationBySlug`
