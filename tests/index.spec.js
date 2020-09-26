@@ -16,6 +16,7 @@ describe(`soundslice-data-api`, () => {
 
       const expected = [
         `createSlice`,
+        `deleteRecordingByRecordingId`,
         `deleteSliceBySlug`,
         `duplicateSliceByScorehash`,
         `getSliceBySlug`,
@@ -35,6 +36,12 @@ describe(`soundslice-data-api`, () => {
   describe(`createSlice`, () => {
     it(`should be a function`, () => {
       expect(apiClient.createSlice).to.be.a(`function`);
+    });
+  });
+
+  describe(`deleteRecordingByRecordingId`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.deleteRecordingByRecordingId).to.be.a(`function`);
     });
   });
 
