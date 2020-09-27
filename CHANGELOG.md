@@ -1,6 +1,8 @@
 # Changelog
 
 **2020-09-27**
+- Published `v0.9.0`
+- Added `deleteFolderByFolderId`,
 - Published `v0.8.0`
 - Added `deleteRecordingByRecordingId`
 

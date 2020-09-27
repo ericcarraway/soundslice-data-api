@@ -175,6 +175,16 @@ apiClient.deleteRecordingByRecordingId('123456')
 apiClient.getSyncpointsByRecordingId('123456')
 ```
 
+#### `deleteFolderByFolderId(folderId)`
+
+- Deletes the given folder within your account’s slice manager.
+- The folder must be empty. It can’t contain any slices or other folders.
+- Soundslice documentation: ["Delete folder"](https://www.soundslice.com/help/data-api/#deletefolder)
+
+```javascript
+apiClient.deleteFolderByFolderId('12345')
+```
+
 #### `listFolders()`
 
 - Lists **top-level** folders within your account’s slice manager.
