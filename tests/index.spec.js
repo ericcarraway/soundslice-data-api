@@ -16,6 +16,7 @@ describe(`soundslice-data-api`, () => {
 
       const expected = [
         `createSlice`,
+        `deleteRecordingByRecordingId`,
         `deleteSliceBySlug`,
         `duplicateSliceByScorehash`,
         `getSliceBySlug`,
@@ -38,9 +39,21 @@ describe(`soundslice-data-api`, () => {
     });
   });
 
+  describe(`deleteRecordingByRecordingId`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.deleteRecordingByRecordingId).to.be.a(`function`);
+    });
+  });
+
   describe(`deleteSliceBySlug`, () => {
     it(`should be a function`, () => {
       expect(apiClient.deleteSliceBySlug).to.be.a(`function`);
+    });
+  });
+
+  describe(`duplicateSliceByScorehash`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.duplicateSliceByScorehash).to.be.a(`function`);
     });
   });
 

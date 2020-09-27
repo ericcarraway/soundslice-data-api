@@ -1,10 +1,5 @@
 # TODO
 
-Delete recording
-- `deleteRecordingByRecordingId`
-- https://www.soundslice.com/help/data-api/#deleterecording
-- HTTP DELETE
-
 Create folder
 - `createFolder`
 - https://www.soundslice.com/help/data-api/#createfolder

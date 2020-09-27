@@ -1,5 +1,9 @@
 # Changelog
 
+**2020-09-27**
+- Published `v0.8.0`
+- Added `deleteRecordingByRecordingId`
+
 **2020-09-19**
 - Published `v0.7.0`
 - Added `duplicateSliceByScorehash`
