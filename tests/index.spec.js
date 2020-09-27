@@ -51,6 +51,12 @@ describe(`soundslice-data-api`, () => {
     });
   });
 
+  describe(`duplicateSliceByScorehash`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.duplicateSliceByScorehash).to.be.a(`function`);
+    });
+  });
+
   describe(`getSliceBySlug`, () => {
     it(`should be a function`, () => {
       expect(apiClient.getSliceBySlug).to.be.a(`function`);
