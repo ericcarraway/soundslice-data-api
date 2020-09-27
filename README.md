@@ -156,6 +156,15 @@ apiClient.duplicateSliceByScorehash('C1FVc')
 apiClient.getSliceRecordingsBySlug('123456')
 ```
 
+#### `deleteRecordingByRecordingId(recordingId)`
+
+- Deletes the recording with the given `recordingId`, including all its associated data such as syncpoints and uploaded audio.
+- Soundslice documentation: ["Delete recording"](https://www.soundslice.com/help/data-api/#deleterecording)
+
+```javascript
+apiClient.deleteRecordingByRecordingId('123456')
+```
+
 #### `getSyncpointsByRecordingId(recordingId)`
 
 - Gets the syncpoints for the recording with ID `recordingId`.
