@@ -58,6 +58,8 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
   const duplicateSliceByScorehash = (scorehash) =>
     axiosInstance.post(`/slices/${scorehash}/duplicate/`);
 
+  const deleteFolderByFolderId = (folderId) =>
+    axiosInstance.delete(`/folders/${folderId}/`);
   const deleteRecordingByRecordingId = (recordingId) =>
     axiosInstance.delete(`/recordings/${recordingId}/`);
   const deleteSliceBySlug = (slug) => axiosInstance.delete(`/scores/${slug}/`);
@@ -76,6 +78,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
 
   return {
     createSlice,
+    deleteFolderByFolderId,
     deleteRecordingByRecordingId,
     deleteSliceBySlug,
     duplicateSliceByScorehash,

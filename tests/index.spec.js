@@ -16,6 +16,7 @@ describe(`soundslice-data-api`, () => {
 
       const expected = [
         `createSlice`,
+        `deleteFolderByFolderId`,
         `deleteRecordingByRecordingId`,
         `deleteSliceBySlug`,
         `duplicateSliceByScorehash`,
@@ -36,6 +37,12 @@ describe(`soundslice-data-api`, () => {
   describe(`createSlice`, () => {
     it(`should be a function`, () => {
       expect(apiClient.createSlice).to.be.a(`function`);
+    });
+  });
+
+  describe(`deleteFolderByFolderId`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.deleteFolderByFolderId).to.be.a(`function`);
     });
   });
 
