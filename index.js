@@ -40,6 +40,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     return axios.post(url, formData, config);
   };
 
+  const createFolder = (paramsObj) => post(`${baseURL}/folders/`, paramsObj);
   const createSlice = (paramsObj) => post(`${baseURL}/scores/`, paramsObj);
 
   const moveSliceToFolder = (paramsObj) => {
@@ -77,6 +78,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     get(`/folders/?parent_id=${parentId}`);
 
   return {
+    createFolder,
     createSlice,
     deleteFolderByFolderId,
     deleteRecordingByRecordingId,
