@@ -1,5 +1,9 @@
 # Changelog
 
+**2020-10-10**
+- Published `v0.10.0`
+- Added `createFolder`,
+
 **2020-09-27**
 - Published `v0.9.0`
 - Added `deleteFolderByFolderId`,
