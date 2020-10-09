@@ -15,6 +15,7 @@ describe(`soundslice-data-api`, () => {
       const actual = Object.keys(apiClient).sort();
 
       const expected = [
+        `createFolder`,
         `createSlice`,
         `deleteFolderByFolderId`,
         `deleteRecordingByRecordingId`,
@@ -31,6 +32,12 @@ describe(`soundslice-data-api`, () => {
       ];
 
       expect(actual).to.eql(expected);
+    });
+  });
+
+  describe(`createFolder`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.createFolder).to.be.a(`function`);
     });
   });
 

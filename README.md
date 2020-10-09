@@ -175,6 +175,22 @@ apiClient.deleteRecordingByRecordingId('123456')
 apiClient.getSyncpointsByRecordingId('123456')
 ```
 
+#### `createFolder()`
+
+- Creates a folder.
+- Soundslice documentation: ["Create folder"](https://www.soundslice.com/help/data-api/#createfolder)
+
+```javascript
+apiClient.createFolder({
+  // Required - The name of the folder.
+  name: 'New Example Folder',
+
+  // Optional - Integer. The folder's parent ID.
+  // Use this if you want to nest a folder within another one.
+  parent_id: 12345,
+})
+```
+
 #### `deleteFolderByFolderId(folderId)`
 
 - Deletes the given folder within your account’s slice manager.
