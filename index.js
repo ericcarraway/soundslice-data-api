@@ -54,6 +54,16 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     return post(`${baseURL}/scores/${slug}/move/`, paramsObjClone);
   };
 
+  const renameFolder = (paramsObj) => {
+    const { folderId } = paramsObj;
+    const paramsObjClone = { ...paramsObj };
+
+    delete paramsObjClone.folderId;
+
+    // required: name
+    return post(`${baseURL}/folders/${folderId}/`, paramsObjClone);
+  };
+
   const axiosInstance = axios.create({ baseURL, headers });
 
   const duplicateSliceByScorehash = (scorehash) =>
@@ -92,5 +102,6 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     listSlices,
     listSubfoldersByParentId,
     moveSliceToFolder,
+    renameFolder,
   };
 };

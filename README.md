@@ -191,6 +191,21 @@ apiClient.createFolder({
 })
 ```
 
+#### `renameFolder()`
+
+- Renames a folder.
+- Soundslice documentation: ["Rename folder"](https://www.soundslice.com/help/data-api/#renamefolder)
+
+```javascript
+apiClient.renameFolder({
+  // Required - The folder's ID.
+  folderId: '12345',
+
+  // Required - The new name of the folder.
+  name: 'Renamed Folder',
+})
+```
+
 #### `deleteFolderByFolderId(folderId)`
 
 - Deletes the given folder within your account’s slice manager.
