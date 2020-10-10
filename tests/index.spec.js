@@ -29,6 +29,7 @@ describe(`soundslice-data-api`, () => {
         `listSlices`,
         `listSubfoldersByParentId`,
         `moveSliceToFolder`,
+        `renameFolder`,
       ];
 
       expect(actual).to.eql(expected);
@@ -116,6 +117,12 @@ describe(`soundslice-data-api`, () => {
   describe(`moveSliceToFolder`, () => {
     it(`should be a function`, () => {
       expect(apiClient.moveSliceToFolder).to.be.a(`function`);
+    });
+  });
+
+  describe(`renameFolder`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.renameFolder).to.be.a(`function`);
     });
   });
 });
