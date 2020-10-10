@@ -1,6 +1,8 @@
 # Changelog
 
 **2020-10-10**
+- Published `v0.11.0`
+- Added `renameFolder`,
 - Published `v0.10.0`
 - Added `createFolder`,
 
