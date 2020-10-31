@@ -29,6 +29,7 @@ describe(`soundslice-data-api`, () => {
         `listSlices`,
         `listSubfoldersByParentId`,
         `moveSliceToFolder`,
+        `putRecordingSyncpoints`,
         `renameFolder`,
       ];
 
@@ -117,6 +118,12 @@ describe(`soundslice-data-api`, () => {
   describe(`moveSliceToFolder`, () => {
     it(`should be a function`, () => {
       expect(apiClient.moveSliceToFolder).to.be.a(`function`);
+    });
+  });
+
+  describe(`putRecordingSyncpoints`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.putRecordingSyncpoints).to.be.a(`function`);
     });
   });
 

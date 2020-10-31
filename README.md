@@ -48,7 +48,7 @@ Each method returns an [Axios](https://github.com/axios/axios) Promise.
 
 ### **NOTE:** Not all API methods have been implemented yet.
 
-#### `createSlice()`
+#### `createSlice(paramsObj)`
 
 - Creates a slice.
 - Soundslice documentation: ["Create slice"](https://www.soundslice.com/help/data-api/#createslice)
@@ -92,6 +92,7 @@ apiClient.deleteSliceBySlug('123456')
 
 - Retrieves metadata for all slices in your account.
 - Soundslice documentation: ["List slices"](https://www.soundslice.com/help/data-api/#listslices)
+- This method takes no arguments.
 
 ```javascript
 apiClient.listSlices()
@@ -115,7 +116,7 @@ apiClient.getSliceBySlug('123456')
 apiClient.getSliceNotationBySlug('123456')
 ```
 
-#### `moveSliceToFolder()`
+#### `moveSliceToFolder(paramsObj)`
 
 - Moves a slice to a folder.
 - Soundslice documentation: ["Move slice to folder"](https://www.soundslice.com/help/data-api/#moveslice)
@@ -151,7 +152,6 @@ apiClient.duplicateSliceByScorehash('C1FVc')
 - Gets data about all recordings in the slice with slug `slug`.
 - Soundslice documentation: ["Get slice’s recordings"](https://www.soundslice.com/help/data-api/#getrecordings)
 
-
 ```javascript
 apiClient.getSliceRecordingsBySlug('123456')
 ```
@@ -170,12 +170,42 @@ apiClient.deleteRecordingByRecordingId('123456')
 - Gets the syncpoints for the recording with ID `recordingId`.
 - Soundslice documentation: ["Get recording’s syncpoints"](https://www.soundslice.com/help/data-api/#getsyncpoints)
 
-
 ```javascript
 apiClient.getSyncpointsByRecordingId('123456')
 ```
 
-#### `createFolder()`
+#### `putRecordingSyncpoints(paramsObj)`
+
+- Sets the syncpoints for the recording with ID `recordingId`.
+- Soundslice documentation: ["Put recording’s syncpoints"](https://www.soundslice.com/help/data-api/#putsyncpoints)
+
+```javascript
+apiClient.putRecordingSyncpoints({
+  // Required
+  recordingId: `494055`,
+
+  // Required - an array of syncpoint arrays
+  //   each entry is an array with the following numbers:
+  //   index 0 - bar (required)
+  //   index 1 - time (required)
+  //   index 2 - percentage into the bar (optional)
+  //             between 0 & 480 (50% is 240)
+  syncpoints: [
+    [0, 0],
+    [1, 0.57],
+    [1, 0.8, 240],
+    [2, 1.3],
+  ],
+
+  // Optional - floating-point number
+  // crop_start: 59.0,
+
+  // Optional - floating-point number
+  // crop_end: 65.0,
+})
+```
+
+#### `createFolder(paramsObj)`
 
 - Creates a folder.
 - Soundslice documentation: ["Create folder"](https://www.soundslice.com/help/data-api/#createfolder)
@@ -191,7 +221,7 @@ apiClient.createFolder({
 })
 ```
 
-#### `renameFolder()`
+#### `renameFolder(paramsObj)`
 
 - Renames a folder.
 - Soundslice documentation: ["Rename folder"](https://www.soundslice.com/help/data-api/#renamefolder)
@@ -220,7 +250,7 @@ apiClient.deleteFolderByFolderId('12345')
 
 - Lists **top-level** folders within your account’s slice manager.
 - Soundslice documentation: ["List folders"](https://www.soundslice.com/help/data-api/#listfolders)
-
+- This method takes no arguments.
 
 ```javascript
 apiClient.listFolders()
@@ -230,7 +260,6 @@ apiClient.listFolders()
 
 - List subfolders within a given parent folder.
 - Soundslice documentation: ["List folders"](https://www.soundslice.com/help/data-api/#listfolders)
-
 
 ```javascript
 apiClient.listSubfoldersByParentId('12345')

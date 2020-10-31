@@ -69,6 +69,36 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
   const duplicateSliceByScorehash = (scorehash) =>
     axiosInstance.post(`/slices/${scorehash}/duplicate/`);
 
+  /**
+   * Sets the syncpoints for the recording with ID `recordingId`.
+   *
+   * @see https://www.soundslice.com/help/data-api/#putsyncpoints
+   *
+   * @param {Object} paramsObj paramsObj
+   * paramsObj.syncpoints (Required) an array of syncpoint arrays
+   *
+   * paramsObj.crop_start (Optional) floating-point number
+   * paramsObj.crop_end   (Optional) floating-point number
+   *
+   * @return {Promise} an Axios promise
+   */
+  const putRecordingSyncpoints = (paramsObj) => {
+    const { recordingId, syncpoints } = paramsObj;
+    const paramsObjClone = { ...paramsObj };
+
+    delete paramsObjClone.recordingId;
+
+    if (syncpoints) {
+      paramsObjClone.syncpoints = JSON.stringify(syncpoints);
+    }
+
+    return post(
+      `${baseURL}/recordings/${recordingId}/syncpoints/`,
+      paramsObjClone,
+    );
+  };
+
+  // all DELETE methods...
   const deleteFolderByFolderId = (folderId) =>
     axiosInstance.delete(`/folders/${folderId}/`);
   const deleteRecordingByRecordingId = (recordingId) =>
@@ -77,6 +107,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
 
   const { get } = axiosInstance;
 
+  // all GET methods...
   const getSliceBySlug = (slug) => get(`/scores/${slug}/`);
   const getSliceNotationBySlug = (slug) => get(`/scores/${slug}/notation/`);
   const getSliceRecordingsBySlug = (slug) => get(`/scores/${slug}/recordings/`);
@@ -102,6 +133,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     listSlices,
     listSubfoldersByParentId,
     moveSliceToFolder,
+    putRecordingSyncpoints,
     renameFolder,
   };
 };
