@@ -1,14 +1,19 @@
 # Changelog
 
+**2021-01-02**
+- Published `v0.12.0`
+- Added `putRecordingSyncpoints`
+- Added example for `getSliceRecordingsBySlug`
+
 **2020-10-10**
 - Published `v0.11.0`
-- Added `renameFolder`,
+- Added `renameFolder`
 - Published `v0.10.0`
-- Added `createFolder`,
+- Added `createFolder`
 
 **2020-09-27**
 - Published `v0.9.0`
-- Added `deleteFolderByFolderId`,
+- Added `deleteFolderByFolderId`
 - Published `v0.8.0`
 - Added `deleteRecordingByRecordingId`
 
