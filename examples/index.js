@@ -9,10 +9,17 @@ const apiClient = require(`../index.js`)({
 });
 
 const handleError = (err) => {
-  const { response } = err;
+  const { data, status, statusText } = err.response;
 
-  console.error(response.status);
-  console.error(response.statusText);
+  // { status: 422, statusText: 'Unprocessable Entity' }
+  console.log({
+    status,
+    statusText,
+  });
+
+  // { error: 'Please provide a name.' }
+  // { error: 'The parent_id was invalid or not owned by your account.' }
+  console.log(data);
 };
 
 const handleSuccess = (res) => {
