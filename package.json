@@ -21,10 +21,10 @@
     "form-data": "^3.0.0"
   },
   "devDependencies": {
-    "@percuss.io/eslint-config-ericcarraway": "^1.1.3",
-    "chai": "^4.2.0",
+    "@percuss.io/eslint-config-ericcarraway": "^1.1.5",
+    "chai": "^4.3.0",
     "dotenv": "^8.2.0",
-    "eslint": "^7.18.0",
+    "eslint": "^7.19.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "mocha": "^8.2.1"
