@@ -20,7 +20,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
   const baseURL = `https://www.soundslice.com/api/v1`;
 
   const SOUNDSLICE_API_KEY = btoa(
-    `${SOUNDSLICE_APPLICATION_ID}:${SOUNDSLICE_PASSWORD}`,
+    `${SOUNDSLICE_APPLICATION_ID}:${SOUNDSLICE_PASSWORD}`
   );
 
   const headers = {
@@ -94,7 +94,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
 
     return post(
       `${baseURL}/recordings/${recordingId}/syncpoints/`,
-      paramsObjClone,
+      paramsObjClone
     );
   };
 
