@@ -1,8 +1,11 @@
 username_expected="ericcarraway"
 username_actual=$(npm whoami)
+package_name="@percuss.io/soundslice-data-api";
 
 registry_expected="https://registry.npmjs.org/"
 registry_actual=$(npm config get registry)
+
+echo "publishing $package_name ..."
 
 # verify that I'm logged in to the correct account
 if [ "$username_actual" != $username_expected ]; then
@@ -27,5 +30,9 @@ echo "OK"
 # the `npm publish` command
 npm publish --access public
 
+# EXPECT:
+#   "This operation requires a one-time password."
+#   "Enter OTP:"
+
 echo "- - -"
-echo "https://www.npmjs.com/package/@percuss.io/soundslice-data-api"
+echo "https://www.npmjs.com/package/$package_name"
