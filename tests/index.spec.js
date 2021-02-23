@@ -23,6 +23,7 @@ describe(`soundslice-data-api`, () => {
         `duplicateSliceByScorehash`,
         `getSliceBySlug`,
         `getSliceNotationBySlug`,
+        `getSliceRecordingsByScorehash`,
         `getSliceRecordingsBySlug`,
         `getSyncpointsByRecordingId`,
         `listFolders`,
@@ -85,6 +86,13 @@ describe(`soundslice-data-api`, () => {
     });
   });
 
+  describe(`getSliceRecordingsByScorehash`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.getSliceRecordingsByScorehash).to.be.a(`function`);
+    });
+  });
+
+  // @deprecated since 2021-01-13
   describe(`getSliceRecordingsBySlug`, () => {
     it(`should be a function`, () => {
       expect(apiClient.getSliceRecordingsBySlug).to.be.a(`function`);

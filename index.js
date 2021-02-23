@@ -110,7 +110,19 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
   // all GET methods...
   const getSliceBySlug = (slug) => get(`/scores/${slug}/`);
   const getSliceNotationBySlug = (slug) => get(`/scores/${slug}/notation/`);
+
+  const getSliceRecordingsByScorehash = (scorehash) =>
+    get(`/slices/${scorehash}/recordings/`);
+
+  /**
+   * @deprecated
+   * Per the Soundslice data API changelog entry on 2021-01-13,
+   * a slice's recordings should be retrieved by using the scorehash instead of the slug.
+   * This method still works for backwards compatibility,
+   * but new code should use `getSliceRecordingsByScorehash`.
+   */
   const getSliceRecordingsBySlug = (slug) => get(`/scores/${slug}/recordings/`);
+
   const getSyncpointsByRecordingId = (recordingId) =>
     get(`/recordings/${recordingId}/syncpoints/`);
   const listFolders = () => get(`/folders/`);
@@ -127,6 +139,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     duplicateSliceByScorehash,
     getSliceBySlug,
     getSliceNotationBySlug,
+    getSliceRecordingsByScorehash,
     getSliceRecordingsBySlug,
     getSyncpointsByRecordingId,
     listFolders,
