@@ -44,11 +44,11 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
       },
     };
 
-    return axios.post(url, formData, config);
+    return axios.post(`${baseURL}${url}`, formData, config);
   };
 
-  const createFolder = (paramsObj) => post(`${baseURL}/folders/`, paramsObj);
-  const createSlice = (paramsObj) => post(`${baseURL}/scores/`, paramsObj);
+  const createFolder = (paramsObj) => post(`/folders/`, paramsObj);
+  const createSlice = (paramsObj) => post(`/scores/`, paramsObj);
 
   const createRecording = (paramsObj) => {
     const { slug } = paramsObj;
@@ -58,7 +58,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
 
     // required: source
     // optional: name, source_data, hls_url
-    return post(`${baseURL}/scores/${slug}/recordings/`, paramsObjClone);
+    return post(`/scores/${slug}/recordings/`, paramsObjClone);
   };
 
   const moveSliceToFolder = (paramsObj) => {
@@ -69,7 +69,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
 
     // required: folder_id
     // optional: user_id
-    return post(`${baseURL}/scores/${slug}/move/`, paramsObjClone);
+    return post(`/scores/${slug}/move/`, paramsObjClone);
   };
 
   const renameFolder = (paramsObj) => {
@@ -79,7 +79,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     delete paramsObjClone.folderId;
 
     // required: name
-    return post(`${baseURL}/folders/${folderId}/`, paramsObjClone);
+    return post(`/folders/${folderId}/`, paramsObjClone);
   };
 
   const axiosInstance = axios.create({ baseURL, headers });
