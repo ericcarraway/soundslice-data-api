@@ -54,6 +54,10 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     const { slug } = paramsObj;
     const paramsObjClone = { ...paramsObj };
 
+    // `slug` must be included in `paramsObj`
+    // because it's part of the URL we'll POST to
+    //
+    // however, we don't want to send it in the payload
     delete paramsObjClone.slug;
 
     // required: source
@@ -65,6 +69,10 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     const { slug } = paramsObj;
     const paramsObjClone = { ...paramsObj };
 
+    // `slug` must be included in `paramsObj`
+    // because it's part of the URL we'll POST to
+    //
+    // however, we don't want to send it in the payload
     delete paramsObjClone.slug;
 
     // required: folder_id
@@ -76,6 +84,10 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     const { folderId } = paramsObj;
     const paramsObjClone = { ...paramsObj };
 
+    // `folderId` must be included in `paramsObj`
+    // because it's part of the URL we'll POST to
+    //
+    // however, we don't want to send it in the payload
     delete paramsObjClone.folderId;
 
     // required: name
@@ -116,6 +128,10 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     const { recordingId, syncpoints } = paramsObj;
     const paramsObjClone = { ...paramsObj };
 
+    // `recordingId` must be included in `paramsObj`
+    // because it's part of the URL we'll POST to
+    //
+    // however, we don't want to send it in the payload
     delete paramsObjClone.recordingId;
 
     if (syncpoints) {
