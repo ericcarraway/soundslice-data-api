@@ -16,11 +16,13 @@ describe(`soundslice-data-api`, () => {
 
       const expected = [
         `createFolder`,
+        `createRecording`,
         `createSlice`,
         `deleteFolderByFolderId`,
         `deleteRecordingByRecordingId`,
         `deleteSliceBySlug`,
         `duplicateSliceByScorehash`,
+        `getRecordingUploadUrlByRecordingId`,
         `getSliceBySlug`,
         `getSliceNotationBySlug`,
         `getSliceRecordingsByScorehash`,
@@ -41,6 +43,12 @@ describe(`soundslice-data-api`, () => {
   describe(`createFolder`, () => {
     it(`should be a function`, () => {
       expect(apiClient.createFolder).to.be.a(`function`);
+    });
+  });
+
+  describe(`createRecording`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.createRecording).to.be.a(`function`);
     });
   });
 
@@ -71,6 +79,12 @@ describe(`soundslice-data-api`, () => {
   describe(`duplicateSliceByScorehash`, () => {
     it(`should be a function`, () => {
       expect(apiClient.duplicateSliceByScorehash).to.be.a(`function`);
+    });
+  });
+
+  describe(`getRecordingUploadUrlByRecordingId`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.getRecordingUploadUrlByRecordingId).to.be.a(`function`);
     });
   });
 

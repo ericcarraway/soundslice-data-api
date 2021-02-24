@@ -5,6 +5,7 @@ const FormData = require(`form-data`);
 
 const btoa = (b) => Buffer.from(b).toString(`base64`);
 
+// helper function to convert a plain JS object to form data
 const getFormDataFromObj = (paramsObj) => {
   const formData = new FormData();
 
@@ -27,6 +28,12 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     Authorization: `Basic ${SOUNDSLICE_API_KEY}`,
   };
 
+  /**
+   * helper function
+   * - converts a plain JS object to form data
+   * - adds the auth header
+   * - sends a POST to the specified URL
+   */
   const post = (url, paramsObj) => {
     const formData = getFormDataFromObj(paramsObj);
 
@@ -42,6 +49,17 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
 
   const createFolder = (paramsObj) => post(`${baseURL}/folders/`, paramsObj);
   const createSlice = (paramsObj) => post(`${baseURL}/scores/`, paramsObj);
+
+  const createRecording = (paramsObj) => {
+    const { slug } = paramsObj;
+    const paramsObjClone = { ...paramsObj };
+
+    delete paramsObjClone.slug;
+
+    // required: source
+    // optional: name, source_data, hls_url
+    return post(`${baseURL}/scores/${slug}/recordings/`, paramsObjClone);
+  };
 
   const moveSliceToFolder = (paramsObj) => {
     const { slug } = paramsObj;
@@ -66,8 +84,20 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
 
   const axiosInstance = axios.create({ baseURL, headers });
 
+  /**
+   * duplicates a slice by its `scorehash`
+   * sends a POST request with no body
+   */
   const duplicateSliceByScorehash = (scorehash) =>
     axiosInstance.post(`/slices/${scorehash}/duplicate/`);
+
+  /**
+   * step 1 of the upload process
+   * sends a POST request with no body
+   * so that we can receive a temporary upload URL
+   */
+  const getRecordingUploadUrlByRecordingId = (recordingId) =>
+    axiosInstance.post(`/recordings/${recordingId}/media/`);
 
   /**
    * Sets the syncpoints for the recording with ID `recordingId`.
@@ -132,11 +162,13 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
 
   return {
     createFolder,
+    createRecording,
     createSlice,
     deleteFolderByFolderId,
     deleteRecordingByRecordingId,
     deleteSliceBySlug,
     duplicateSliceByScorehash,
+    getRecordingUploadUrlByRecordingId,
     getSliceBySlug,
     getSliceNotationBySlug,
     getSliceRecordingsByScorehash,
