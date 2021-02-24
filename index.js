@@ -122,10 +122,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
       paramsObjClone.syncpoints = JSON.stringify(syncpoints);
     }
 
-    return post(
-      `${baseURL}/recordings/${recordingId}/syncpoints/`,
-      paramsObjClone,
-    );
+    return post(`/recordings/${recordingId}/syncpoints/`, paramsObjClone);
   };
 
   // all DELETE methods...
