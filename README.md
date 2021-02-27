@@ -25,6 +25,8 @@ const apiClient = require('@percuss.io/soundslice-data-api')({
 
 ### 3. Usage
 
+> _See [the examples folder on GitHub](https://github.com/ericcarraway/soundslice-data-api/tree/primary/examples) for detailed usage examples._
+
 ```javascript
 apiClient.listSlices().then(handleSuccess).catch(handleError);
 
