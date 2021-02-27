@@ -1,10 +1,12 @@
+// examples/create-slice.js
+
 const { apiClient } = require(`./index.js`);
 
 const main = async () => {
   const params = {
     artist: `B C Manjunath`,
     embed_status: 4,
-    folder_id: `2428`,
+    folder_id: `28882`,
     name: `Fibonacci Konnakol`,
     print_status: 3,
     status: 3,
@@ -32,11 +34,14 @@ const main = async () => {
   }
 
   const {
-    // scorehash,
-    // slug,
+    scorehash,
+    slug,
     url,
     // embed_url,
   } = res.data;
+
+  // { scorehash: '2zcDc', slug: '565773' }
+  console.log({ scorehash, slug });
 
   console.log(`https://www.soundslice.com${url}`);
 };
