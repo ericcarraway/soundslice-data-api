@@ -1,3 +1,5 @@
+// examples/create-folder.js
+
 const { apiClient } = require(`./index.js`);
 
 const main = async () => {
@@ -7,7 +9,7 @@ const main = async () => {
 
     // Optional - Integer. The folder's parent ID.
     // Use this if you want to nest a folder within another one.
-    parent_id: 12345,
+    parent_id: 15303,
   };
 
   let res;
@@ -33,6 +35,7 @@ const main = async () => {
     return;
   }
 
+  // { id: 28882 }
   console.log(res.data);
 
   console.log(`https://www.soundslice.com/manage/folder-${res.data.id}/`);
