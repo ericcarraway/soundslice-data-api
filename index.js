@@ -151,7 +151,15 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
   const { get } = axiosInstance;
 
   // all GET methods...
+  // get the details of a slice by its `slug`
   const getSliceBySlug = (slug) => get(`/scores/${slug}/`);
+
+  // get the details of a slice by its `scorehash`
+  // while useful, please note that as of 2021-02-27
+  // this is still technically an undocumented API method
+  // it may change at any time
+  const getSliceByScorehash = (scorehash) => get(`/slices/${scorehash}/`);
+
   const getSliceNotationBySlug = (slug) => get(`/scores/${slug}/notation/`);
 
   const getSliceRecordingsByScorehash = (scorehash) =>
@@ -182,10 +190,17 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     deleteSliceBySlug,
     duplicateSliceByScorehash,
     getRecordingUploadUrlByRecordingId,
+
+    // undocumented
+    getSliceByScorehash,
+
     getSliceBySlug,
     getSliceNotationBySlug,
     getSliceRecordingsByScorehash,
+
+    // deprecated
     getSliceRecordingsBySlug,
+
     getSyncpointsByRecordingId,
     listFolders,
     listSlices,
