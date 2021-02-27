@@ -1,3 +1,5 @@
+// examples/delete-slice-by-slug.js
+
 const { apiClient } = require(`./index.js`);
 
 // change this to the slug of a slice you own & wish to delete

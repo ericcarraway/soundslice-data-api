@@ -3,7 +3,7 @@
 const { apiClient } = require(`./index.js`);
 
 const main = async () => {
-  const params = {
+  const paramsObj = {
     // Required - The name of the folder.
     name: `New Example Folder`,
 
@@ -15,7 +15,7 @@ const main = async () => {
   let res;
 
   try {
-    res = await apiClient.createFolder(params);
+    res = await apiClient.createFolder(paramsObj);
   } catch (err) {
     console.error(`ERROR:`);
 

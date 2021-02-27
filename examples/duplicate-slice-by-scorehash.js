@@ -1,4 +1,4 @@
-// $ node examples/duplicate-slice-by-scorehash.js
+// examples/duplicate-slice-by-scorehash.js
 
 const { apiClient } = require(`./index.js`);
 

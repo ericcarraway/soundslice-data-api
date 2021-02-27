@@ -1,3 +1,5 @@
+// examples/move-slice-to-folder.js
+
 const { apiClient, handleError, handleSuccess } = require(`./index.js`);
 
 apiClient

@@ -3,7 +3,7 @@
 const { apiClient } = require(`./index.js`);
 
 const main = async () => {
-  const params = {
+  const paramsObj = {
     artist: `B C Manjunath`,
     embed_status: 4,
     folder_id: `28882`,
@@ -15,7 +15,7 @@ const main = async () => {
   let res;
 
   try {
-    res = await apiClient.createSlice(params);
+    res = await apiClient.createSlice(paramsObj);
   } catch (err) {
     console.error(`ERROR:`);
 

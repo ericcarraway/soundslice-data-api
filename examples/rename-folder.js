@@ -1,9 +1,11 @@
+// examples/rename-folder.js
+
 const { apiClient } = require(`./index.js`);
 
 const main = async () => {
-  const params = {
+  const paramsObj = {
     // Required - The folder's ID.
-    folderId: `12345`,
+    folderId: `28882`,
 
     // Required - The new name of the folder.
     name: `This folder has been renamed`,
@@ -12,7 +14,7 @@ const main = async () => {
   let res;
 
   try {
-    res = await apiClient.renameFolder(params);
+    res = await apiClient.renameFolder(paramsObj);
   } catch (err) {
     console.error(`ERROR:`);
 
