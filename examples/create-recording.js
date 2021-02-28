@@ -34,6 +34,9 @@ const main = async () => {
       statusText,
     });
 
+    // If you need to upload a recording,
+    // `data.id` is what you should pass to
+    // `apiClient.getRecordingUploadUrlByRecordingId`.
     console.log(data);
 
     return;
