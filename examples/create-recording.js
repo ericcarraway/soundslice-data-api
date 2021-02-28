@@ -1,5 +1,7 @@
 // examples/create-recording.js
 
+// https://www.soundslice.com/help/data-api/#createrecording
+
 const { apiClient } = require(`./index.js`);
 
 const main = async () => {
@@ -14,10 +16,10 @@ const main = async () => {
     // name: ``,
 
     // sometimes optional
-    // source_data
+    // source_data: ``,
 
     // sometimes optional
-    // hls_url
+    // hls_url: ``,
   };
 
   let res;
@@ -34,14 +36,19 @@ const main = async () => {
       statusText,
     });
 
-    // If you need to upload a recording,
-    // `data.id` is what you should pass to
-    // `apiClient.getRecordingUploadUrlByRecordingId`.
     console.log(data);
 
     return;
   }
 
+  // `data.id` is the `recordingId`
+  //
+  // If you need to upload a recording,
+  // because your `source` integer was one of
+  //   2 — MP3 uploaded to Soundslice
+  //   4 — Video uploaded to Soundslice
+  // this is what you should pass to
+  // `apiClient.getRecordingUploadUrlByRecordingId`.
   console.log(res.data);
 };
 

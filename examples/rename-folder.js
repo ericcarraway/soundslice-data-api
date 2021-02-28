@@ -1,5 +1,7 @@
 // examples/rename-folder.js
 
+// https://www.soundslice.com/help/data-api/#renamefolder
+
 const { apiClient } = require(`./index.js`);
 
 const main = async () => {

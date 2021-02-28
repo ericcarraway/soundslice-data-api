@@ -1,5 +1,7 @@
 // examples/get-recording-upload-url-by-recording-id.js
 
+// https://www.soundslice.com/help/data-api/#putmedia
+
 const { apiClient } = require(`./index.js`);
 
 // This should be the `id` of a recording associated with a slice.
@@ -15,6 +17,8 @@ const main = async () => {
   let res;
 
   try {
+    // initiate an upload via a POST request
+    // receive a temporary URL to PUT the media file to
     res = await apiClient.getRecordingUploadUrlByRecordingId(recordingId);
   } catch (err) {
     console.error(`ERROR:`);

@@ -1,5 +1,7 @@
 // examples/list-slices.js
 
+// https://www.soundslice.com/help/data-api/#listslices
+
 const { apiClient, handleError, handleSuccess } = require(`./index.js`);
 
 // retrieves metadata for all slices in your account

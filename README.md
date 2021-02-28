@@ -149,7 +149,7 @@ apiClient.moveSliceToFolder({
 apiClient.duplicateSliceByScorehash('C1FVc')
 ```
 
-#### `getSliceRecordingsByScorehash(slug)`
+#### `getSliceRecordingsByScorehash(scorehash)`
 
 - Gets data about all recordings in the slice with scorehash `scorehash`.
 - Soundslice documentation: ["Get slice’s recordings"](https://www.soundslice.com/help/data-api/#getrecordings)

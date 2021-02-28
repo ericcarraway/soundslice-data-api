@@ -2,6 +2,8 @@
 
 // deleteFolderByFolderId(folderId)
 
+// https://www.soundslice.com/help/data-api/#deletefolder
+
 const { apiClient } = require(`./index.js`);
 
 // change this to the ID of a recording you own & wish to delete

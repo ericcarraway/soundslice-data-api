@@ -1,5 +1,7 @@
 // examples/get-slice-recordings-by-scorehash.js
 
+// https://www.soundslice.com/help/data-api/#getrecordings
+
 const { apiClient, handleError, handleSuccess } = require(`./index.js`);
 
 // change this to the scorehash of a slice you own

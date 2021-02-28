@@ -1,5 +1,7 @@
 // examples/duplicate-slice-by-scorehash.js
 
+// https://www.soundslice.com/help/data-api/#duplicateslice
+
 const { apiClient } = require(`./index.js`);
 
 const scorehash = `5Kzcc`;

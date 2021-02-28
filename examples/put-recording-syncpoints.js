@@ -1,5 +1,7 @@
 // examples/put-recording-syncpoints.js
 
+// https://www.soundslice.com/help/data-api/#putsyncpoints
+
 const { apiClient, handleError, handleSuccess } = require(`./index.js`);
 
 const paramsObj = {

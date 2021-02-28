@@ -1,5 +1,7 @@
 // examples/create-slice.js
 
+// https://www.soundslice.com/help/data-api/#createslice
+
 const { apiClient } = require(`./index.js`);
 
 const main = async () => {
