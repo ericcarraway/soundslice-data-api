@@ -1,6 +1,6 @@
 // examples/get-recording-upload-url-by-recording-id.js
 
-const { apiClient, handleError, handleSuccess } = require(`./index.js`);
+const { apiClient } = require(`./index.js`);
 
 // This should be the `id` of a recording associated with a slice.
 //
@@ -11,9 +11,26 @@ const { apiClient, handleError, handleSuccess } = require(`./index.js`);
 // - `getSliceRecordingsBySlug` (deprecated)
 const recordingId = 556383;
 
-apiClient
-  .getRecordingUploadUrlByRecordingId(recordingId)
-  .then(handleSuccess)
-  .catch(handleError);
+const main = async () => {
+  let res;
 
-// logs an object with a `url` you can PUT to
+  try {
+    res = await apiClient.getRecordingUploadUrlByRecordingId(recordingId);
+  } catch (err) {
+    console.error(`ERROR:`);
+
+    const { status, statusText } = err.response;
+
+    // { status: 403, statusText: 'Forbidden' }
+    console.error({ status, statusText });
+
+    return;
+  }
+
+  // this is the URL we'll PUT to with `apiClient.uploadFile`
+  const uploadUrl = res.data.url;
+
+  console.log(uploadUrl);
+};
+
+main();
