@@ -35,6 +35,7 @@ describe(`soundslice-data-api`, () => {
         `moveSliceToFolder`,
         `putRecordingSyncpoints`,
         `renameFolder`,
+        `uploadFile`,
       ];
 
       expect(actual).to.eql(expected);
@@ -159,6 +160,12 @@ describe(`soundslice-data-api`, () => {
   describe(`renameFolder`, () => {
     it(`should be a function`, () => {
       expect(apiClient.renameFolder).to.be.a(`function`);
+    });
+  });
+
+  describe(`uploadFile`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.uploadFile).to.be.a(`function`);
     });
   });
 });

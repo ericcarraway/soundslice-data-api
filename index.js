@@ -1,6 +1,9 @@
 // https://www.soundslice.com/help/data-api/
 
 const axios = require(`axios`);
+
+const { uploadFile } = require(`./lib/upload-file.js`);
+
 const FormData = require(`form-data`);
 
 const btoa = (b) => Buffer.from(b).toString(`base64`);
@@ -208,5 +211,6 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     moveSliceToFolder,
     putRecordingSyncpoints,
     renameFolder,
+    uploadFile,
   };
 };
