@@ -2,27 +2,15 @@
 
 const axios = require(`axios`);
 
+const { getFormDataFromObj } = require(`./lib/get-form-data-from-obj.js`);
 const { uploadFile } = require(`./lib/upload-file.js`);
-
-const FormData = require(`form-data`);
 
 const btoa = (b) => Buffer.from(b).toString(`base64`);
 
-// helper function to convert a plain JS object to form data
-const getFormDataFromObj = (paramsObj) => {
-  const formData = new FormData();
-
-  // eslint-disable-next-line no-restricted-syntax
-  for (const [key, value] of Object.entries(paramsObj)) {
-    formData.append(key, value);
-  }
-
-  return formData;
-};
+const baseURL = `https://www.soundslice.com/api/v1`;
 
 module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
-  const baseURL = `https://www.soundslice.com/api/v1`;
-
+  // https://en.wikipedia.org/wiki/Basic_access_authentication
   const SOUNDSLICE_API_KEY = btoa(
     `${SOUNDSLICE_APPLICATION_ID}:${SOUNDSLICE_PASSWORD}`,
   );
