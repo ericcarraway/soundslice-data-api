@@ -1,5 +1,16 @@
 # Changelog
 
+**2021-03-01**
+
+- Published `v0.12.1`
+- Added three methods for uploading a recording:
+  - Step 1: `createRecording`
+  - Step 2: `getRecordingUploadUrlByRecordingId`
+  - Step 3: `uploadFile`
+- Marked `getSliceRecordingsBySlug` as deprecated and added `getSliceRecordingsByScorehash` in its place
+- Added more examples to the [examples folder](https://github.com/ericcarraway/soundslice-data-api/tree/primary/examples)
+- Extracted helper methods to a `/lib` folder
+
 **2021-01-02**
 
 - Published `v0.12.0`
