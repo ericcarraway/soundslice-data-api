@@ -16,13 +16,17 @@ describe(`soundslice-data-api`, () => {
 
       const expected = [
         `createFolder`,
+        `createRecording`,
         `createSlice`,
         `deleteFolderByFolderId`,
         `deleteRecordingByRecordingId`,
         `deleteSliceBySlug`,
         `duplicateSliceByScorehash`,
+        `getRecordingUploadUrlByRecordingId`,
+        `getSliceByScorehash`,
         `getSliceBySlug`,
         `getSliceNotationBySlug`,
+        `getSliceRecordingsByScorehash`,
         `getSliceRecordingsBySlug`,
         `getSyncpointsByRecordingId`,
         `listFolders`,
@@ -31,6 +35,7 @@ describe(`soundslice-data-api`, () => {
         `moveSliceToFolder`,
         `putRecordingSyncpoints`,
         `renameFolder`,
+        `uploadFile`,
       ];
 
       expect(actual).to.eql(expected);
@@ -40,6 +45,12 @@ describe(`soundslice-data-api`, () => {
   describe(`createFolder`, () => {
     it(`should be a function`, () => {
       expect(apiClient.createFolder).to.be.a(`function`);
+    });
+  });
+
+  describe(`createRecording`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.createRecording).to.be.a(`function`);
     });
   });
 
@@ -73,6 +84,18 @@ describe(`soundslice-data-api`, () => {
     });
   });
 
+  describe(`getRecordingUploadUrlByRecordingId`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.getRecordingUploadUrlByRecordingId).to.be.a(`function`);
+    });
+  });
+
+  describe(`getSliceByScorehash`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.getSliceByScorehash).to.be.a(`function`);
+    });
+  });
+
   describe(`getSliceBySlug`, () => {
     it(`should be a function`, () => {
       expect(apiClient.getSliceBySlug).to.be.a(`function`);
@@ -85,6 +108,13 @@ describe(`soundslice-data-api`, () => {
     });
   });
 
+  describe(`getSliceRecordingsByScorehash`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.getSliceRecordingsByScorehash).to.be.a(`function`);
+    });
+  });
+
+  // @deprecated since 2021-01-13
   describe(`getSliceRecordingsBySlug`, () => {
     it(`should be a function`, () => {
       expect(apiClient.getSliceRecordingsBySlug).to.be.a(`function`);
@@ -130,6 +160,12 @@ describe(`soundslice-data-api`, () => {
   describe(`renameFolder`, () => {
     it(`should be a function`, () => {
       expect(apiClient.renameFolder).to.be.a(`function`);
+    });
+  });
+
+  describe(`uploadFile`, () => {
+    it(`should be a function`, () => {
+      expect(apiClient.uploadFile).to.be.a(`function`);
     });
   });
 });

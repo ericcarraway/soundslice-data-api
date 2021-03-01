@@ -1,3 +1,7 @@
+// examples/delete-slice-by-slug.js
+
+// https://www.soundslice.com/help/data-api/#deleteslice
+
 const { apiClient } = require(`./index.js`);
 
 // change this to the slug of a slice you own & wish to delete

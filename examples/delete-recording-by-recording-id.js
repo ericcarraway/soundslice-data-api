@@ -1,8 +1,12 @@
+// examples/delete-recording-by-recording-id.js
+
+// https://www.soundslice.com/help/data-api/#deleterecording
+
 const { apiClient } = require(`./index.js`);
 
 // change this to the ID of a recording you own & wish to delete
 // https://www.soundslice.com/help/data-api/#deleterecording
-const recordingId = `283614`;
+const recordingId = `556383`;
 
 const main = async () => {
   try {
@@ -10,10 +14,10 @@ const main = async () => {
 
     const { data, status } = res;
 
-    // 200
-    console.log(status);
+    // { status: 200 }
+    console.log({ status });
 
-    // { name: 'Video 2' }
+    // { name: 'Video' }
     console.log(data);
   } catch (err) {
     console.error(`ERROR:`);

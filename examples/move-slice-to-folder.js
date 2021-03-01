@@ -1,3 +1,7 @@
+// examples/move-slice-to-folder.js
+
+// https://www.soundslice.com/help/data-api/#moveslice
+
 const { apiClient, handleError, handleSuccess } = require(`./index.js`);
 
 apiClient
@@ -9,3 +13,6 @@ apiClient
   })
   .then(handleSuccess)
   .catch(handleError);
+
+// returns the `id` of the folder to which the slice was moved
+// { id: 2428 }

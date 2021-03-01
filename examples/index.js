@@ -3,6 +3,7 @@ require(`dotenv`).config({ path: `../.env` });
 
 const { SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD } = process.env;
 
+// instantiate the client
 const apiClient = require(`../index.js`)({
   SOUNDSLICE_APPLICATION_ID,
   SOUNDSLICE_PASSWORD,

@@ -1,4 +1,6 @@
-// $ node examples/duplicate-slice-by-scorehash.js
+// examples/duplicate-slice-by-scorehash.js
+
+// https://www.soundslice.com/help/data-api/#duplicateslice
 
 const { apiClient } = require(`./index.js`);
 

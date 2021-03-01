@@ -1,3 +1,7 @@
+// examples/get-slice-by-slug.js
+
+// https://www.soundslice.com/help/data-api/#getslice
+
 const { apiClient, handleError, handleSuccess } = require(`./index.js`);
 
 // change this to the slug of a slice you own

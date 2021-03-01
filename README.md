@@ -25,6 +25,8 @@ const apiClient = require('@percuss.io/soundslice-data-api')({
 
 ### 3. Usage
 
+> _See [the examples folder on GitHub](https://github.com/ericcarraway/soundslice-data-api/tree/primary/examples) for detailed usage examples._
+
 ```javascript
 apiClient.listSlices().then(handleSuccess).catch(handleError);
 
@@ -145,6 +147,15 @@ apiClient.moveSliceToFolder({
 
 ```javascript
 apiClient.duplicateSliceByScorehash('C1FVc')
+```
+
+#### `getSliceRecordingsByScorehash(scorehash)`
+
+- Gets data about all recordings in the slice with scorehash `scorehash`.
+- Soundslice documentation: ["Get slice’s recordings"](https://www.soundslice.com/help/data-api/#getrecordings)
+
+```javascript
+apiClient.getSliceRecordingsByScorehash('HD8Nc')
 ```
 
 #### `getSliceRecordingsBySlug(slug)`

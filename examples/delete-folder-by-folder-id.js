@@ -1,10 +1,14 @@
+// examples/delete-folder-by-folder-id.js
+
 // deleteFolderByFolderId(folderId)
+
+// https://www.soundslice.com/help/data-api/#deletefolder
 
 const { apiClient } = require(`./index.js`);
 
 // change this to the ID of a recording you own & wish to delete
 // https://www.soundslice.com/help/data-api/#deletefolder
-const folderId = `21086`;
+const folderId = `28882`;
 
 const main = async () => {
   try {
@@ -22,13 +26,20 @@ const main = async () => {
   } catch (err) {
     console.error(`ERROR:`);
 
-    const { status, statusText } = err.response;
+    const { data, status, statusText } = err.response;
 
+    // If you don't own the folder, you'll see this error:
     // { status: 403, statusText: 'Forbidden' }
+
+    // If the folder is not empty, you'll see this error:
+    // { status: 422, statusText: 'Unprocessable Entity' }
     console.log({
       status,
       statusText,
     });
+
+    // { error: 'Folder contains slices.' }
+    console.log(data);
   }
 };
 

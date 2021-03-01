@@ -1,19 +1,23 @@
+// examples/create-folder.js
+
+// https://www.soundslice.com/help/data-api/#createfolder
+
 const { apiClient } = require(`./index.js`);
 
 const main = async () => {
-  const params = {
+  const paramsObj = {
     // Required - The name of the folder.
     name: `New Example Folder`,
 
     // Optional - Integer. The folder's parent ID.
     // Use this if you want to nest a folder within another one.
-    parent_id: 12345,
+    parent_id: 15303,
   };
 
   let res;
 
   try {
-    res = await apiClient.createFolder(params);
+    res = await apiClient.createFolder(paramsObj);
   } catch (err) {
     console.error(`ERROR:`);
 
@@ -33,6 +37,7 @@ const main = async () => {
     return;
   }
 
+  // { id: 28882 }
   console.log(res.data);
 
   console.log(`https://www.soundslice.com/manage/folder-${res.data.id}/`);
