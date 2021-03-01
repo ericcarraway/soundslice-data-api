@@ -9,7 +9,9 @@
     "test": "bash ./scripts/test.sh"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "lib/get-form-data-from-obj.js",
+    "lib/upload-file.js"
   ],
   "keywords": [
     "Soundslice"
