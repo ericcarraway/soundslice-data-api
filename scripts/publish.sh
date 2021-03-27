@@ -1,6 +1,8 @@
+set -e
+
 username_expected="ericcarraway"
 username_actual=$(npm whoami)
-package_name="@percuss.io/soundslice-data-api";
+package_name="@percuss.io/soundslice-data-api"
 
 registry_expected="https://registry.npmjs.org/"
 registry_actual=$(npm config get registry)
