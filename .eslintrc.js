@@ -21,41 +21,11 @@ module.exports = {
 
   // custom overrides
   rules: {
-    'implicit-arrow-linebreak': [0],
-    indent: [`error`, 2],
     'no-console': [
       `error`,
       {
         allow: [`log`, `warn`, `error`],
       },
     ],
-
-    // hoisted functions are OK
-    'no-use-before-define': [
-      `error`,
-      {
-        functions: false,
-      },
-    ],
-
-    'object-curly-newline': [0],
-    'operator-linebreak': [
-      `error`,
-      `after`,
-      {
-        overrides: {
-          ':': `before`,
-          '?': `before`,
-        },
-      },
-    ],
-    'prefer-destructuring': [
-      `error`,
-      {
-        array: true,
-        object: true,
-      },
-    ],
-    quotes: [`error`, `backtick`],
   },
 };
