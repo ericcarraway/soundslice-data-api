@@ -1,10 +1,13 @@
 // https://www.soundslice.com/help/data-api/
 
-const axios = require(`axios`);
+import axios from 'axios';
 
-const { getFormDataFromObj } = require(`./lib/get-form-data-from-obj.js`);
-const { uploadFile } = require(`./lib/upload-file.js`);
+// eslint-disable-next-line import/no-unresolved
+import { getFormDataFromObj } from './lib/get-form-data-from-obj';
+// eslint-disable-next-line import/no-unresolved
+import { uploadFile } from './lib/upload-file';
 
+// eslint-disable-next-line no-underscore-dangle
 const _btoa = (b: string): string => Buffer.from(b).toString(`base64`);
 
 const baseURL = `https://www.soundslice.com/api/v1`;
@@ -31,6 +34,7 @@ module.exports = ({
    * - adds the auth header
    * - sends a POST to the specified URL
    */
+  // eslint-disable-next-line @typescript-eslint/ban-types
   const post = (url: string, paramsObj: object) => {
     const formData = getFormDataFromObj(paramsObj);
 
@@ -44,7 +48,10 @@ module.exports = ({
     return axios.post(`${baseURL}${url}`, formData, config);
   };
 
+  // eslint-disable-next-line @typescript-eslint/ban-types
   const createFolder = (paramsObj: object) => post(`/folders/`, paramsObj);
+
+  // eslint-disable-next-line @typescript-eslint/ban-types
   const createSlice = (paramsObj: object) => post(`/scores/`, paramsObj);
 
   // required: source
@@ -120,6 +127,7 @@ module.exports = ({
     const { recordingId, syncpoints, ...paramsObjClone } = paramsObj;
 
     if (syncpoints) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       paramsObjClone.syncpoints = JSON.stringify(syncpoints);
     }

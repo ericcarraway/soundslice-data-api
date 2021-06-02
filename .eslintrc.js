@@ -6,6 +6,9 @@ module.exports = {
   extends: [
     `eslint:recommended`,
 
+    `plugin:@typescript-eslint/eslint-recommended`,
+    `plugin:@typescript-eslint/recommended`,
+
     // https://www.npmjs.com/package/eslint-config-airbnb-base
     // This package provides Airbnb's base JS .eslintrc (without React plugins)
     // as an extensible shared config.
@@ -14,12 +17,17 @@ module.exports = {
     `@percuss.io/eslint-config-ericcarraway`,
   ],
 
+  parser: `@typescript-eslint/parser`,
+
+  plugins: [`@typescript-eslint`],
+
   // don't continue to look for config files
   // in ancestor directories
   root: true,
 
   // custom overrides
   rules: {
+    'import/extensions': `off`,
     'no-console': [
       `error`,
       {

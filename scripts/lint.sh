@@ -1,5 +1,9 @@
-./node_modules/eslint/bin/eslint.js ./*.js --fix
-                           prettier ./*.js --no-config --single-quote --trailing-comma all --write
+set -e
 
-./node_modules/eslint/bin/eslint.js ./**/*.js --fix
-                           prettier ./**/*.js --no-config --single-quote --trailing-comma all --write
+# ./node_modules/eslint/bin/eslint.js ./src/*.ts --fix
+# ./node_modules/eslint/bin/eslint.js ./src/**/*.ts --fix
+
+# ./node_modules/eslint/bin/eslint.js ./dist/*.js --fix
+# ./node_modules/eslint/bin/eslint.js ./dist/**/*.js --fix
+
+npm run prettier

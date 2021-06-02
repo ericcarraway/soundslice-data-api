@@ -1,6 +1,7 @@
-const FormData = require(`form-data`);
+import FormData from 'form-data';
 
 // helper function to convert a plain JS object to "multipart/form-data"
+// eslint-disable-next-line @typescript-eslint/ban-types
 const getFormDataFromObj = function getFormDataFromObj(paramsObj: object) {
   const formData = new FormData();
 
