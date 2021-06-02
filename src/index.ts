@@ -5,13 +5,19 @@ const axios = require(`axios`);
 const { getFormDataFromObj } = require(`./lib/get-form-data-from-obj.js`);
 const { uploadFile } = require(`./lib/upload-file.js`);
 
-const btoa = (b) => Buffer.from(b).toString(`base64`);
+const _btoa = (b: string): string => Buffer.from(b).toString(`base64`);
 
 const baseURL = `https://www.soundslice.com/api/v1`;
 
-module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
+module.exports = ({
+  SOUNDSLICE_APPLICATION_ID,
+  SOUNDSLICE_PASSWORD,
+}: {
+  SOUNDSLICE_APPLICATION_ID: string;
+  SOUNDSLICE_PASSWORD: string;
+}) => {
   // https://en.wikipedia.org/wiki/Basic_access_authentication
-  const SOUNDSLICE_API_KEY = btoa(
+  const SOUNDSLICE_API_KEY = _btoa(
     `${SOUNDSLICE_APPLICATION_ID}:${SOUNDSLICE_PASSWORD}`,
   );
 
@@ -25,7 +31,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
    * - adds the auth header
    * - sends a POST to the specified URL
    */
-  const post = (url, paramsObj) => {
+  const post = (url: string, paramsObj: object) => {
     const formData = getFormDataFromObj(paramsObj);
 
     const config = {
@@ -38,50 +44,41 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
     return axios.post(`${baseURL}${url}`, formData, config);
   };
 
-  const createFolder = (paramsObj) => post(`/folders/`, paramsObj);
-  const createSlice = (paramsObj) => post(`/scores/`, paramsObj);
+  const createFolder = (paramsObj: object) => post(`/folders/`, paramsObj);
+  const createSlice = (paramsObj: object) => post(`/scores/`, paramsObj);
 
-  const createRecording = (paramsObj) => {
-    const { slug } = paramsObj;
-    const paramsObjClone = { ...paramsObj };
-
+  // required: source
+  // optional: name, source_data, hls_url
+  const createRecording = (paramsObj: { slug: string }) => {
     // `slug` must be included in `paramsObj`
     // because it's part of the URL we'll POST to
     //
     // however, we don't want to send it in the payload
-    delete paramsObjClone.slug;
+    const { slug, ...paramsObjClone } = paramsObj;
 
-    // required: source
-    // optional: name, source_data, hls_url
     return post(`/scores/${slug}/recordings/`, paramsObjClone);
   };
 
-  const moveSliceToFolder = (paramsObj) => {
-    const { slug } = paramsObj;
-    const paramsObjClone = { ...paramsObj };
-
+  // required: folder_id
+  // optional: user_id
+  const moveSliceToFolder = (paramsObj: { slug: string }) => {
     // `slug` must be included in `paramsObj`
     // because it's part of the URL we'll POST to
     //
     // however, we don't want to send it in the payload
-    delete paramsObjClone.slug;
+    const { slug, ...paramsObjClone } = paramsObj;
 
-    // required: folder_id
-    // optional: user_id
     return post(`/scores/${slug}/move/`, paramsObjClone);
   };
 
-  const renameFolder = (paramsObj) => {
-    const { folderId } = paramsObj;
-    const paramsObjClone = { ...paramsObj };
-
+  // required: name
+  const renameFolder = (paramsObj: { folderId: string }) => {
     // `folderId` must be included in `paramsObj`
     // because it's part of the URL we'll POST to
     //
     // however, we don't want to send it in the payload
-    delete paramsObjClone.folderId;
+    const { folderId, ...paramsObjClone } = paramsObj;
 
-    // required: name
     return post(`/folders/${folderId}/`, paramsObjClone);
   };
 
@@ -91,7 +88,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
    * duplicates a slice by its `scorehash`
    * sends a POST request with no body
    */
-  const duplicateSliceByScorehash = (scorehash) =>
+  const duplicateSliceByScorehash = (scorehash: string) =>
     axiosInstance.post(`/slices/${scorehash}/duplicate/`);
 
   /**
@@ -99,7 +96,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
    * sends a POST request with no body
    * so that we can receive a temporary upload URL
    */
-  const getRecordingUploadUrlByRecordingId = (recordingId) =>
+  const getRecordingUploadUrlByRecordingId = (recordingId: string) =>
     axiosInstance.post(`/recordings/${recordingId}/media/`);
 
   /**
@@ -108,6 +105,7 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
    * @see https://www.soundslice.com/help/data-api/#putsyncpoints
    *
    * @param {Object} paramsObj paramsObj
+   * paramsObj.recordingId (Required) part of the URL we'll POST to
    * paramsObj.syncpoints (Required) an array of syncpoint arrays
    *
    * paramsObj.crop_start (Optional) floating-point number
@@ -115,17 +113,14 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
    *
    * @return {Promise} an Axios promise
    */
-  const putRecordingSyncpoints = (paramsObj) => {
-    const { recordingId, syncpoints } = paramsObj;
-    const paramsObjClone = { ...paramsObj };
-
-    // `recordingId` must be included in `paramsObj`
-    // because it's part of the URL we'll POST to
-    //
-    // however, we don't want to send it in the payload
-    delete paramsObjClone.recordingId;
+  const putRecordingSyncpoints = (paramsObj: {
+    recordingId: string;
+    syncpoints: number[][];
+  }) => {
+    const { recordingId, syncpoints, ...paramsObjClone } = paramsObj;
 
     if (syncpoints) {
+      // @ts-ignore
       paramsObjClone.syncpoints = JSON.stringify(syncpoints);
     }
 
@@ -133,27 +128,30 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
   };
 
   // all DELETE methods...
-  const deleteFolderByFolderId = (folderId) =>
+  const deleteFolderByFolderId = (folderId: string) =>
     axiosInstance.delete(`/folders/${folderId}/`);
-  const deleteRecordingByRecordingId = (recordingId) =>
+  const deleteRecordingByRecordingId = (recordingId: string) =>
     axiosInstance.delete(`/recordings/${recordingId}/`);
-  const deleteSliceBySlug = (slug) => axiosInstance.delete(`/scores/${slug}/`);
+  const deleteSliceBySlug = (slug: string) =>
+    axiosInstance.delete(`/scores/${slug}/`);
 
   const { get } = axiosInstance;
 
   // all GET methods...
   // get the details of a slice by its `slug`
-  const getSliceBySlug = (slug) => get(`/scores/${slug}/`);
+  const getSliceBySlug = (slug: string) => get(`/scores/${slug}/`);
 
   // get the details of a slice by its `scorehash`
   // while useful, please note that as of 2021-02-27
   // this is still technically an undocumented API method
   // it may change at any time
-  const getSliceByScorehash = (scorehash) => get(`/slices/${scorehash}/`);
+  const getSliceByScorehash = (scorehash: string) =>
+    get(`/slices/${scorehash}/`);
 
-  const getSliceNotationBySlug = (slug) => get(`/scores/${slug}/notation/`);
+  const getSliceNotationBySlug = (slug: string) =>
+    get(`/scores/${slug}/notation/`);
 
-  const getSliceRecordingsByScorehash = (scorehash) =>
+  const getSliceRecordingsByScorehash = (scorehash: string) =>
     get(`/slices/${scorehash}/recordings/`);
 
   /**
@@ -163,13 +161,14 @@ module.exports = ({ SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD }) => {
    * This method still works for backwards compatibility,
    * but new code should use `getSliceRecordingsByScorehash`.
    */
-  const getSliceRecordingsBySlug = (slug) => get(`/scores/${slug}/recordings/`);
+  const getSliceRecordingsBySlug = (slug: string) =>
+    get(`/scores/${slug}/recordings/`);
 
-  const getSyncpointsByRecordingId = (recordingId) =>
+  const getSyncpointsByRecordingId = (recordingId: string) =>
     get(`/recordings/${recordingId}/syncpoints/`);
   const listFolders = () => get(`/folders/`);
   const listSlices = () => get(`/scores/`);
-  const listSubfoldersByParentId = (parentId) =>
+  const listSubfoldersByParentId = (parentId: string) =>
     get(`/folders/?parent_id=${parentId}`);
 
   return {

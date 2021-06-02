@@ -10,7 +10,13 @@ const axios = require(`axios`);
  * @param {string} uploadUrl  fully-qualified URL to which we'll
  *                            make our PUT request
  */
-const uploadFile = async function uploadFile({ pathToFile, uploadUrl }) {
+const uploadFile = async function uploadFile({
+  pathToFile,
+  uploadUrl,
+}: {
+  pathToFile: string;
+  uploadUrl: string;
+}) {
   const data = await fs.readFile(pathToFile);
 
   const axiosConfig = {
@@ -49,4 +55,4 @@ const uploadFile = async function uploadFile({ pathToFile, uploadUrl }) {
   return response;
 };
 
-module.exports = { uploadFile };
+export { uploadFile };

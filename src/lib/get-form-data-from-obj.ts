@@ -1,7 +1,7 @@
 const FormData = require(`form-data`);
 
 // helper function to convert a plain JS object to "multipart/form-data"
-const getFormDataFromObj = function getFormDataFromObj(paramsObj) {
+const getFormDataFromObj = function getFormDataFromObj(paramsObj: object) {
   const formData = new FormData();
 
   Object.entries(paramsObj).forEach(([key, value]) => {
@@ -11,4 +11,4 @@ const getFormDataFromObj = function getFormDataFromObj(paramsObj) {
   return formData;
 };
 
-module.exports = { getFormDataFromObj };
+export { getFormDataFromObj };
