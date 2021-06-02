@@ -2,17 +2,39 @@
   "name": "@percuss.io/soundslice-data-api",
   "version": "0.12.2",
   "description": "Unofficial Node.js client for the Soundslice data API",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
+    "analyze": "size-limit --why",
+    "build": "bash scripts/build.sh",
+    "clear_jest": "jest --clearCache",
     "lint": "bash ./scripts/lint.sh",
+    "pre-publish": "bash scripts/pre-publish.sh",
+    "prettier": "prettier \"./**/*.{ts,js}\" --write",
     "shipit": "bash ./scripts/publish.sh",
-    "test": "bash ./scripts/test.sh"
+    "size": "size-limit",
+    "test": "npx jest"
   },
-  "files": [
-    "index.js",
-    "lib/get-form-data-from-obj.js",
-    "lib/upload-file.js"
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run test"
+    }
+  },
+  "size-limit": [
+    {
+      "path": "dist/index.js",
+      "limit": "180 KB"
+    }
   ],
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "jest": {
+    "preset": "ts-jest"
+  },
   "keywords": [
     "Soundslice"
   ],
@@ -24,13 +46,22 @@
   },
   "devDependencies": {
     "@percuss.io/eslint-config-ericcarraway": "^1.1.10",
-    "chai": "^4.3.4",
+    "@size-limit/preset-small-lib": "^4.10.2",
+    "@tsconfig/node14": "^1.0.0",
+    "@types/jest": "^26.0.23",
     "dotenv": "^8.6.0",
-    "eslint": "^7.26.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-sort-destructure-keys": "^1.3.5",
-    "mocha": "^8.4.0"
+    "eslint": "^7.26.0",
+    "husky": "^4.3.8",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "size-limit": "^4.10.2",
+    "ts-jest": "^26.5.5",
+    "ts-loader": "^8.2.0",
+    "tslib": "^2.2.0",
+    "typescript": "^4.2.4"
   },
   "repository": {
     "type": "git",
