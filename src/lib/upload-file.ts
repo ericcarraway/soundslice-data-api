@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import { readFile } from 'fs/promises';
+import { promises as fsp } from 'fs';
 
 /**
  * Read a file from the filesystem & PUT it
@@ -17,7 +17,7 @@ const uploadFile = async function uploadFile({
   pathToFile: string;
   uploadUrl: string;
 }): Promise<AxiosResponse<any>> {
-  const data = await readFile(pathToFile);
+  const data = await fsp.readFile(pathToFile);
 
   const axiosConfig: AxiosRequestConfig = {
     data,
