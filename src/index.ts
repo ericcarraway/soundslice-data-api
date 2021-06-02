@@ -1,3 +1,7 @@
+/* eslint camelcase: ["error", {allow: [
+  "crop_end", "crop_start", "embed_status", "folder_id",
+  "hls_url", "parent_id", "print_status", "source_data", "user_id" ]}] */
+
 // https://www.soundslice.com/help/data-api/
 
 import axios from 'axios';
@@ -56,68 +60,78 @@ module.exports = ({
    *                           The folder's parent ID.
    *                           Use this if you want to nest a folder within another one.
    */
-  const createFolder = (paramsObj: {
-    name: string;
-
-    // eslint-disable-next-line camelcase
-    parent_id?: number;
-  }) => post(`/folders/`, paramsObj);
+  const createFolder = (paramsObj: { name: string; parent_id?: number }) =>
+    post(`/folders/`, paramsObj);
 
   const createSlice = (paramsObj: {
     artist?: string;
-
-    // eslint-disable-next-line camelcase
     embed_status?: 4;
-
-    // eslint-disable-next-line camelcase
     folder_id?: string;
-
     name?: string;
 
     // 1 - Disabled (default value, if not provided)
     // 2 - Enabled on any domain (option only available for certain accounts)
     // 4 - Enabled on allowlist domains
-    // eslint-disable-next-line camelcase
     print_status?: number;
 
     // 1 - "Only me" (default value, if not provided)
     // 3 - "Anybody who knows its URL"
     status?: number;
+
+    // TODO: confirm that we can POST to the newer Soundslice endpoint, `/slices/`
   }) => post(`/scores/`, paramsObj);
 
-  // required: source
-  // optional: name, source_data, hls_url
-  const createRecording = (paramsObj: { slug: string }) => {
+  const createRecording = (paramsObj: {
+    // Required
+    slug: string;
+
+    // If not given, this will be "Audio" or "Video", depending on the type of recording.
+    name?: string;
+
+    // Required
+    source: number;
+
+    source_data?: string;
+
+    hls_url?: string;
+  }) => {
     // `slug` must be included in `paramsObj`
     // because it's part of the URL we'll POST to
     //
     // however, we don't want to send it in the payload
-    const { slug, ...paramsObjClone } = paramsObj;
+    const { slug, ...paramsObjToPOST } = paramsObj;
 
-    return post(`/scores/${slug}/recordings/`, paramsObjClone);
+    // NOTE:
+    // Soundslice docs indicate that a new endpoint, `/slices/${scorehash}/recordings/`,
+    // has been created. That may be preferred over `/scores/${slug}/recordings/`.
+    return post(`/scores/${slug}/recordings/`, paramsObjToPOST);
   };
 
-  // required: folder_id
-  // optional: user_id
-  const moveSliceToFolder = (paramsObj: { slug: string }) => {
+  const moveSliceToFolder = (paramsObj: {
+    slug: string;
+    folder_id: number | string;
+    user_id?: number | string;
+  }) => {
     // `slug` must be included in `paramsObj`
     // because it's part of the URL we'll POST to
     //
     // however, we don't want to send it in the payload
-    const { slug, ...paramsObjClone } = paramsObj;
+    const { slug, ...paramsObjToPOST } = paramsObj;
 
-    return post(`/scores/${slug}/move/`, paramsObjClone);
+    // NOTE:
+    // Soundslice docs indicate that a new endpoint, `/slices/${scorehash}/move/`,
+    // has been created. That may be preferred over `/scores/${slug}/move/`.
+    return post(`/scores/${slug}/move/`, paramsObjToPOST);
   };
 
-  // required: name
-  const renameFolder = (paramsObj: { folderId: string }) => {
+  const renameFolder = (paramsObj: { folderId: string; name: string }) => {
     // `folderId` must be included in `paramsObj`
     // because it's part of the URL we'll POST to
     //
     // however, we don't want to send it in the payload
-    const { folderId, ...paramsObjClone } = paramsObj;
+    const { folderId, ...paramsObjToPOST } = paramsObj;
 
-    return post(`/folders/${folderId}/`, paramsObjClone);
+    return post(`/folders/${folderId}/`, paramsObjToPOST);
   };
 
   const axiosInstance = axios.create({ baseURL, headers });
@@ -154,16 +168,18 @@ module.exports = ({
   const putRecordingSyncpoints = (paramsObj: {
     recordingId: string;
     syncpoints: number[][];
+    crop_start?: number;
+    crop_end?: number;
   }) => {
-    const { recordingId, syncpoints, ...paramsObjClone } = paramsObj;
+    const { recordingId, syncpoints, ...paramsObjToPOST } = paramsObj;
 
     if (syncpoints) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      paramsObjClone.syncpoints = JSON.stringify(syncpoints);
+      paramsObjToPOST.syncpoints = JSON.stringify(syncpoints);
     }
 
-    return post(`/recordings/${recordingId}/syncpoints/`, paramsObjClone);
+    return post(`/recordings/${recordingId}/syncpoints/`, paramsObjToPOST);
   };
 
   // all DELETE methods...
@@ -171,19 +187,24 @@ module.exports = ({
     axiosInstance.delete(`/folders/${folderId}/`);
   const deleteRecordingByRecordingId = (recordingId: string) =>
     axiosInstance.delete(`/recordings/${recordingId}/`);
+
+  // TODO: add `deleteSliceByScorehash` and mark this as 'no longer documented'
   const deleteSliceBySlug = (slug: string) =>
     axiosInstance.delete(`/scores/${slug}/`);
 
   const { get } = axiosInstance;
 
   // all GET methods...
-  // get the details of a slice by its `slug`
+
+  /**
+   * NOTE: no longer documented
+   * retrieves metadata for a slice by its `slug`
+   */
   const getSliceBySlug = (slug: string) => get(`/scores/${slug}/`);
 
-  // get the details of a slice by its `scorehash`
-  // while useful, please note that as of 2021-02-27
-  // this is still technically an undocumented API method
-  // it may change at any time
+  /**
+   * retrieves metadata for a slice by its `scorehash`
+   */
   const getSliceByScorehash = (scorehash: string) =>
     get(`/slices/${scorehash}/`);
 
@@ -206,7 +227,10 @@ module.exports = ({
   const getSyncpointsByRecordingId = (recordingId: string) =>
     get(`/recordings/${recordingId}/syncpoints/`);
   const listFolders = () => get(`/folders/`);
+
+  // TODO: confirm that we can GET from the newer Soundslice endpoint, `/slices/`
   const listSlices = () => get(`/scores/`);
+
   const listSubfoldersByParentId = (parentId: string) =>
     get(`/folders/?parent_id=${parentId}`);
 
@@ -219,10 +243,7 @@ module.exports = ({
     deleteSliceBySlug,
     duplicateSliceByScorehash,
     getRecordingUploadUrlByRecordingId,
-
-    // undocumented
     getSliceByScorehash,
-
     getSliceBySlug,
     getSliceNotationBySlug,
     getSliceRecordingsByScorehash,
