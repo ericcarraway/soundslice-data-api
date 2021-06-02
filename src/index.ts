@@ -48,10 +48,21 @@ module.exports = ({
     return axios.post(`${baseURL}${url}`, formData, config);
   };
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  const createFolder = (paramsObj: object) => post(`/folders/`, paramsObj);
+  /**
+   * Creates a folder within your account's slice manager.
+   *
+   * @param {string} name Required - The name of the folder.
+   * @param {string} parent_id Optional - Integer.
+   *                           The folder's parent ID.
+   *                           Use this if you want to nest a folder within another one.
+   */
+  const createFolder = (paramsObj: {
+    name: string;
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
+    // eslint-disable-next-line camelcase
+    parent_id?: number;
+  }) => post(`/folders/`, paramsObj);
+
   const createSlice = (paramsObj: {
     artist?: string;
 
