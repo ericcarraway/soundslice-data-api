@@ -52,7 +52,27 @@ module.exports = ({
   const createFolder = (paramsObj: object) => post(`/folders/`, paramsObj);
 
   // eslint-disable-next-line @typescript-eslint/ban-types
-  const createSlice = (paramsObj: object) => post(`/scores/`, paramsObj);
+  const createSlice = (paramsObj: {
+    artist?: string;
+
+    // eslint-disable-next-line camelcase
+    embed_status?: 4;
+
+    // eslint-disable-next-line camelcase
+    folder_id?: string;
+
+    name?: string;
+
+    // 1 - Disabled (default value, if not provided)
+    // 2 - Enabled on any domain (option only available for certain accounts)
+    // 4 - Enabled on allowlist domains
+    // eslint-disable-next-line camelcase
+    print_status?: number;
+
+    // 1 - "Only me" (default value, if not provided)
+    // 3 - "Anybody who knows its URL"
+    status?: number;
+  }) => post(`/scores/`, paramsObj);
 
   // required: source
   // optional: name, source_data, hls_url
