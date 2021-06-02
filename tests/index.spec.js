@@ -1,11 +1,9 @@
 /* global describe, it, expect */
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 require(`dotenv`).config();
 
 const { SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD } = process.env;
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const apiClient = require(`../dist/index`)({
   SOUNDSLICE_APPLICATION_ID,
   SOUNDSLICE_PASSWORD,

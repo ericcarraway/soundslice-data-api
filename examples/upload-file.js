@@ -1,9 +1,7 @@
 // examples/upload-file.js
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require(`path`);
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { apiClient } = require(`./index.js`);
 
 async function main() {

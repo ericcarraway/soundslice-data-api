@@ -2,7 +2,6 @@
 
 // https://www.soundslice.com/help/data-api/#putmedia
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { apiClient } = require(`./index.js`);
 
 // This should be the `id` of a recording associated with a slice.

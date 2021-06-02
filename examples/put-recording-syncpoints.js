@@ -2,7 +2,6 @@
 
 // https://www.soundslice.com/help/data-api/#putsyncpoints
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { apiClient, handleError, handleSuccess } = require(`./index.js`);
 
 const paramsObj = {

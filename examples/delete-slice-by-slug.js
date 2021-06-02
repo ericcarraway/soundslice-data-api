@@ -2,7 +2,6 @@
 
 // https://www.soundslice.com/help/data-api/#deleteslice
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { apiClient } = require(`./index.js`);
 
 // change this to the slug of a slice you own & wish to delete

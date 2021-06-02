@@ -27,6 +27,7 @@ module.exports = {
 
   // custom overrides
   rules: {
+    '@typescript-eslint/no-var-requires': `off`,
     'import/extensions': `off`,
     'no-console': [
       `error`,

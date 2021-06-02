@@ -2,7 +2,6 @@
 
 // https://www.soundslice.com/help/data-api/#renamefolder
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { apiClient } = require(`./index.js`);
 
 const main = async () => {
