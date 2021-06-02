@@ -2,6 +2,7 @@
 
 // https://www.soundslice.com/help/data-api/#listslices
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { apiClient, handleError, handleSuccess } = require(`./index.js`);
 
 // retrieves metadata for all slices in your account

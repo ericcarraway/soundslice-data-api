@@ -2,6 +2,7 @@
 
 // https://www.soundslice.com/help/data-api/#duplicateslice
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { apiClient } = require(`./index.js`);
 
 const scorehash = `5Kzcc`;
