@@ -10,17 +10,6 @@ const {
 
 const makeMockAxios = () => ({ delete: jest.fn() });
 
-// // all DELETE methods...
-// const deleteFolderByFolderId = (folderId: number | string) =>
-//   axiosWrapper.delete(`/folders/${folderId}/`);
-
-// const deleteRecordingByRecordingId = (recordingId: number | string) =>
-//   axiosWrapper.delete(`/recordings/${recordingId}/`);
-
-// // TODO: add `deleteSliceByScorehash` and mark this as 'no longer documented'
-// const deleteSliceBySlug = (slug: number | string) =>
-//   axiosWrapper.delete(`/scores/${slug}/`);
-
 describe(`DELETE requests`, () => {
   test(`.deleteFolderByFolderId method`, async () => {
     const mockAxios = makeMockAxios();
