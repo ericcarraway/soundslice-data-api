@@ -250,8 +250,7 @@ const getApiClientInstance = ({
   // to list subfolders within a given folder, use `listSubfoldersByParentId`
   const listFolders = () => axiosWrapper.get(`/folders/`);
 
-  // TODO: confirm that we can GET from the newer Soundslice endpoint, `/slices/`
-  const listSlices = () => axiosWrapper.get(`/scores/`);
+  const listSlices = () => axiosWrapper.get(`/slices/`);
 
   // list subfolders within a given folder
   const listSubfoldersByParentId = (parentId: number | string) =>

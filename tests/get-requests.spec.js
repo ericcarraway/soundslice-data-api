@@ -1,5 +1,7 @@
 /* global describe, expect, test, jest */
 
+/* eslint @typescript-eslint/no-unused-vars: ["error", { "varsIgnorePattern": "^unused" }] */
+
 const { getApiClientInstance } = require(`../dist/get-api-client-instance.js`);
 
 const {
@@ -46,7 +48,7 @@ describe(`GET requests`, () => {
     expect(mockAxios.get).toHaveBeenCalled();
 
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `/scores/`,
+      `/slices/`,
       EXPECTED_BASE_AXIOS_CONFIG,
     );
   });
