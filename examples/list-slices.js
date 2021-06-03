@@ -2,10 +2,22 @@
 
 // https://www.soundslice.com/help/data-api/#listslices
 
-const { apiClient, handleError, handleSuccess } = require(`./index.js`);
+const { apiClient, handleError } = require(`./index.js`);
 
 // retrieves metadata for all slices in your account
 apiClient.listSlices().then(handleSuccess).catch(handleError);
+
+function handleSuccess(res) {
+  const arrayOfSlices = res.data;
+
+  console.log(
+    `arrayOfSlices.length`,
+    arrayOfSlices.length.toLocaleString(),
+    `\n`,
+  );
+
+  arrayOfSlices.forEach((slice) => console.log(slice));
+}
 
 // returns an array of slices, each with the following shape:
 //
