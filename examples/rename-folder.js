@@ -10,7 +10,7 @@ const main = async () => {
     folderId: `28882`,
 
     // Required - The new name of the folder.
-    name: `This folder has been renamed`,
+    name: `This folder has been renamed ${new Date().toLocaleTimeString()}`,
   };
 
   let res;

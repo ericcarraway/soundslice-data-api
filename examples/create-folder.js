@@ -7,7 +7,7 @@ const { apiClient } = require(`./index.js`);
 const main = async () => {
   const paramsObj = {
     // Required - The name of the folder.
-    name: `New Example Folder`,
+    name: `New Example Folder ${new Date().toLocaleTimeString()}`,
 
     // Optional - Integer. The folder's parent ID.
     // Use this if you want to nest a folder within another one.
