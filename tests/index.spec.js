@@ -20,6 +20,7 @@ describe(`soundslice-data-api`, () => {
         `createSlice`,
         `deleteFolderByFolderId`,
         `deleteRecordingByRecordingId`,
+        `deleteSliceByScorehash`,
         `deleteSliceBySlug`,
         `duplicateSliceByScorehash`,
         `getRecordingUploadUrlByRecordingId`,
@@ -69,6 +70,12 @@ describe(`soundslice-data-api`, () => {
   describe(`deleteRecordingByRecordingId`, () => {
     it(`should be a function`, () => {
       expect(typeof apiClient.deleteRecordingByRecordingId).toBe(`function`);
+    });
+  });
+
+  describe(`deleteSliceByScorehash`, () => {
+    it(`should be a function`, () => {
+      expect(typeof apiClient.deleteSliceByScorehash).toBe(`function`);
     });
   });
 

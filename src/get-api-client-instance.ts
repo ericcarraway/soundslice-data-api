@@ -208,14 +208,29 @@ const getApiClientInstance = ({
   const deleteRecordingByRecordingId = (recordingId: number | string) =>
     axiosWrapper.delete(`/recordings/${recordingId}/`);
 
-  // TODO: add `deleteSliceByScorehash` and mark this as 'no longer documented'
+  /**
+   * deletes a slice by its `scorehash`
+   */
+  const deleteSliceByScorehash = (scorehash: string) =>
+    axiosWrapper.delete(`/slices/${scorehash}/`);
+
+  /**
+   * @deprecated NOTE: most "by slug" methods are no longer documented
+   * use the corresponding "by scorehash" method instead
+   * @see deleteSliceByScorehash
+   *
+   * deletes a slice by its `slug`
+   */
   const deleteSliceBySlug = (slug: number | string) =>
     axiosWrapper.delete(`/scores/${slug}/`);
 
   // all GET methods...
 
   /**
-   * NOTE: no longer documented
+   * @deprecated NOTE: most "by slug" methods are no longer documented
+   * use the corresponding "by scorehash" method instead
+   * @see getSliceByScorehash
+   *
    * retrieves metadata for a slice by its `slug`
    */
   const getSliceBySlug = (slug: number | string) =>
@@ -239,6 +254,8 @@ const getApiClientInstance = ({
    * a slice's recordings should be retrieved by using the scorehash instead of the slug.
    * This method still works for backwards compatibility,
    * but new code should use `getSliceRecordingsByScorehash`.
+   *
+   * @see getSliceRecordingsByScorehash
    */
   const getSliceRecordingsBySlug = (slug: number | string) =>
     axiosWrapper.get(`/scores/${slug}/recordings/`);
@@ -262,11 +279,18 @@ const getApiClientInstance = ({
     createSlice,
     deleteFolderByFolderId,
     deleteRecordingByRecordingId,
+    deleteSliceByScorehash,
+
+    // deprecated
     deleteSliceBySlug,
+
     duplicateSliceByScorehash,
     getRecordingUploadUrlByRecordingId,
     getSliceByScorehash,
+
+    // deprecated
     getSliceBySlug,
+
     getSliceNotationBySlug,
     getSliceRecordingsByScorehash,
 

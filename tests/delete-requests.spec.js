@@ -49,8 +49,22 @@ describe(`DELETE requests`, () => {
     );
   });
 
-  test.skip(`.deleteSliceByScorehash method`, async () => {
-    //
+  test(`.deleteSliceByScorehash method`, async () => {
+    const mockAxios = makeMockAxios();
+    const apiClient = getApiClientInstance({
+      axios: mockAxios,
+      SOUNDSLICE_APPLICATION_ID,
+      SOUNDSLICE_PASSWORD,
+    });
+
+    const scorehash = `abcde`;
+    const unusedResult = await apiClient.deleteSliceByScorehash(scorehash);
+
+    expect(mockAxios.delete).toHaveBeenCalled();
+    expect(mockAxios.delete).toHaveBeenCalledWith(
+      `/slices/abcde/`,
+      EXPECTED_BASE_AXIOS_CONFIG,
+    );
   });
 
   test(`.deleteSliceBySlug method`, async () => {
