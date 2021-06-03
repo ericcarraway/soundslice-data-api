@@ -1,7 +1,5 @@
 /* global describe, expect, test, jest */
 
-/* eslint @typescript-eslint/no-unused-vars: ["error", { "varsIgnorePattern": "^unused" }] */
-
 const { getApiClientInstance } = require(`../dist/get-api-client-instance.js`);
 
 const {
