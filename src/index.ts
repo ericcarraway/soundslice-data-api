@@ -66,7 +66,7 @@ module.exports = ({
   const createSlice = (paramsObj: {
     artist?: string;
     embed_status?: 4;
-    folder_id?: string;
+    folder_id: number | string;
     name?: string;
 
     // 1 - Disabled (default value, if not provided)
@@ -83,7 +83,7 @@ module.exports = ({
 
   const createRecording = (paramsObj: {
     // Required
-    slug: string;
+    slug: number | string;
 
     // If not given, this will be "Audio" or "Video", depending on the type of recording.
     name?: string;
@@ -108,7 +108,7 @@ module.exports = ({
   };
 
   const moveSliceToFolder = (paramsObj: {
-    slug: string;
+    slug: number | string;
     folder_id: number | string;
     user_id?: number | string;
   }) => {
@@ -124,7 +124,10 @@ module.exports = ({
     return post(`/scores/${slug}/move/`, paramsObjToPOST);
   };
 
-  const renameFolder = (paramsObj: { folderId: string; name: string }) => {
+  const renameFolder = (paramsObj: {
+    folderId: number | string;
+    name: string;
+  }) => {
     // `folderId` must be included in `paramsObj`
     // because it's part of the URL we'll POST to
     //
@@ -139,6 +142,10 @@ module.exports = ({
   /**
    * duplicates a slice by its `scorehash`
    * sends a POST request with no body
+   *
+   * QUESTION: are newly-created slices ending up in the same subfolder as the original?
+   * the docs state
+   * "The newly created slice will live in the top level of your slice manager."
    */
   const duplicateSliceByScorehash = (scorehash: string) =>
     axiosInstance.post(`/slices/${scorehash}/duplicate/`);
@@ -148,7 +155,7 @@ module.exports = ({
    * sends a POST request with no body
    * so that we can receive a temporary upload URL
    */
-  const getRecordingUploadUrlByRecordingId = (recordingId: string) =>
+  const getRecordingUploadUrlByRecordingId = (recordingId: number | string) =>
     axiosInstance.post(`/recordings/${recordingId}/media/`);
 
   /**
@@ -166,7 +173,7 @@ module.exports = ({
    * @return {Promise} an Axios promise
    */
   const putRecordingSyncpoints = (paramsObj: {
-    recordingId: string;
+    recordingId: number | string;
     syncpoints: number[][];
     crop_start?: number;
     crop_end?: number;
@@ -183,13 +190,14 @@ module.exports = ({
   };
 
   // all DELETE methods...
-  const deleteFolderByFolderId = (folderId: string) =>
+  const deleteFolderByFolderId = (folderId: number | string) =>
     axiosInstance.delete(`/folders/${folderId}/`);
-  const deleteRecordingByRecordingId = (recordingId: string) =>
+
+  const deleteRecordingByRecordingId = (recordingId: number | string) =>
     axiosInstance.delete(`/recordings/${recordingId}/`);
 
   // TODO: add `deleteSliceByScorehash` and mark this as 'no longer documented'
-  const deleteSliceBySlug = (slug: string) =>
+  const deleteSliceBySlug = (slug: number | string) =>
     axiosInstance.delete(`/scores/${slug}/`);
 
   const { get } = axiosInstance;
@@ -200,7 +208,7 @@ module.exports = ({
    * NOTE: no longer documented
    * retrieves metadata for a slice by its `slug`
    */
-  const getSliceBySlug = (slug: string) => get(`/scores/${slug}/`);
+  const getSliceBySlug = (slug: number | string) => get(`/scores/${slug}/`);
 
   /**
    * retrieves metadata for a slice by its `scorehash`
@@ -208,7 +216,7 @@ module.exports = ({
   const getSliceByScorehash = (scorehash: string) =>
     get(`/slices/${scorehash}/`);
 
-  const getSliceNotationBySlug = (slug: string) =>
+  const getSliceNotationBySlug = (slug: number | string) =>
     get(`/scores/${slug}/notation/`);
 
   const getSliceRecordingsByScorehash = (scorehash: string) =>
@@ -221,17 +229,20 @@ module.exports = ({
    * This method still works for backwards compatibility,
    * but new code should use `getSliceRecordingsByScorehash`.
    */
-  const getSliceRecordingsBySlug = (slug: string) =>
+  const getSliceRecordingsBySlug = (slug: number | string) =>
     get(`/scores/${slug}/recordings/`);
 
-  const getSyncpointsByRecordingId = (recordingId: string) =>
+  const getSyncpointsByRecordingId = (recordingId: number | string) =>
     get(`/recordings/${recordingId}/syncpoints/`);
+
+  // by default, this lists only the top-level folders
+  // to list subfolders within a given folder, use `listSubfoldersByParentId`
   const listFolders = () => get(`/folders/`);
 
   // TODO: confirm that we can GET from the newer Soundslice endpoint, `/slices/`
   const listSlices = () => get(`/scores/`);
 
-  const listSubfoldersByParentId = (parentId: string) =>
+  const listSubfoldersByParentId = (parentId: number | string) =>
     get(`/folders/?parent_id=${parentId}`);
 
   return {
