@@ -1,10 +1,10 @@
-/* global describe, it, expect */
+/* global describe, expect, it */
 
 require(`dotenv`).config();
 
 const { SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD } = process.env;
 
-const apiClient = require(`../dist/index`)({
+const apiClient = require(`../dist/index.js`).default({
   SOUNDSLICE_APPLICATION_ID,
   SOUNDSLICE_PASSWORD,
 });

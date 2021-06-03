@@ -4,11 +4,9 @@
 
 // https://www.soundslice.com/help/data-api/
 
-import axios from 'axios';
+import { AxiosStatic } from 'axios';
 
-// eslint-disable-next-line import/no-unresolved
 import { getFormDataFromObj } from './lib/get-form-data-from-obj';
-// eslint-disable-next-line import/no-unresolved
 import { uploadFile } from './lib/upload-file';
 
 // eslint-disable-next-line no-underscore-dangle
@@ -16,10 +14,12 @@ const _btoa = (b: string): string => Buffer.from(b).toString(`base64`);
 
 const baseURL = `https://www.soundslice.com/api/v1`;
 
-module.exports = ({
+const getApiClientInstance = ({
+  axios,
   SOUNDSLICE_APPLICATION_ID,
   SOUNDSLICE_PASSWORD,
 }: {
+  axios: AxiosStatic;
   SOUNDSLICE_APPLICATION_ID: string;
   SOUNDSLICE_PASSWORD: string;
 }) => {
@@ -273,3 +273,5 @@ module.exports = ({
     uploadFile,
   };
 };
+
+export { getApiClientInstance };

@@ -29,6 +29,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-var-requires': `off`,
     'import/extensions': `off`,
+    'import/no-unresolved': `off`,
     'no-console': [
       `error`,
       {
