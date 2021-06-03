@@ -148,7 +148,7 @@ const getApiClientInstance = ({
   const axiosWrapper = {
     delete: (url: string) => axios.delete(url, baseAxiosConfig),
     get: (url: string) => axios.get(url, baseAxiosConfig),
-    post: (url: string) => axios.post(url, baseAxiosConfig),
+    post: (url: string) => axios.post(url, null, baseAxiosConfig),
   };
 
   /**
