@@ -67,23 +67,26 @@ const getApiClientInstance = ({
   const createFolder = (paramsObj: { name: string; parent_id?: number }) =>
     postWithFormData(`/folders/`, paramsObj);
 
+  // all params are optional
   const createSlice = (paramsObj: {
     artist?: string;
-    embed_status?: 4;
-    folder_id: number | string;
+
+    // 1 — Disabled (default value, if not provided)
+    // 2 — Enabled on any domain (option only available for certain accounts)
+    // 4 — Enabled on allowlist domains
+    embed_status?: number;
+
+    folder_id?: number | string;
     name?: string;
 
-    // 1 - Disabled (default value, if not provided)
-    // 2 - Enabled on any domain (option only available for certain accounts)
-    // 4 - Enabled on allowlist domains
+    // 1 — Printing is disabled (default)
+    // 3 — Printing is allowed
     print_status?: number;
 
     // 1 - "Only me" (default value, if not provided)
     // 3 - "Anybody who knows its URL"
     status?: number;
-
-    // TODO: confirm that we can POST to the newer Soundslice endpoint, `/slices/`
-  }) => postWithFormData(`/scores/`, paramsObj);
+  }) => postWithFormData(`/slices/`, paramsObj);
 
   const createRecording = (paramsObj: {
     // Required
