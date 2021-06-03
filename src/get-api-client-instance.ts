@@ -4,7 +4,7 @@
 
 // https://www.soundslice.com/help/data-api/
 
-import { AxiosStatic } from 'axios';
+import { AxiosRequestConfig, AxiosStatic } from 'axios';
 
 import { getFormDataFromObj } from './lib/get-form-data-from-obj';
 import { uploadFile } from './lib/upload-file';
@@ -28,8 +28,11 @@ const getApiClientInstance = ({
     `${SOUNDSLICE_APPLICATION_ID}:${SOUNDSLICE_PASSWORD}`,
   );
 
-  const headers = {
-    Authorization: `Basic ${SOUNDSLICE_API_KEY}`,
+  const baseAxiosConfig: AxiosRequestConfig = {
+    baseURL,
+    headers: {
+      Authorization: `Basic ${SOUNDSLICE_API_KEY}`,
+    },
   };
 
   /**
@@ -39,17 +42,18 @@ const getApiClientInstance = ({
    * - sends a POST to the specified URL
    */
   // eslint-disable-next-line @typescript-eslint/ban-types
-  const post = (url: string, paramsObj: object) => {
+  const postWithFormData = (url: string, paramsObj: object) => {
     const formData = getFormDataFromObj(paramsObj);
 
-    const config = {
+    const axiosConfig: AxiosRequestConfig = {
+      ...baseAxiosConfig,
       headers: {
-        Authorization: headers.Authorization,
+        ...baseAxiosConfig.headers,
         ...formData.getHeaders(),
       },
     };
 
-    return axios.post(`${baseURL}${url}`, formData, config);
+    return axios.post(url, formData, axiosConfig);
   };
 
   /**
@@ -61,7 +65,7 @@ const getApiClientInstance = ({
    *                           Use this if you want to nest a folder within another one.
    */
   const createFolder = (paramsObj: { name: string; parent_id?: number }) =>
-    post(`/folders/`, paramsObj);
+    postWithFormData(`/folders/`, paramsObj);
 
   const createSlice = (paramsObj: {
     artist?: string;
@@ -79,7 +83,7 @@ const getApiClientInstance = ({
     status?: number;
 
     // TODO: confirm that we can POST to the newer Soundslice endpoint, `/slices/`
-  }) => post(`/scores/`, paramsObj);
+  }) => postWithFormData(`/scores/`, paramsObj);
 
   const createRecording = (paramsObj: {
     // Required
@@ -104,7 +108,7 @@ const getApiClientInstance = ({
     // NOTE:
     // Soundslice docs indicate that a new endpoint, `/slices/${scorehash}/recordings/`,
     // has been created. That may be preferred over `/scores/${slug}/recordings/`.
-    return post(`/scores/${slug}/recordings/`, paramsObjToPOST);
+    return postWithFormData(`/scores/${slug}/recordings/`, paramsObjToPOST);
   };
 
   const moveSliceToFolder = (paramsObj: {
@@ -121,7 +125,7 @@ const getApiClientInstance = ({
     // NOTE:
     // Soundslice docs indicate that a new endpoint, `/slices/${scorehash}/move/`,
     // has been created. That may be preferred over `/scores/${slug}/move/`.
-    return post(`/scores/${slug}/move/`, paramsObjToPOST);
+    return postWithFormData(`/scores/${slug}/move/`, paramsObjToPOST);
   };
 
   const renameFolder = (paramsObj: {
@@ -134,10 +138,15 @@ const getApiClientInstance = ({
     // however, we don't want to send it in the payload
     const { folderId, ...paramsObjToPOST } = paramsObj;
 
-    return post(`/folders/${folderId}/`, paramsObjToPOST);
+    return postWithFormData(`/folders/${folderId}/`, paramsObjToPOST);
   };
 
-  const axiosInstance = axios.create({ baseURL, headers });
+  // these HTTP methods won't include a payload in the request body
+  const axiosWrapper = {
+    delete: (url: string) => axios.delete(url, baseAxiosConfig),
+    get: (url: string) => axios.get(url, baseAxiosConfig),
+    post: (url: string) => axios.post(url, baseAxiosConfig),
+  };
 
   /**
    * duplicates a slice by its `scorehash`
@@ -148,7 +157,7 @@ const getApiClientInstance = ({
    * "The newly created slice will live in the top level of your slice manager."
    */
   const duplicateSliceByScorehash = (scorehash: string) =>
-    axiosInstance.post(`/slices/${scorehash}/duplicate/`);
+    axiosWrapper.post(`/slices/${scorehash}/duplicate/`);
 
   /**
    * step 1 of the upload process
@@ -156,7 +165,7 @@ const getApiClientInstance = ({
    * so that we can receive a temporary upload URL
    */
   const getRecordingUploadUrlByRecordingId = (recordingId: number | string) =>
-    axiosInstance.post(`/recordings/${recordingId}/media/`);
+    axiosWrapper.post(`/recordings/${recordingId}/media/`);
 
   /**
    * Sets the syncpoints for the recording with ID `recordingId`.
@@ -186,21 +195,22 @@ const getApiClientInstance = ({
       paramsObjToPOST.syncpoints = JSON.stringify(syncpoints);
     }
 
-    return post(`/recordings/${recordingId}/syncpoints/`, paramsObjToPOST);
+    return postWithFormData(
+      `/recordings/${recordingId}/syncpoints/`,
+      paramsObjToPOST,
+    );
   };
 
   // all DELETE methods...
   const deleteFolderByFolderId = (folderId: number | string) =>
-    axiosInstance.delete(`/folders/${folderId}/`);
+    axiosWrapper.delete(`/folders/${folderId}/`);
 
   const deleteRecordingByRecordingId = (recordingId: number | string) =>
-    axiosInstance.delete(`/recordings/${recordingId}/`);
+    axiosWrapper.delete(`/recordings/${recordingId}/`);
 
   // TODO: add `deleteSliceByScorehash` and mark this as 'no longer documented'
   const deleteSliceBySlug = (slug: number | string) =>
-    axiosInstance.delete(`/scores/${slug}/`);
-
-  const { get } = axiosInstance;
+    axiosWrapper.delete(`/scores/${slug}/`);
 
   // all GET methods...
 
@@ -208,19 +218,20 @@ const getApiClientInstance = ({
    * NOTE: no longer documented
    * retrieves metadata for a slice by its `slug`
    */
-  const getSliceBySlug = (slug: number | string) => get(`/scores/${slug}/`);
+  const getSliceBySlug = (slug: number | string) =>
+    axiosWrapper.get(`/scores/${slug}/`);
 
   /**
    * retrieves metadata for a slice by its `scorehash`
    */
   const getSliceByScorehash = (scorehash: string) =>
-    get(`/slices/${scorehash}/`);
+    axiosWrapper.get(`/slices/${scorehash}/`);
 
   const getSliceNotationBySlug = (slug: number | string) =>
-    get(`/scores/${slug}/notation/`);
+    axiosWrapper.get(`/scores/${slug}/notation/`);
 
   const getSliceRecordingsByScorehash = (scorehash: string) =>
-    get(`/slices/${scorehash}/recordings/`);
+    axiosWrapper.get(`/slices/${scorehash}/recordings/`);
 
   /**
    * @deprecated
@@ -230,21 +241,21 @@ const getApiClientInstance = ({
    * but new code should use `getSliceRecordingsByScorehash`.
    */
   const getSliceRecordingsBySlug = (slug: number | string) =>
-    get(`/scores/${slug}/recordings/`);
+    axiosWrapper.get(`/scores/${slug}/recordings/`);
 
   const getSyncpointsByRecordingId = (recordingId: number | string) =>
-    get(`/recordings/${recordingId}/syncpoints/`);
+    axiosWrapper.get(`/recordings/${recordingId}/syncpoints/`);
 
   // by default, this lists only the top-level folders
   // to list subfolders within a given folder, use `listSubfoldersByParentId`
-  const listFolders = () => get(`/folders/`);
+  const listFolders = () => axiosWrapper.get(`/folders/`);
 
   // TODO: confirm that we can GET from the newer Soundslice endpoint, `/slices/`
-  const listSlices = () => get(`/scores/`);
+  const listSlices = () => axiosWrapper.get(`/scores/`);
 
   // list subfolders within a given folder
   const listSubfoldersByParentId = (parentId: number | string) =>
-    get(`/folders/?parent_id=${parentId}`);
+    axiosWrapper.get(`/folders/?parent_id=${parentId}`);
 
   return {
     createFolder,
