@@ -2,42 +2,71 @@
   "name": "@percuss.io/soundslice-data-api",
   "version": "0.12.2",
   "description": "Unofficial Node.js client for the Soundslice data API",
-  "main": "index.js",
-  "scripts": {
-    "lint": "bash ./scripts/lint.sh",
-    "shipit": "bash ./scripts/publish.sh",
-    "test": "bash ./scripts/test.sh"
-  },
-  "files": [
-    "index.js",
-    "lib/get-form-data-from-obj.js",
-    "lib/upload-file.js"
-  ],
   "keywords": [
     "Soundslice"
   ],
-  "author": "Eric Carraway",
+  "homepage": "https://github.com/ericcarraway/soundslice-data-api#readme",
+  "bugs": {
+    "url": "https://github.com/ericcarraway/soundslice-data-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericcarraway/soundslice-data-api.git"
+  },
   "license": "ISC",
+  "author": "Eric Carraway",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "analyze": "size-limit --why",
+    "build": "bash scripts/build.sh",
+    "clear_jest": "jest --clearCache",
+    "lint": "bash ./scripts/lint.sh",
+    "pre-publish": "bash scripts/pre-publish.sh",
+    "prettier": "prettier \"./**/*.{ts,js}\" --write",
+    "shipit": "bash ./scripts/publish.sh",
+    "size": "size-limit",
+    "test": "npx jest",
+    "prepare": "husky install"
+  },
+  "jest": {
+    "preset": "ts-jest"
+  },
   "dependencies": {
     "axios": "^0.21.1",
     "form-data": "^4.0.0"
   },
   "devDependencies": {
     "@percuss.io/eslint-config-ericcarraway": "^1.1.10",
-    "chai": "^4.3.4",
-    "dotenv": "^8.6.0",
-    "eslint": "^7.26.0",
+    "@size-limit/preset-small-lib": "^4.11.0",
+    "@tsconfig/node14": "^1.0.0",
+    "@types/jest": "^26.0.23",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "dotenv": "^10.0.0",
+    "eslint": "^7.27.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-sort-destructure-keys": "^1.3.5",
-    "mocha": "^8.4.0"
+    "husky": "^6.0.0",
+    "jest": "^27.0.4",
+    "prettier": "^2.3.0",
+    "size-limit": "^4.11.0",
+    "ts-jest": "^27.0.2",
+    "ts-loader": "^9.2.2",
+    "tslib": "^2.2.0",
+    "typescript": "^4.3.2"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ericcarraway/soundslice-data-api.git"
+  "engines": {
+    "node": ">=10"
   },
-  "bugs": {
-    "url": "https://github.com/ericcarraway/soundslice-data-api/issues"
-  },
-  "homepage": "https://github.com/ericcarraway/soundslice-data-api#readme"
+  "size-limit": [
+    {
+      "path": "dist/index.js",
+      "limit": "180 KB"
+    }
+  ]
 }

@@ -1,6 +1,6 @@
-const fs = require(`fs`).promises;
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-const axios = require(`axios`);
+import { promises as fsp } from 'fs';
 
 /**
  * Read a file from the filesystem & PUT it
@@ -10,10 +10,16 @@ const axios = require(`axios`);
  * @param {string} uploadUrl  fully-qualified URL to which we'll
  *                            make our PUT request
  */
-const uploadFile = async function uploadFile({ pathToFile, uploadUrl }) {
-  const data = await fs.readFile(pathToFile);
+const uploadFile = async function uploadFile({
+  pathToFile,
+  uploadUrl,
+}: {
+  pathToFile: string;
+  uploadUrl: string;
+}): Promise<AxiosResponse<any>> {
+  const data = await fsp.readFile(pathToFile);
 
-  const axiosConfig = {
+  const axiosConfig: AxiosRequestConfig = {
     data,
 
     // Do not include HTTP authentication
@@ -22,7 +28,7 @@ const uploadFile = async function uploadFile({ pathToFile, uploadUrl }) {
 
     method: `PUT`,
     transformRequest: [
-      (_data, headers) => {
+      (_data: Buffer, headers: any) => {
         /**
          * By default, Axios will add a 'Content-Type' header.
          *
@@ -49,4 +55,4 @@ const uploadFile = async function uploadFile({ pathToFile, uploadUrl }) {
   return response;
 };
 
-module.exports = { uploadFile };
+export { uploadFile };
