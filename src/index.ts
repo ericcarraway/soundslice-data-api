@@ -242,6 +242,7 @@ module.exports = ({
   // TODO: confirm that we can GET from the newer Soundslice endpoint, `/slices/`
   const listSlices = () => get(`/scores/`);
 
+  // list subfolders within a given folder
   const listSubfoldersByParentId = (parentId: number | string) =>
     get(`/folders/?parent_id=${parentId}`);
 
