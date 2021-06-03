@@ -1,5 +1,17 @@
 # Changelog
 
+**2021-06-03**
+
+- Published `v0.13.1` (hotfix for `tslib` dependency)
+- Published `v0.13.0`
+- Began a conversion to TypeScript
+  - See https://github.com/ericcarraway/soundslice-data-api/pull/17
+- Added more examples to the [examples folder](https://github.com/ericcarraway/soundslice-data-api/tree/primary/examples)
+  - `listSubfoldersByParentId`
+  - `getSyncpointsByRecordingId`
+- Removed Mocha in favor of Jest for unit tests
+- Bumped and added several `devDependencies`
+
 **2021-03-01**
 
 - Published `v0.12.1`
