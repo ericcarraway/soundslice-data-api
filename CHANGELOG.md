@@ -1,5 +1,21 @@
 # Changelog
 
+**2021-06-04**
+
+- Published `v0.14.0`
+- See https://github.com/ericcarraway/soundslice-data-api/pull/18
+- TypeScript typings and tab-completion now work, even for projects using vanilla JavaScript. 🎉
+- **BREAKING CHANGE** - To import this package in a CommonJS environment, make this change:
+
+```diff
+- const apiClient = require('@percuss.io/soundslice-data-api')({
++ const apiClient = require('@percuss.io/soundslice-data-api').default({
+```
+
+- Added Jest unit tests for many of the API methods
+- Added method `deleteSliceByScorehash` & deprecated `deleteSliceBySlug`
+- Changed `listSlices` to target `/slices/` instead of the deprecated `/scores/` endpoint
+
 **2021-06-03**
 
 - Published `v0.13.1` (hotfix for `tslib` dependency)
