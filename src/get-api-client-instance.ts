@@ -89,7 +89,17 @@ const getApiClientInstance = ({
   }) => postWithFormData(`/slices/`, paramsObj);
 
   const createRecording = (paramsObj: {
-    // Required
+    /**
+     * TODO:
+     *
+     * Soundslice docs indicate that a new endpoint, `/slices/${scorehash}/recordings/`,
+     * has been created and is preferred over `/scores/${slug}/recordings/`.
+     *
+     * Update this `createRecording` method to
+     * - use `scorehash` if it's provided in `paramsObj`, targeting `/slices`
+     * - use `slug` if it's provided in lieu of `scorehash`, targeting `/scores`
+     * - throw some helpful errors in other cases
+     */
     slug: number | string;
 
     // If not given, this will be "Audio" or "Video", depending on the type of recording.
@@ -108,9 +118,6 @@ const getApiClientInstance = ({
     // however, we don't want to send it in the payload
     const { slug, ...paramsObjToPOST } = paramsObj;
 
-    // NOTE:
-    // Soundslice docs indicate that a new endpoint, `/slices/${scorehash}/recordings/`,
-    // has been created. That may be preferred over `/scores/${slug}/recordings/`.
     return postWithFormData(`/scores/${slug}/recordings/`, paramsObjToPOST);
   };
 
