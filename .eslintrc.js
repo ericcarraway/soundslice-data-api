@@ -27,8 +27,14 @@ module.exports = {
 
   // custom overrides
   rules: {
+    '@typescript-eslint/no-unused-vars': [
+      `error`,
+      // unused variables that start with "unused" are legal
+      { varsIgnorePattern: `^unused` },
+    ],
     '@typescript-eslint/no-var-requires': `off`,
     'import/extensions': `off`,
+    'import/no-unresolved': `off`,
     'no-console': [
       `error`,
       {

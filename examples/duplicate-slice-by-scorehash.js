@@ -4,7 +4,7 @@
 
 const { apiClient } = require(`./index.js`);
 
-const scorehash = `5Kzcc`;
+const scorehash = `YzcDc`;
 
 const main = async () => {
   try {

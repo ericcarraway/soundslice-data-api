@@ -11,7 +11,7 @@ const { apiClient } = require(`./index.js`);
 // - `getSliceRecordingsByScorehash` returns an array of recordings.
 //        You're likely interested in the one with a `status` of 'waiting'.
 // - `getSliceRecordingsBySlug` (deprecated)
-const recordingId = 556383;
+const recordingId = 611492;
 
 const main = async () => {
   let res;
@@ -22,6 +22,12 @@ const main = async () => {
     res = await apiClient.getRecordingUploadUrlByRecordingId(recordingId);
   } catch (err) {
     console.error(`ERROR:`);
+
+    if (typeof err.response !== `object`) {
+      console.log(err);
+
+      return;
+    }
 
     const { status, statusText } = err.response;
 

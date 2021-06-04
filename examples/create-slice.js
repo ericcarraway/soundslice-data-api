@@ -8,7 +8,7 @@ const main = async () => {
   const paramsObj = {
     artist: `B C Manjunath`,
     embed_status: 4,
-    folder_id: `28882`,
+    folder_id: `15303`,
     name: `Fibonacci Konnakol`,
     print_status: 3,
     status: 3,

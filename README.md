@@ -17,7 +17,8 @@ $ npm install @percuss.io/soundslice-data-api
 // https://www.soundslice.com/help/data-api/
 const { SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD } = process.env;
 
-const apiClient = require('@percuss.io/soundslice-data-api')({
+// create an instance of the Soundslice data API client
+const apiClient = require('@percuss.io/soundslice-data-api').default({
   SOUNDSLICE_APPLICATION_ID,
   SOUNDSLICE_PASSWORD,
 });
@@ -81,10 +82,19 @@ apiClient.createSlice({
 })
 ```
 
-#### `deleteSliceBySlug(slug)`
+#### `duplicateSliceByScorehash(scorehash)`
 
-- Deletes the slice with slug `slug`, including all its associated data such as recordings.
+- Deletes the slice with scorehash `scorehash`, including all its associated data such as recordings.
 - Soundslice documentation: ["Delete slice"](https://www.soundslice.com/help/data-api/#deleteslice)
+
+```javascript
+apiClient.duplicateSliceByScorehash('abcde')
+```
+
+#### `deleteSliceBySlug(slug)` (deprecated)
+
+- **DEPRECATED** Use `duplicateSliceByScorehash` instead.
+- Deletes the slice with slug `slug`.
 
 ```javascript
 apiClient.deleteSliceBySlug('123456')
@@ -100,10 +110,19 @@ apiClient.deleteSliceBySlug('123456')
 apiClient.listSlices()
 ```
 
-#### `getSliceBySlug(slug)`
+#### `getSliceByScorehash(scorehash)`
 
-- Retrieves metadata for the slice with slug `slug`.
+- Retrieves metadata for the slice with scorehash `scorehash`.
 - Soundslice documentation: ["Get slice"](https://www.soundslice.com/help/data-api/#getslice)
+
+```javascript
+apiClient.getSliceByScorehash('abcde')
+```
+
+#### `getSliceBySlug(slug)` (deprecated)
+
+- **DEPRECATED** Use `getSliceByScorehash` instead.
+- Retrieves metadata for the slice with slug `slug`.
 
 ```javascript
 apiClient.getSliceBySlug('123456')
@@ -158,10 +177,10 @@ apiClient.duplicateSliceByScorehash('C1FVc')
 apiClient.getSliceRecordingsByScorehash('HD8Nc')
 ```
 
-#### `getSliceRecordingsBySlug(slug)`
+#### `getSliceRecordingsBySlug(slug)` (deprecated)
 
+- **DEPRECATED** Use `getSliceRecordingsByScorehash` instead.
 - Gets data about all recordings in the slice with slug `slug`.
-- Soundslice documentation: ["Get slice’s recordings"](https://www.soundslice.com/help/data-api/#getrecordings)
 
 ```javascript
 apiClient.getSliceRecordingsBySlug('123456')
@@ -275,7 +294,20 @@ apiClient.listFolders()
 ```javascript
 apiClient.listSubfoldersByParentId('12345')
 ```
+## Methods for Uploading Media
+
+Uploading media is a multi-step process.  Here's a high-level example of a three-step process to upload a recording:
+
+- **STEP 1:** Call `apiClient.createRecording` with the `slug` of the slice.  This will return an object with an `id` property of the new recording.
+- **STEP 2:** Call `apiClient.getRecordingUploadUrlByRecordingId` with the `id` from step 1 as `recordingId`.  This will return an object with a `url` property.
+- **STEP 3:** Call `apiClient.uploadFile` with the `url` from step 2 as `uploadUrl`.
+
+See [the examples folder on GitHub](https://github.com/ericcarraway/soundslice-data-api/tree/primary/examples) for information about using these methods.
 
 ## Versioning
 
 Until this package reaches a 1.0 release, breaking changes may be released.
+
+**BREAKING CHANGES**
+
+- Starting with `v0.14.0`, environments using a CommonJS import system (i.e. vanilla Node.js with `require` statements) may need to append `.default` when importing this package.
