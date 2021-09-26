@@ -17,6 +17,9 @@ const baseURL = `https://www.soundslice.com/api/v1`;
  * Value 1: Bar - Required. The zero-based bar number in the slice, as an integer.
  * Value 2: Time - Required. Timecode in the audio, in seconds, as a float.
  * Value 3: Percentage into the bar - Optional. Distance into the bar.
+ *
+ * "Syncpoint data format"
+ * @see https://www.soundslice.com/help/data-api/#syncpointdata
  */
 type Syncpoint = Array<[number, number, number?]>;
 
