@@ -1,5 +1,16 @@
 # Changelog
 
+**2021-09-27**
+
+- Published `v0.14.1`
+- See https://github.com/ericcarraway/soundslice-data-api/pull/19
+- Bumped dependencies
+- Removed Node.js 10 support
+- Made minor refinements to TypeScript typings
+- When running scripts in the examples directory:
+  - The path to `.env` is more clear
+  - When required credentials aren't found, log an error message
+
 **2021-06-04**
 
 - Published `v0.14.0`
