@@ -5,7 +5,6 @@
 // https://www.soundslice.com/help/data-api/
 
 import { AxiosRequestConfig, AxiosStatic } from 'axios';
-
 import { getFormDataFromObj } from './lib/get-form-data-from-obj';
 import { uploadFile } from './lib/upload-file';
 
@@ -13,6 +12,16 @@ import { uploadFile } from './lib/upload-file';
 const _btoa = (b: string): string => Buffer.from(b).toString(`base64`);
 
 const baseURL = `https://www.soundslice.com/api/v1`;
+
+/**
+ * Value 1: Bar - Required. The zero-based bar number in the slice, as an integer.
+ * Value 2: Time - Required. Timecode in the audio, in seconds, as a float.
+ * Value 3: Percentage into the bar - Optional. Distance into the bar.
+ *
+ * "Syncpoint data format"
+ * @see https://www.soundslice.com/help/data-api/#syncpointdata
+ */
+type Syncpoint = Array<[number, number, number?]>;
 
 const getApiClientInstance = ({
   axios,
@@ -41,8 +50,10 @@ const getApiClientInstance = ({
    * - adds the auth header
    * - sends a POST to the specified URL
    */
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  const postWithFormData = (url: string, paramsObj: object) => {
+  const postWithFormData = (
+    url: string,
+    paramsObj: Record<string, unknown>,
+  ) => {
     const formData = getFormDataFromObj(paramsObj);
 
     const axiosConfig: AxiosRequestConfig = {
@@ -112,13 +123,18 @@ const getApiClientInstance = ({
 
     hls_url?: string;
   }) => {
+    const paramsObjToPOST: Record<string, unknown> = { ...paramsObj };
+
     // `slug` must be included in `paramsObj`
     // because it's part of the URL we'll POST to
     //
     // however, we don't want to send it in the payload
-    const { slug, ...paramsObjToPOST } = paramsObj;
+    delete paramsObjToPOST.slug;
 
-    return postWithFormData(`/scores/${slug}/recordings/`, paramsObjToPOST);
+    return postWithFormData(
+      `/scores/${paramsObj.slug}/recordings/`,
+      paramsObjToPOST,
+    );
   };
 
   const moveSliceToFolder = (paramsObj: {
@@ -126,29 +142,33 @@ const getApiClientInstance = ({
     folder_id: number | string;
     user_id?: number | string;
   }) => {
+    const paramsObjToPOST: Record<string, unknown> = { ...paramsObj };
+
     // `slug` must be included in `paramsObj`
     // because it's part of the URL we'll POST to
     //
     // however, we don't want to send it in the payload
-    const { slug, ...paramsObjToPOST } = paramsObj;
+    delete paramsObjToPOST.slug;
 
     // NOTE:
     // Soundslice docs indicate that a new endpoint, `/slices/${scorehash}/move/`,
     // has been created. That may be preferred over `/scores/${slug}/move/`.
-    return postWithFormData(`/scores/${slug}/move/`, paramsObjToPOST);
+    return postWithFormData(`/scores/${paramsObj.slug}/move/`, paramsObjToPOST);
   };
 
   const renameFolder = (paramsObj: {
     folderId: number | string;
     name: string;
   }) => {
+    const paramsObjToPOST: Record<string, unknown> = { ...paramsObj };
+
     // `folderId` must be included in `paramsObj`
     // because it's part of the URL we'll POST to
     //
     // however, we don't want to send it in the payload
-    const { folderId, ...paramsObjToPOST } = paramsObj;
+    delete paramsObjToPOST.folderId;
 
-    return postWithFormData(`/folders/${folderId}/`, paramsObjToPOST);
+    return postWithFormData(`/folders/${paramsObj.folderId}/`, paramsObjToPOST);
   };
 
   // these HTTP methods won't include a payload in the request body
@@ -193,20 +213,24 @@ const getApiClientInstance = ({
    */
   const putRecordingSyncpoints = (paramsObj: {
     recordingId: number | string;
-    syncpoints: number[][];
+    syncpoints: Syncpoint[];
     crop_start?: number;
     crop_end?: number;
   }) => {
-    const { recordingId, syncpoints, ...paramsObjToPOST } = paramsObj;
+    const paramsObjToPOST: Record<string, unknown> = { ...paramsObj };
 
-    if (syncpoints) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      paramsObjToPOST.syncpoints = JSON.stringify(syncpoints);
+    // `recordingId` must be included in `paramsObj`
+    // because it's part of the URL we'll POST to
+    //
+    // however, we don't want to send it in the payload
+    delete paramsObjToPOST.recordingId;
+
+    if (paramsObjToPOST.syncpoints) {
+      paramsObjToPOST.syncpoints = JSON.stringify(paramsObjToPOST.syncpoints);
     }
 
     return postWithFormData(
-      `/recordings/${recordingId}/syncpoints/`,
+      `/recordings/${paramsObj.recordingId}/syncpoints/`,
       paramsObjToPOST,
     );
   };

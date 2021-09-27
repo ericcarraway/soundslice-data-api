@@ -1,8 +1,9 @@
 import FormData from 'form-data';
 
-// helper function to convert a plain JS object to "multipart/form-data"
-// eslint-disable-next-line @typescript-eslint/ban-types
-const getFormDataFromObj = function getFormDataFromObj(paramsObj: object) {
+/** helper function to convert a plain JS object to "multipart/form-data" */
+const getFormDataFromObj = function getFormDataFromObj(
+  paramsObj: Record<string, unknown>,
+): FormData {
   const formData = new FormData();
 
   Object.entries(paramsObj).forEach(([key, value]) => {

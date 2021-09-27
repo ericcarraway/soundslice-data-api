@@ -1,7 +1,27 @@
+const path = require(`path`);
+
 // load environment variables
-require(`dotenv`).config({ path: `../.env` });
+require(`dotenv`).config({
+  path: path.resolve(__dirname, `../.env`),
+});
 
 const { SOUNDSLICE_APPLICATION_ID, SOUNDSLICE_PASSWORD } = process.env;
+
+if (!SOUNDSLICE_APPLICATION_ID) {
+  console.error(
+    `@percuss.io/soundslice-data-api ERROR: configure SOUNDSLICE_APPLICATION_ID`,
+  );
+
+  process.exit(1);
+}
+
+if (!SOUNDSLICE_PASSWORD) {
+  console.error(
+    `@percuss.io/soundslice-data-api ERROR: configure SOUNDSLICE_PASSWORD`,
+  );
+
+  process.exit(1);
+}
 
 // instantiate the client
 const apiClient = require(`../dist/index.js`).default({
