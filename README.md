@@ -128,6 +128,15 @@ apiClient.getSliceByScorehash('abcde')
 apiClient.getSliceBySlug('123456')
 ```
 
+#### `getSliceNotationByScorehash(scorehash)`
+
+- Retrieves the original notation file for the slice with scorehash `scorehash`.
+- Soundslice documentation: ["Get slice’s notation"](https://www.soundslice.com/help/data-api/#getnotation)
+
+```javascript
+apiClient.getSliceNotationByScorehash('abcdef')
+```
+
 #### `getSliceNotationBySlug(slug)`
 
 - Retrieves the original notation file for the slice with slug `slug`.

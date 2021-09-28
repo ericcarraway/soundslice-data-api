@@ -23,9 +23,12 @@ describe(`soundslice-data-api`, () => {
         `deleteSliceByScorehash`,
         `deleteSliceBySlug`,
         `duplicateSliceByScorehash`,
+        `getNotationUploadUrlByScorehash`,
+        // `getNotationUploadUrlBySlug`,
         `getRecordingUploadUrlByRecordingId`,
         `getSliceByScorehash`,
         `getSliceBySlug`,
+        `getSliceNotationByScorehash`,
         `getSliceNotationBySlug`,
         `getSliceRecordingsByScorehash`,
         `getSliceRecordingsBySlug`,
@@ -91,6 +94,12 @@ describe(`soundslice-data-api`, () => {
     });
   });
 
+  describe(`getNotationUploadUrlByScorehash`, () => {
+    it(`should be a function`, () => {
+      expect(typeof apiClient.getNotationUploadUrlByScorehash).toBe(`function`);
+    });
+  });
+
   describe(`getRecordingUploadUrlByRecordingId`, () => {
     it(`should be a function`, () => {
       expect(typeof apiClient.getRecordingUploadUrlByRecordingId).toBe(
@@ -114,6 +123,12 @@ describe(`soundslice-data-api`, () => {
   describe(`getSliceNotationBySlug`, () => {
     it(`should be a function`, () => {
       expect(typeof apiClient.getSliceNotationBySlug).toBe(`function`);
+    });
+  });
+
+  describe(`getSliceNotationByScorehash`, () => {
+    it(`should be a function`, () => {
+      expect(typeof apiClient.getSliceNotationByScorehash).toBe(`function`);
     });
   });
 
