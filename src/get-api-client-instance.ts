@@ -199,8 +199,7 @@ const getApiClientInstance = ({
    * TODO: include the optional param `callback_url`
    */
   const getNotationUploadUrlByScorehash = (scorehash: string) =>
-    axiosWrapper.post(`/slices/${scorehash}/notation-file/
-    `);
+    axiosWrapper.post(`/slices/${scorehash}/notation-file/`);
 
   // getNotationUploadUrlBySlug`
 
