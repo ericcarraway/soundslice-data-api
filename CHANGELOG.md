@@ -1,5 +1,22 @@
 # Changelog
 
+**2021-09-29**
+
+- Published `v0.15.1`
+- See https://github.com/ericcarraway/soundslice-data-api/pull/21
+- New methods:
+  - `getNotationUploadUrlByScorehash`, which makes it possible to upload notation
+  - `getSliceNotationByScorehash`
+- New example scripts:
+  - `getNotationUploadUrlByScorehash`
+  - `getSliceNotationByScorehash`
+  - `getSliceNotationBySlug`
+- New unit tests:
+  - `createSlice`
+  - `getNotationUploadUrlByScorehash`
+  - `getSliceNotationByScorehash`
+  - `getSliceNotationBySlug`
+
 **2021-09-27**
 
 - Published `v0.14.1`

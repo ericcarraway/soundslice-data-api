@@ -128,6 +128,15 @@ apiClient.getSliceByScorehash('abcde')
 apiClient.getSliceBySlug('123456')
 ```
 
+#### `getSliceNotationByScorehash(scorehash)`
+
+- Retrieves the original notation file for the slice with scorehash `scorehash`.
+- Soundslice documentation: ["Get slice’s notation"](https://www.soundslice.com/help/data-api/#getnotation)
+
+```javascript
+apiClient.getSliceNotationByScorehash('abcdef')
+```
+
 #### `getSliceNotationBySlug(slug)`
 
 - Retrieves the original notation file for the slice with slug `slug`.
@@ -301,6 +310,11 @@ Uploading media is a multi-step process.  Here's a high-level example of a three
 - **STEP 1:** Call `apiClient.createRecording` with the `slug` of the slice.  This will return an object with an `id` property of the new recording.
 - **STEP 2:** Call `apiClient.getRecordingUploadUrlByRecordingId` with the `id` from step 1 as `recordingId`.  This will return an object with a `url` property.
 - **STEP 3:** Call `apiClient.uploadFile` with the `url` from step 2 as `uploadUrl`.
+
+### Uploading Notation
+
+- **STEP 1:** Call `apiClient.getNotationUploadUrlByScorehash` with the `scorehash` of the slice.  This will return an object with a `url` property.
+- **STEP 2:** Call `apiClient.uploadFile` with the `url` from step 1 as `uploadUrl`.
 
 See [the examples folder on GitHub](https://github.com/ericcarraway/soundslice-data-api/tree/primary/examples) for information about using these methods.
 

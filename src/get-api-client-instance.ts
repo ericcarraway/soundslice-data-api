@@ -190,6 +190,18 @@ const getApiClientInstance = ({
     axiosWrapper.post(`/slices/${scorehash}/duplicate/`);
 
   /**
+   * step 1 of the notation upload process
+   * sends a POST request
+   * so that we can receive a temporary upload URL
+   *
+   * @see https://www.soundslice.com/help/data-api/#putnotation
+   *
+   * TODO: include the optional param `callback_url`
+   */
+  const getNotationUploadUrlByScorehash = (scorehash: string) =>
+    axiosWrapper.post(`/slices/${scorehash}/notation-file/`);
+
+  /**
    * step 1 of the upload process
    * sends a POST request with no body
    * so that we can receive a temporary upload URL
@@ -276,6 +288,16 @@ const getApiClientInstance = ({
   const getSliceByScorehash = (scorehash: string) =>
     axiosWrapper.get(`/slices/${scorehash}/`);
 
+  /**
+   * Retrieves the original uploaded notation file for a slice with a given `scorehash`.
+   * @see https://www.soundslice.com/help/data-api/#getnotation
+   */
+  const getSliceNotationByScorehash = (scorehash: string) =>
+    axiosWrapper.get(`/slices/${scorehash}/notation-file/`);
+
+  /**
+   * Retrieves the original uploaded notation file for a slice with a given `slug`.
+   */
   const getSliceNotationBySlug = (slug: number | string) =>
     axiosWrapper.get(`/scores/${slug}/notation/`);
 
@@ -319,12 +341,14 @@ const getApiClientInstance = ({
     deleteSliceBySlug,
 
     duplicateSliceByScorehash,
+    getNotationUploadUrlByScorehash,
     getRecordingUploadUrlByRecordingId,
     getSliceByScorehash,
 
     // deprecated
     getSliceBySlug,
 
+    getSliceNotationByScorehash,
     getSliceNotationBySlug,
     getSliceRecordingsByScorehash,
 
