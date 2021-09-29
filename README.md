@@ -311,6 +311,11 @@ Uploading media is a multi-step process.  Here's a high-level example of a three
 - **STEP 2:** Call `apiClient.getRecordingUploadUrlByRecordingId` with the `id` from step 1 as `recordingId`.  This will return an object with a `url` property.
 - **STEP 3:** Call `apiClient.uploadFile` with the `url` from step 2 as `uploadUrl`.
 
+### Uploading Notation
+
+- **STEP 1:** Call `apiClient.getNotationUploadUrlByScorehash` with the `scorehash` of the slice.  This will return an object with a `url` property.
+- **STEP 2:** Call `apiClient.uploadFile` with the `url` from step 1 as `uploadUrl`.
+
 See [the examples folder on GitHub](https://github.com/ericcarraway/soundslice-data-api/tree/primary/examples) for information about using these methods.
 
 ## Versioning
