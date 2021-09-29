@@ -30,6 +30,7 @@ describe(`POST requests without payload`, () => {
     const unusedResult = await apiClient.duplicateSliceByScorehash(scorehash);
 
     expect(mockAxios.post).toHaveBeenCalled();
+    expect(mockAxios.post).toHaveBeenCalledTimes(1);
     expect(mockAxios.post).toHaveBeenCalledWith(
       `/slices/abcde/duplicate/`,
 
@@ -55,6 +56,7 @@ describe(`POST requests without payload`, () => {
     );
 
     expect(mockAxios.post).toHaveBeenCalled();
+    expect(mockAxios.post).toHaveBeenCalledTimes(1);
     expect(mockAxios.post).toHaveBeenCalledWith(
       `/recordings/2468/media/`,
 

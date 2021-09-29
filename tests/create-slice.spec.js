@@ -50,6 +50,7 @@ describe(`POST requests`, () => {
     const unusedResult = await apiClient.createSlice(paramsObj);
 
     expect(mockAxios.post).toHaveBeenCalled();
+    expect(mockAxios.post).toHaveBeenCalledTimes(1);
     expect(mockAxios.post).toHaveBeenCalledWith(
       `/slices/`,
       expect.objectContaining({

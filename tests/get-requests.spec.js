@@ -23,6 +23,7 @@ describe(`GET requests`, () => {
     const unusedResult = await apiClient.getSliceBySlug(slug);
 
     expect(mockAxios.get).toHaveBeenCalled();
+    expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(mockAxios.get).toHaveBeenCalledWith(
       `/scores/12345/`,
       EXPECTED_BASE_AXIOS_CONFIG,
@@ -41,6 +42,7 @@ describe(`GET requests`, () => {
     const unusedResult = await apiClient.getSliceByScorehash(scorehash);
 
     expect(mockAxios.get).toHaveBeenCalled();
+    expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(mockAxios.get).toHaveBeenCalledWith(
       `/slices/abcde/`,
       EXPECTED_BASE_AXIOS_CONFIG,
@@ -59,6 +61,7 @@ describe(`GET requests`, () => {
     const unusedResult = await apiClient.getSliceNotationBySlug(slug);
 
     expect(mockAxios.get).toHaveBeenCalled();
+    expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(mockAxios.get).toHaveBeenCalledWith(
       `/scores/12345/notation/`,
       EXPECTED_BASE_AXIOS_CONFIG,
@@ -79,6 +82,7 @@ describe(`GET requests`, () => {
     );
 
     expect(mockAxios.get).toHaveBeenCalled();
+    expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(mockAxios.get).toHaveBeenCalledWith(
       `/slices/abcde/recordings/`,
       EXPECTED_BASE_AXIOS_CONFIG,
@@ -97,6 +101,7 @@ describe(`GET requests`, () => {
     const unusedResult = await apiClient.getSliceRecordingsBySlug(slug);
 
     expect(mockAxios.get).toHaveBeenCalled();
+    expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(mockAxios.get).toHaveBeenCalledWith(
       `/scores/12345/recordings/`,
       EXPECTED_BASE_AXIOS_CONFIG,
@@ -117,6 +122,7 @@ describe(`GET requests`, () => {
     );
 
     expect(mockAxios.get).toHaveBeenCalled();
+    expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(mockAxios.get).toHaveBeenCalledWith(
       `/recordings/67890/syncpoints/`,
       EXPECTED_BASE_AXIOS_CONFIG,
@@ -134,6 +140,7 @@ describe(`GET requests`, () => {
     const unusedResult = await apiClient.listFolders();
 
     expect(mockAxios.get).toHaveBeenCalled();
+    expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(mockAxios.get).toHaveBeenCalledWith(
       `/folders/`,
       EXPECTED_BASE_AXIOS_CONFIG,
@@ -151,6 +158,7 @@ describe(`GET requests`, () => {
     const unusedResult = await apiClient.listSlices();
 
     expect(mockAxios.get).toHaveBeenCalled();
+    expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(mockAxios.get).toHaveBeenCalledWith(
       `/slices/`,
       EXPECTED_BASE_AXIOS_CONFIG,
@@ -169,6 +177,7 @@ describe(`GET requests`, () => {
     const unusedResult = await apiClient.listSubfoldersByParentId(parentId);
 
     expect(mockAxios.get).toHaveBeenCalled();
+    expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(mockAxios.get).toHaveBeenCalledWith(
       `/folders/?parent_id=12345`,
       EXPECTED_BASE_AXIOS_CONFIG,
