@@ -293,7 +293,7 @@ const getApiClientInstance = ({
    * @see https://www.soundslice.com/help/data-api/#getnotation
    */
   const getSliceNotationByScorehash = (scorehash: string) =>
-    axiosWrapper.get(`/slices/${scorehash}/notation/`);
+    axiosWrapper.get(`/slices/${scorehash}/notation-file/`);
 
   /**
    * Retrieves the original uploaded notation file for a slice with a given `slug`.

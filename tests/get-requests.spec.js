@@ -89,6 +89,44 @@ describe(`GET requests`, () => {
     );
   });
 
+  test(`.getSliceNotationByScorehash method`, async () => {
+    const mockAxios = makeMockAxios();
+    const apiClient = getApiClientInstance({
+      axios: mockAxios,
+      SOUNDSLICE_APPLICATION_ID,
+      SOUNDSLICE_PASSWORD,
+    });
+
+    const scorehash = `abcde`;
+    const unusedResult = await apiClient.getSliceNotationByScorehash(scorehash);
+
+    expect(mockAxios.get).toHaveBeenCalled();
+    expect(mockAxios.get).toHaveBeenCalledTimes(1);
+    expect(mockAxios.get).toHaveBeenCalledWith(
+      `/slices/abcde/notation-file/`,
+      EXPECTED_BASE_AXIOS_CONFIG,
+    );
+  });
+
+  test(`.getSliceNotationBySlug method`, async () => {
+    const mockAxios = makeMockAxios();
+    const apiClient = getApiClientInstance({
+      axios: mockAxios,
+      SOUNDSLICE_APPLICATION_ID,
+      SOUNDSLICE_PASSWORD,
+    });
+
+    const slug = `12345`;
+    const unusedResult = await apiClient.getSliceNotationBySlug(slug);
+
+    expect(mockAxios.get).toHaveBeenCalled();
+    expect(mockAxios.get).toHaveBeenCalledTimes(1);
+    expect(mockAxios.get).toHaveBeenCalledWith(
+      `/scores/12345/notation/`,
+      EXPECTED_BASE_AXIOS_CONFIG,
+    );
+  });
+
   test(`.getSliceRecordingsBySlug method`, async () => {
     const mockAxios = makeMockAxios();
     const apiClient = getApiClientInstance({
