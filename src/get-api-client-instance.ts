@@ -201,8 +201,6 @@ const getApiClientInstance = ({
   const getNotationUploadUrlByScorehash = (scorehash: string) =>
     axiosWrapper.post(`/slices/${scorehash}/notation-file/`);
 
-  // getNotationUploadUrlBySlug`
-
   /**
    * step 1 of the upload process
    * sends a POST request with no body

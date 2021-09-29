@@ -24,7 +24,6 @@ describe(`soundslice-data-api`, () => {
         `deleteSliceBySlug`,
         `duplicateSliceByScorehash`,
         `getNotationUploadUrlByScorehash`,
-        // `getNotationUploadUrlBySlug`,
         `getRecordingUploadUrlByRecordingId`,
         `getSliceByScorehash`,
         `getSliceBySlug`,
