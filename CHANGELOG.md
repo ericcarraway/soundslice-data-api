@@ -9,7 +9,7 @@
   - `getSliceNotationByScorehash`
 - New example scripts:
   - `getNotationUploadUrlByScorehash`
-  - `getNotationUploadUrlByScorehash`
+  - `getSliceNotationByScorehash`
   - `getSliceNotationBySlug`
 - New unit tests:
   - `createSlice`
