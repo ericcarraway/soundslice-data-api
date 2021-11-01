@@ -7,6 +7,8 @@
 - Bumped the HTTP client `axios` from `^0.21.4` to `^0.24.0`
 - Bumped several `devDependencies`
 - Removed an `any` type from `src/lib/upload-file.ts` where we remove `Content-Type` header from the PUT request to the pre-signed Amazon S3 URL
+- Reformatted dates in CHANGELOG.md so that date headings are linkable in URLs
+- Changed the name of the default branch from `primary` to `main`
 
 ## 2021-09-29
 
