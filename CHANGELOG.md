@@ -1,5 +1,13 @@
 # Changelog
 
+**2021-11-01**
+
+- Published `v0.16.0`
+- See https://github.com/ericcarraway/soundslice-data-api/pull/25
+- Bumped the HTTP client `axios` from `^0.21.4` to `^0.24.0`
+- Bumped several `devDependencies`
+- Removed an `any` type from `src/lib/upload-file.ts` where we remove `Content-Type` header from the PUT request to the pre-signed Amazon S3 URL
+
 **2021-09-29**
 
 - Published `v0.15.1`
