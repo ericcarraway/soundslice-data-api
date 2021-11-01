@@ -1,6 +1,6 @@
 # Changelog
 
-**2021-11-01**
+## 2021-11-01
 
 - Published `v0.16.0`
 - See https://github.com/ericcarraway/soundslice-data-api/pull/25
@@ -8,7 +8,7 @@
 - Bumped several `devDependencies`
 - Removed an `any` type from `src/lib/upload-file.ts` where we remove `Content-Type` header from the PUT request to the pre-signed Amazon S3 URL
 
-**2021-09-29**
+## 2021-09-29
 
 - Published `v0.15.1`
 - See https://github.com/ericcarraway/soundslice-data-api/pull/21
@@ -25,7 +25,7 @@
   - `getSliceNotationByScorehash`
   - `getSliceNotationBySlug`
 
-**2021-09-27**
+## 2021-09-27
 
 - Published `v0.14.1`
 - See https://github.com/ericcarraway/soundslice-data-api/pull/19
@@ -36,7 +36,7 @@
   - The path to `.env` is more clear
   - When required credentials aren't found, log an error message
 
-**2021-06-04**
+## 2021-06-04
 
 - Published `v0.14.0`
 - See https://github.com/ericcarraway/soundslice-data-api/pull/18
@@ -52,7 +52,7 @@
 - Added method `deleteSliceByScorehash` & deprecated `deleteSliceBySlug`
 - Changed `listSlices` to target `/slices/` instead of the deprecated `/scores/` endpoint
 
-**2021-06-03**
+## 2021-06-03
 
 - Published `v0.13.1` (hotfix for `tslib` dependency)
 - Published `v0.13.0`
@@ -64,7 +64,7 @@
 - Removed Mocha in favor of Jest for unit tests
 - Bumped and added several `devDependencies`
 
-**2021-03-01**
+## 2021-03-01
 
 - Published `v0.12.1`
 - Added three methods for uploading a recording:
@@ -75,52 +75,52 @@
 - Added more examples to the [examples folder](https://github.com/ericcarraway/soundslice-data-api/tree/primary/examples)
 - Extracted helper methods to a `/lib` folder
 
-**2021-01-02**
+## 2021-01-02
 
 - Published `v0.12.0`
 - Added `putRecordingSyncpoints`
 - Added example for `getSliceRecordingsBySlug`
 
-**2020-10-10**
+## 2020-10-10
 
 - Published `v0.11.0`
 - Added `renameFolder`
 - Published `v0.10.0`
 - Added `createFolder`
 
-**2020-09-27**
+## 2020-09-27
 
 - Published `v0.9.0`
 - Added `deleteFolderByFolderId`
 - Published `v0.8.0`
 - Added `deleteRecordingByRecordingId`
 
-**2020-09-19**
+## 2020-09-19
 
 - Published `v0.7.0`
 - Added `duplicateSliceByScorehash`
 
-**2020-09-11**
+## 2020-09-11
 
 - Published `v0.6.0`
 - Added `moveSliceToFolder`
 - Added `async` / `await` example for `createSlice`
 
-**2020-08-28**
+## 2020-08-28
 
 - Added examples for `listSlices` & `getSliceBySlug`
 
-**2020-08-20**
+## 2020-08-20
 
 - Published `v0.5.1`
 - Added basic smoke tests
 
-**2020-08-19**
+## 2020-08-19
 
 - Published `v0.5.0`
 - Added `deleteSliceBySlug`
 
-**2020-08-18**
+## 2020-08-18
 
 - Published `v0.2.0`
 - `createSlice`
