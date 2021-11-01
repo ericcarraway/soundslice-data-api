@@ -1,5 +1,8 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-
+import axios, {
+  AxiosRequestConfig,
+  AxiosRequestHeaders,
+  AxiosResponse,
+} from 'axios';
 import { promises as fsp } from 'fs';
 
 /**
@@ -28,7 +31,7 @@ const uploadFile = async function uploadFile({
 
     method: `PUT`,
     transformRequest: [
-      (_data: Buffer, headers: any) => {
+      (_data: Buffer, headers: AxiosRequestHeaders | undefined) => {
         /**
          * By default, Axios will add a 'Content-Type' header.
          *
@@ -40,9 +43,15 @@ const uploadFile = async function uploadFile({
          *     "The request signature we calculated does not match the signature you provided.
          *      Check your key and signing method."
          */
-
-        // eslint-disable-next-line no-param-reassign
-        delete headers.put[`Content-Type`];
+        if (
+          headers &&
+          typeof headers === `object` &&
+          headers.put &&
+          typeof headers.put === `object`
+        ) {
+          // eslint-disable-next-line no-param-reassign
+          delete headers.put[`Content-Type`];
+        }
 
         return _data;
       },
