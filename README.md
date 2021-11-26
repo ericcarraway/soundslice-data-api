@@ -195,6 +195,53 @@ apiClient.getSliceRecordingsByScorehash('HD8Nc')
 apiClient.getSliceRecordingsBySlug('123456')
 ```
 
+#### `reorderSliceRecordings(paramsObj)`
+
+- Reorder a slice's recordings.
+- Sets the order of the recordings in the slice with a given `scorehash`.
+- Soundslice documentation: ["Reorder slice’s recordings"](https://www.soundslice.com/help/data-api/#reorderrecordings)
+
+```javascript
+apiClient.reorderSliceRecordings({
+  // The slice whose recordings you'd like to reorder.
+  scorehash: 'abcde',
+
+  // An array of recording IDs in your requested order.
+  // **OR** a string of recording IDs separated by commas.
+  //
+  // The first recording ID is the top-most recording in the Soundslice UI, and so forth.
+  // The last recording ID is the default.
+  // Every recording in the slice must be included in this data.
+  order: [222226, 222227, 222225],
+
+  // Optionally, pass a comma-delimited string:
+  // order: '222226,222227,222225'
+})
+```
+
+#### `changeRecording(paramsObj)`
+
+- Changes data for the recording with ID `recordingId`.
+- It's possible change a recording's `name`, and/or `source_data`, and/or `hls_url`.
+- Makes a POST request with the given parameters.
+- Other than `recordingId`, all params are optional.
+- If you don’t want to change a particular value, simply don't send its key with the request.
+- Soundslice documentation: ["Change recording"](https://www.soundslice.com/help/data-api/#changerecording)
+
+```javascript
+apiClient.changeRecording({
+  // Required
+  recordingId: 123456,
+
+  // The attribute of the recording that you'd like to change.
+  name: 'Changed Recording Name',
+
+  // Optionally, 'source_data' can be changed if `source` is 3 or 8.
+
+  // Optionally, 'hls_url' can be changed if `source` is 3.
+})
+```
+
 #### `deleteRecordingByRecordingId(recordingId)`
 
 - Deletes the recording with the given `recordingId`, including all its associated data such as syncpoints and uploaded audio.

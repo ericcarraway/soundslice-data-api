@@ -247,6 +247,73 @@ const getApiClientInstance = ({
     );
   };
 
+  /**
+   * - Changes data for the recording with ID `recordingId`.
+   * - It's possible change a recording's `name`, and/or `source_data`, and/or `hls_url`.
+   * - Makes a POST request with the given parameters.
+   * - Other than `recordingId`, all params are optional.
+   * - If you don’t want to change a particular value, simply don't send its key with the request.
+   * @see https://www.soundslice.com/help/data-api/#changerecording
+   *
+   * @param {Object} paramsObj paramsObj
+   * paramsObj.recordingId (Required) part of the URL we'll POST to
+   *
+   * paramsObj.name        (Optional) The name of the recording. Limit 100 characters.
+   * paramsObj.source_data (Optional) Extra data, depending on the value of `source`.
+   * paramsObj.hls_url     (Optional) The URL for an HLS playlist for this recording,
+   *                                  if `source` is 3.
+   *
+   * @return {Promise} an Axios promise
+   */
+  const changeRecording = (paramsObj: {
+    recordingId: number | string;
+    name?: string;
+    source_data?: string;
+    hls_url?: string;
+  }) => {
+    const paramsObjToPOST: Record<string, unknown> = { ...paramsObj };
+
+    // `recordingId` must be included in `paramsObj`
+    // because it's part of the URL we'll POST to
+    //
+    // however, we don't want to send it in the payload
+    delete paramsObjToPOST.recordingId;
+
+    return postWithFormData(
+      `/recordings/${paramsObj.recordingId}/`,
+      paramsObjToPOST,
+    );
+  };
+
+  /**
+   * - Reorder a slice's recordings.
+   * - Sets the order of the recordings in the slice with a given `scorehash`.
+   * @see https://www.soundslice.com/help/data-api/#reorderrecordings
+   *
+   * @param {Object} paramsObj paramsObj
+   * paramsObj.scorehash (Required) The slice whose recordings you'd like to reorder.
+   * paramsObj.order     (Required) An array of recording IDs in your requested order.
+   *                     **OR** a string of recording IDs separated by commas.
+   *
+   * @return {Promise} an Axios promise
+   */
+  const reorderSliceRecordings = (paramsObj: {
+    scorehash: number | string;
+    order: string | string[] | number[];
+  }) => {
+    const { order, scorehash } = paramsObj;
+
+    // if the caller has supplied an array of recording IDs,
+    // convert that to the format expected by Soundslice
+    const orderedRecordingIdsCSV = Array.isArray(order)
+      ? order.join(`,`)
+      : order;
+
+    return postWithFormData(`/slices/${scorehash}/recordings/order/`, {
+      order: orderedRecordingIdsCSV,
+    });
+  };
+
   // all DELETE methods...
   const deleteFolderByFolderId = (folderId: number | string) =>
     axiosWrapper.delete(`/folders/${folderId}/`);
@@ -330,6 +397,7 @@ const getApiClientInstance = ({
     axiosWrapper.get(`/folders/?parent_id=${parentId}`);
 
   return {
+    changeRecording,
     createFolder,
     createRecording,
     createSlice,
@@ -362,6 +430,7 @@ const getApiClientInstance = ({
     moveSliceToFolder,
     putRecordingSyncpoints,
     renameFolder,
+    reorderSliceRecordings,
     uploadFile,
   };
 };
