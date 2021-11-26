@@ -7,7 +7,6 @@
  */
 
 import axios from 'axios';
-
 import { getApiClientInstance as _getApiClientInstance } from './get-api-client-instance';
 
 function getApiClientInstance({
