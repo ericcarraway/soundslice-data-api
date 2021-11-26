@@ -2,10 +2,15 @@
 
 ## 2021-11-26
 
+- Published `v0.18.0`
+  - See https://github.com/ericcarraway/soundslice-data-api/pull/27
+  - Added `reorderSliceRecordings` to reorder a slice's recordings
+  - Added `changeRecording` to change attributes of a recording
+
 - Published `v0.17.0`
-- See https://github.com/ericcarraway/soundslice-data-api/pull/26
-- Changed Node.js support to `"^12.22.0 || ^14.17.0 || >=16.0.0"`
-- Bumped several `devDependencies`
+  - See https://github.com/ericcarraway/soundslice-data-api/pull/26
+  - Changed Node.js support to `"^12.22.0 || ^14.17.0 || >=16.0.0"`
+  - Bumped several `devDependencies`
 
 ## 2021-11-01
 
