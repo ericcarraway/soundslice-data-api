@@ -154,11 +154,11 @@ apiClient.getSliceNotationBySlug('123456')
 ```javascript
 apiClient.moveSliceToFolder({
   // Required - The slice's slug.
-  slug: `123456`,
+  slug: '123456',
 
   // Required - The ID of the new folder.
   // Use 0 (zero) to move the slice to your account's root folder.
-  folder_id: `2048`,
+  folder_id: '2048',
 
   // Optional - The ID of the user account to move this slice into.
   // This will only work for the ID of an organization you belong to.
@@ -221,7 +221,7 @@ apiClient.getSyncpointsByRecordingId('123456')
 ```javascript
 apiClient.putRecordingSyncpoints({
   // Required
-  recordingId: `494055`,
+  recordingId: '494055',
 
   // Required - an array of syncpoint arrays
   //   each entry is an array with the following numbers:
