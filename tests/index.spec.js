@@ -39,6 +39,7 @@ describe(`soundslice-data-api`, () => {
         `moveSliceToFolder`,
         `putRecordingSyncpoints`,
         `renameFolder`,
+        `reorderSliceRecordings`,
         `uploadFile`,
       ];
 

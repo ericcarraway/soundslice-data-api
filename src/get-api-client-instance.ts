@@ -285,6 +285,35 @@ const getApiClientInstance = ({
     );
   };
 
+  /**
+   * - Reorder a slice's recordings.
+   * - Sets the order of the recordings in the slice with a given `scorehash`.
+   * @see https://www.soundslice.com/help/data-api/#reorderrecordings
+   *
+   * @param {Object} paramsObj paramsObj
+   * paramsObj.scorehash (Required) The slice whose recordings you'd like to reorder.
+   * paramsObj.order     (Required) An array of recording IDs in your requested order.
+   *                     **OR** a string of recording IDs separated by commas.
+   *
+   * @return {Promise} an Axios promise
+   */
+  const reorderSliceRecordings = (paramsObj: {
+    scorehash: number | string;
+    order: string | string[] | number[];
+  }) => {
+    const { order, scorehash } = paramsObj;
+
+    // if the caller has supplied an array of recording IDs,
+    // convert that to the format expected by Soundslice
+    const orderedRecordingIdsCSV = Array.isArray(order)
+      ? order.join(`,`)
+      : order;
+
+    return postWithFormData(`/slices/${scorehash}/recordings/order/`, {
+      order: orderedRecordingIdsCSV,
+    });
+  };
+
   // all DELETE methods...
   const deleteFolderByFolderId = (folderId: number | string) =>
     axiosWrapper.delete(`/folders/${folderId}/`);
@@ -401,6 +430,7 @@ const getApiClientInstance = ({
     moveSliceToFolder,
     putRecordingSyncpoints,
     renameFolder,
+    reorderSliceRecordings,
     uploadFile,
   };
 };
