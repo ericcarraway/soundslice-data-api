@@ -195,6 +195,29 @@ apiClient.getSliceRecordingsByScorehash('HD8Nc')
 apiClient.getSliceRecordingsBySlug('123456')
 ```
 
+#### `changeRecording(paramsObj)`
+
+- Changes data for the recording with ID `recordingId`.
+- It's possible change a recording's `name`, and/or `source_data`, and/or `hls_url`.
+- Makes a POST request with the given parameters.
+- Other than `recordingId`, all params are optional.
+- If you don’t want to change a particular value, simply don't send its key with the request.
+- Soundslice documentation: ["Change recording"](https://www.soundslice.com/help/data-api/#changerecording)
+
+```javascript
+apiClient.changeRecording({
+    // Required
+  recordingId: 123456,
+
+  // the attribute of the recording that we'd like to change
+  name: `Changed Recording Name`,
+
+  // optionally, 'source_data' can be changed if `source` is 3 or 8
+
+  // optionally ,'hls_url' can be changed if `source` is 3
+})
+```
+
 #### `deleteRecordingByRecordingId(recordingId)`
 
 - Deletes the recording with the given `recordingId`, including all its associated data such as syncpoints and uploaded audio.

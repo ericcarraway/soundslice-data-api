@@ -15,6 +15,7 @@ describe(`soundslice-data-api`, () => {
       const actual = Object.keys(apiClient).sort();
 
       const expected = [
+        `changeRecording`,
         `createFolder`,
         `createRecording`,
         `createSlice`,
