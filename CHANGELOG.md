@@ -1,5 +1,12 @@
 # Changelog
 
+## 2022-01-19
+
+- Published `v0.19.0`
+  - See https://github.com/ericcarraway/soundslice-data-api/pull/29
+  - Bumped `axios` dependency from ^0.24.0 to ^0.25.0 to ensure that `follow-redirects` uses version 1.14.7 or later
+  - Bumped several `devDependencies`
+
 ## 2021-11-26
 
 - Published `v0.18.0`
