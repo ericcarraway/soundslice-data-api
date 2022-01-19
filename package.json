@@ -1,6 +1,6 @@
 {
   "name": "@percuss.io/soundslice-data-api",
-  "version": "0.18.0",
+  "version": "0.19.0",
   "description": "Unofficial Node.js client for the Soundslice data API",
   "keywords": [
     "Soundslice"
