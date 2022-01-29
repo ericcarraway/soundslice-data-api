@@ -7,21 +7,12 @@
 import { AxiosRequestConfig, AxiosStatic } from 'axios';
 import { getFormDataFromObj } from './lib/get-form-data-from-obj';
 import { uploadFile } from './lib/upload-file';
+import { CreateRecordingParams, Syncpoint } from './types';
 
 // eslint-disable-next-line no-underscore-dangle
 const _btoa = (b: string): string => Buffer.from(b).toString(`base64`);
 
 const baseURL = `https://www.soundslice.com/api/v1`;
-
-/**
- * Value 1: Bar - Required. The zero-based bar number in the slice, as an integer.
- * Value 2: Time - Required. Timecode in the audio, in seconds, as a float.
- * Value 3: Percentage into the bar - Optional. Distance into the bar.
- *
- * "Syncpoint data format"
- * @see https://www.soundslice.com/help/data-api/#syncpointdata
- */
-type Syncpoint = Array<[number, number, number?]>;
 
 const getApiClientInstance = ({
   axios,
@@ -99,42 +90,48 @@ const getApiClientInstance = ({
     status?: number;
   }) => postWithFormData(`/slices/`, paramsObj);
 
-  const createRecording = (paramsObj: {
-    /**
-     * TODO:
-     *
-     * Soundslice docs indicate that a new endpoint, `/slices/${scorehash}/recordings/`,
-     * has been created and is preferred over `/scores/${slug}/recordings/`.
-     *
-     * Update this `createRecording` method to
-     * - use `scorehash` if it's provided in `paramsObj`, targeting `/slices`
-     * - use `slug` if it's provided in lieu of `scorehash`, targeting `/scores`
-     * - throw some helpful errors in other cases
-     */
-    slug: number | string;
-
-    // If not given, this will be "Audio" or "Video", depending on the type of recording.
-    name?: string;
-
-    // Required
-    source: number;
-
-    source_data?: string;
-
-    hls_url?: string;
-  }) => {
+  /**
+   * Creates a recording in the slice with the given `scorehash` or `slug`.
+   * Either `scorehash` (a string) or `slug` (a string or integer) is required.
+   *
+   * @see https://www.soundslice.com/help/data-api/#createrecording
+   *
+   * If `scorehash` is provided, we'll POST to `/slices/${scorehash}/recordings/`.
+   * Or, if `slug` is provided, we'll POST to `/scores/${slug}/recordings/`.
+   *
+   * `source` an integer, required
+   * `name` a string, optional
+   * `source_data` a string, sometimes optional
+   * `hls_url` a string, sometimes optional
+   */
+  const createRecording = (paramsObj: CreateRecordingParams) => {
     const paramsObjToPOST: Record<string, unknown> = { ...paramsObj };
+    let urlToPostTo = ``;
 
-    // `slug` must be included in `paramsObj`
+    if (`scorehash` in paramsObj) {
+      urlToPostTo = `/slices/${paramsObj.scorehash}/recordings/`;
+    } else if (`slug` in paramsObj) {
+      urlToPostTo = `/scores/${paramsObj.slug}/recordings/`;
+    }
+
+    if (!urlToPostTo) {
+      throw new Error(
+        `ERROR: The method \`createRecording\` requires either a \`scorehash\` or a \`slug\`.`,
+      );
+    }
+
+    // `scorehash` or `slug` must be included in `paramsObj`
     // because it's part of the URL we'll POST to
     //
     // however, we don't want to send it in the payload
-    delete paramsObjToPOST.slug;
+    if (`scorehash` in paramsObjToPOST) {
+      delete paramsObjToPOST.scorehash;
+    }
+    if (`slug` in paramsObjToPOST) {
+      delete paramsObjToPOST.slug;
+    }
 
-    return postWithFormData(
-      `/scores/${paramsObj.slug}/recordings/`,
-      paramsObjToPOST,
-    );
+    return postWithFormData(urlToPostTo, paramsObjToPOST);
   };
 
   const moveSliceToFolder = (paramsObj: {
