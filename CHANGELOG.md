@@ -1,4 +1,12 @@
 # Changelog
+## 2022-02-14
+
+- Published `v0.19.1`
+  - Bumped `axios` dependency from ^0.25.0 to ^0.26.0 to ensure that `follow-redirects` uses version 1.14.8 or later
+  - Updated `createRecording` to take either a `slug` or a `scorehash` (previously, it could only take a `slugs`)
+- Added two files to the /examples directory (uploading music notation, uploading video)
+- Added a separate file for types/interfaces, `src/types.ts`
+- See https://github.com/ericcarraway/soundslice-data-api/pull/32
 
 ## 2022-01-19
 
