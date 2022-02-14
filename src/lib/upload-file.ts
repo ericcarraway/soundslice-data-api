@@ -4,41 +4,75 @@ import axios, {
   AxiosResponse,
 } from 'axios';
 import { promises as fsp } from 'fs';
+import { UploadFileParams } from '../types';
+
+const isBuffer = (_data: Buffer): boolean =>
+  _data && typeof _data === `object` && Buffer.isBuffer(_data);
 
 /**
- * Read a file from the filesystem & PUT it
- * to the `url` returned from either
- * `getRecordingUploadUrlByRecordingId` or `getNotationUploadUrlByScorehash`
+ * Read a file from the filesystem (or take a raw string of MusicXML),
+ * and PUT it to the `url` returned from either
+ * `getRecordingUploadUrlByRecordingId` or `getNotationUploadUrlByScorehash`.
  *
- * @param {string} pathToFile fully-qualified path to the file on the filesystem
+ * @param {string} uploadUrl  Required - The fully-qualified URL to which we'll
+ *                            make our PUT request (an Amazon S3 presigned URL).
  *
- * @param {string} uploadUrl  fully-qualified URL to which we'll
- *                            make our PUT request (an Amazon S3 presigned URL)
+ * One of either `pathToFile` or `rawString` is required.
+ *
+ * @param {string} pathToFile The fully-qualified path to a file on the filesystem.
+ *                            When uploading music notation, Soundslice supports
+ *                            MusicXML, Guitar Pro, PowerTab and TuxGuitar formats.
+ *                            When uploading a recording, Soundslice supports
+ *                            MP3 or video.
+ *
+ * @param {string} rawString If `pathToFile` is not provided, we'll attempt to upload
+ *                           `rawString`, which can be a raw string of MusicXML.
+ *
  */
-const uploadFile = async function uploadFile({
-  pathToFile,
-  uploadUrl,
-}: {
-  pathToFile: string;
-  uploadUrl: string;
-}): Promise<AxiosResponse<any>> {
-  if (!uploadUrl || typeof uploadUrl !== `string`) {
+const uploadFile = async function uploadFile(
+  paramsObj: UploadFileParams,
+): Promise<AxiosResponse<any>> {
+  if (!paramsObj.uploadUrl || typeof paramsObj.uploadUrl !== `string`) {
     throw new Error(
       `ERROR: The method \`uploadFile\` failed to receive a string \`uploadUrl\`.`,
     );
   }
 
-  if (!pathToFile || typeof pathToFile !== `string`) {
+  let data: Buffer | null = null;
+
+  if (
+    `pathToFile` in paramsObj &&
+    paramsObj.pathToFile &&
+    typeof paramsObj.pathToFile === `string`
+  ) {
+    data = await fsp.readFile(paramsObj.pathToFile);
+
+    if (!isBuffer(data)) {
+      throw new Error(
+        `ERROR: The method \`uploadFile\` received \`pathToFile\` but failed to receive a \`Buffer\` when reading the file.`,
+      );
+    }
+  } else if (
+    `rawString` in paramsObj &&
+    paramsObj.rawString &&
+    typeof paramsObj.rawString === `string`
+  ) {
+    data = Buffer.from(paramsObj.rawString, `utf8`);
+
+    if (!isBuffer(data)) {
+      throw new Error(
+        `ERROR: The method \`uploadFile\` received \`rawString\` but failed to convert it to a \`Buffer\`.`,
+      );
+    }
+  } else {
     throw new Error(
-      `ERROR: The method \`uploadFile\` failed to receive a string \`pathToFile\`.`,
+      `ERROR: The method \`uploadFile\` failed to receive either a string \`pathToFile\` or a string \`rawString\`.`,
     );
   }
 
-  const data: Buffer = await fsp.readFile(pathToFile);
-
-  if (!data || typeof data !== `object` || !Buffer.isBuffer(data)) {
+  if (!isBuffer(data)) {
     throw new Error(
-      `ERROR: The method \`uploadFile\` failed to receive a data object from \`readFile\`.`,
+      `ERROR: The method \`uploadFile\` has no \`Buffer\` to upload.`,
     );
   }
 
@@ -76,7 +110,7 @@ const uploadFile = async function uploadFile({
         return _data;
       },
     ],
-    url: uploadUrl,
+    url: paramsObj.uploadUrl,
   };
 
   const response = await axios(axiosConfig);

@@ -33,3 +33,20 @@ interface CreateRecordingParamsWithSlug extends CreateRecordingsParamsBase {
 export type CreateRecordingParams =
   | CreateRecordingParamsWithScorehash
   | CreateRecordingParamsWithSlug;
+
+interface UploadFileParamsBase {
+  // Required
+  uploadUrl: string;
+}
+
+interface UploadFileParamsWithPath extends UploadFileParamsBase {
+  pathToFile: string;
+}
+
+interface UploadFileParamsWithString extends UploadFileParamsBase {
+  rawString: string;
+}
+
+export type UploadFileParams =
+  | UploadFileParamsWithPath
+  | UploadFileParamsWithString;
