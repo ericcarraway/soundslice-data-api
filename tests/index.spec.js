@@ -25,6 +25,7 @@ describe(`soundslice-data-api`, () => {
         `deleteSliceBySlug`,
         `duplicateSliceByScorehash`,
         `getNotationUploadUrlByScorehash`,
+        `getNotationUploadUrlBySlug`,
         `getRecordingUploadUrlByRecordingId`,
         `getSliceByScorehash`,
         `getSliceBySlug`,
@@ -99,6 +100,12 @@ describe(`soundslice-data-api`, () => {
   describe(`getNotationUploadUrlByScorehash`, () => {
     it(`should be a function`, () => {
       expect(typeof apiClient.getNotationUploadUrlByScorehash).toBe(`function`);
+    });
+  });
+
+  describe(`getNotationUploadUrlBySlug`, () => {
+    it(`should be a function`, () => {
+      expect(typeof apiClient.getNotationUploadUrlBySlug).toBe(`function`);
     });
   });
 

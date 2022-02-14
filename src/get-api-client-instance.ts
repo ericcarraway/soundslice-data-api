@@ -195,7 +195,8 @@ const getApiClientInstance = ({
 
   /**
    * step 1 of the notation upload process
-   * sends a POST request
+   * (this option uses a slice's `scorehash`)
+   * sends a POST request with no body
    * so that we can receive a temporary upload URL
    *
    * @see https://www.soundslice.com/help/data-api/#putnotation
@@ -206,7 +207,20 @@ const getApiClientInstance = ({
     axiosWrapper.post(`/slices/${scorehash}/notation-file/`);
 
   /**
-   * step 1 of the upload process
+   * step 1 of the notation upload process
+   * (this option uses a slice's `slug`)
+   * sends a POST request with no body
+   * so that we can receive a temporary upload URL
+   *
+   * @see https://www.soundslice.com/help/data-api/#putnotation
+   *
+   * TODO: include the optional param `callback_url`
+   */
+  const getNotationUploadUrlBySlug = (slug: number | string) =>
+    axiosWrapper.post(`/scores/${slug}/notation/`);
+
+  /**
+   * step 1 of the recording upload process
    * sends a POST request with no body
    * so that we can receive a temporary upload URL
    */
@@ -482,6 +496,7 @@ const getApiClientInstance = ({
 
     duplicateSliceByScorehash,
     getNotationUploadUrlByScorehash,
+    getNotationUploadUrlBySlug,
     getRecordingUploadUrlByRecordingId,
     getSliceByScorehash,
 
