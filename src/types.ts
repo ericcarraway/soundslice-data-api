@@ -50,3 +50,20 @@ interface UploadFileParamsWithString extends UploadFileParamsBase {
 export type UploadFileParams =
   | UploadFileParamsWithPath
   | UploadFileParamsWithString;
+
+interface UploadNotationParamsBase {
+  // Required
+  scorehash: string;
+}
+
+interface UploadNotationParamsWithPath extends UploadNotationParamsBase {
+  pathToFile: string;
+}
+
+interface UploadNotationParamsWithString extends UploadNotationParamsBase {
+  rawString: string;
+}
+
+export type UploadNotationParams =
+  | UploadNotationParamsWithPath
+  | UploadNotationParamsWithString;
