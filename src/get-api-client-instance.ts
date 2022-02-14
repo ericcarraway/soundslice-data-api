@@ -138,6 +138,9 @@ const getApiClientInstance = ({
     return postWithFormData(urlToPostTo, paramsObjToPOST);
   };
 
+  // TODO: check for `scorehash` in `paramsObj`
+  //       and POST to `/slices/${scorehash}/move/`
+  //       if it exists
   const moveSliceToFolder = (paramsObj: {
     slug: number | string;
     folder_id: number | string;
