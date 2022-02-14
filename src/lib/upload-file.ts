@@ -34,7 +34,7 @@ const uploadFile = async function uploadFile(
 ): Promise<AxiosResponse<any>> {
   if (!paramsObj.uploadUrl || typeof paramsObj.uploadUrl !== `string`) {
     throw new Error(
-      `ERROR: The method \`uploadFile\` failed to receive a string \`uploadUrl\`.`,
+      `ERROR: The method \`uploadFile\` requires a string \`uploadUrl\`.`,
     );
   }
 
@@ -66,7 +66,7 @@ const uploadFile = async function uploadFile(
     }
   } else {
     throw new Error(
-      `ERROR: The method \`uploadFile\` failed to receive either a string \`pathToFile\` or a string \`rawString\`.`,
+      `ERROR: The method \`uploadFile\` requires either a string \`pathToFile\` or a string \`rawString\`.`,
     );
   }
 
