@@ -7,11 +7,13 @@ import { promises as fsp } from 'fs';
 
 /**
  * Read a file from the filesystem & PUT it
- * to the `url` returned form `getRecordingUploadUrlByRecordingId`
+ * to the `url` returned from either
+ * `getRecordingUploadUrlByRecordingId` or `getNotationUploadUrlByScorehash`
  *
- * @param {string} pathToFile fully-qualified path to the file
+ * @param {string} pathToFile fully-qualified path to the file on the filesystem
+ *
  * @param {string} uploadUrl  fully-qualified URL to which we'll
- *                            make our PUT request
+ *                            make our PUT request (an Amazon S3 presigned URL)
  */
 const uploadFile = async function uploadFile({
   pathToFile,
@@ -20,7 +22,25 @@ const uploadFile = async function uploadFile({
   pathToFile: string;
   uploadUrl: string;
 }): Promise<AxiosResponse<any>> {
-  const data = await fsp.readFile(pathToFile);
+  if (!uploadUrl || typeof uploadUrl !== `string`) {
+    throw new Error(
+      `ERROR: The method \`uploadFile\` failed to receive a string \`uploadUrl\`.`,
+    );
+  }
+
+  if (!pathToFile || typeof pathToFile !== `string`) {
+    throw new Error(
+      `ERROR: The method \`uploadFile\` failed to receive a string \`pathToFile\`.`,
+    );
+  }
+
+  const data: Buffer = await fsp.readFile(pathToFile);
+
+  if (!data || typeof data !== `object` || !Buffer.isBuffer(data)) {
+    throw new Error(
+      `ERROR: The method \`uploadFile\` failed to receive a data object from \`readFile\`.`,
+    );
+  }
 
   const axiosConfig: AxiosRequestConfig = {
     data,
