@@ -59,6 +59,31 @@ describe(`POST requests without payload`, () => {
     expect(mockAxios.post).toHaveBeenCalledTimes(1);
     expect(mockAxios.post).toHaveBeenCalledWith(
       `/slices/b8vDc/notation-file/`,
+
+      // the second `axios.post` argument should be `null`
+      // when there is no payload in the request body
+      null,
+
+      EXPECTED_BASE_AXIOS_CONFIG,
+    );
+  });
+
+  test(`.getNotationUploadUrlBySlug method`, async () => {
+    const mockAxios = makeMockAxios();
+    const apiClient = getApiClientInstance({
+      axios: mockAxios,
+      SOUNDSLICE_APPLICATION_ID,
+      SOUNDSLICE_PASSWORD,
+    });
+
+    const slug = `456789`;
+    const unusedResult = await apiClient.getNotationUploadUrlBySlug(slug);
+
+    expect(mockAxios.post).toHaveBeenCalled();
+    expect(mockAxios.post).toHaveBeenCalledTimes(1);
+    expect(mockAxios.post).toHaveBeenCalledWith(
+      `/scores/456789/notation/`,
+
       // the second `axios.post` argument should be `null`
       // when there is no payload in the request body
       null,

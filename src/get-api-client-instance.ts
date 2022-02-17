@@ -7,7 +7,11 @@
 import { AxiosRequestConfig, AxiosStatic } from 'axios';
 import { getFormDataFromObj } from './lib/get-form-data-from-obj';
 import { uploadFile } from './lib/upload-file';
-import { CreateRecordingParams, Syncpoint } from './types';
+import {
+  CreateRecordingParams,
+  Syncpoint,
+  UploadNotationParams,
+} from './types';
 
 // eslint-disable-next-line no-underscore-dangle
 const _btoa = (b: string): string => Buffer.from(b).toString(`base64`);
@@ -134,6 +138,9 @@ const getApiClientInstance = ({
     return postWithFormData(urlToPostTo, paramsObjToPOST);
   };
 
+  // TODO: check for `scorehash` in `paramsObj`
+  //       and POST to `/slices/${scorehash}/move/`
+  //       if it exists
   const moveSliceToFolder = (paramsObj: {
     slug: number | string;
     folder_id: number | string;
@@ -188,7 +195,8 @@ const getApiClientInstance = ({
 
   /**
    * step 1 of the notation upload process
-   * sends a POST request
+   * (this option uses a slice's `scorehash`)
+   * sends a POST request with no body
    * so that we can receive a temporary upload URL
    *
    * @see https://www.soundslice.com/help/data-api/#putnotation
@@ -199,7 +207,20 @@ const getApiClientInstance = ({
     axiosWrapper.post(`/slices/${scorehash}/notation-file/`);
 
   /**
-   * step 1 of the upload process
+   * step 1 of the notation upload process
+   * (this option uses a slice's `slug`)
+   * sends a POST request with no body
+   * so that we can receive a temporary upload URL
+   *
+   * @see https://www.soundslice.com/help/data-api/#putnotation
+   *
+   * TODO: include the optional param `callback_url`
+   */
+  const getNotationUploadUrlBySlug = (slug: number | string) =>
+    axiosWrapper.post(`/scores/${slug}/notation/`);
+
+  /**
+   * step 1 of the recording upload process
    * sends a POST request with no body
    * so that we can receive a temporary upload URL
    */
@@ -393,6 +414,74 @@ const getApiClientInstance = ({
   const listSubfoldersByParentId = (parentId: number | string) =>
     axiosWrapper.get(`/folders/?parent_id=${parentId}`);
 
+  /**
+   * Uploads notation to the slice with the given `scorehash`.
+   *
+   * @param {string} scorehash  Required
+   *
+   * One of either `pathToFile` or `rawString` is required, depending on if
+   * we want to upload a file from the filesystem or upload a raw string of MusicXML.
+   *
+   * @param {string} pathToFile The fully-qualified path to a file on the filesystem.
+   *                            When uploading music notation, Soundslice supports
+   *                            MusicXML, Guitar Pro, PowerTab and TuxGuitar formats.
+   *
+   * @param {string} rawString If `pathToFile` is not provided, we'll attempt to upload
+   *                           `rawString`, which can be a raw string of MusicXML.
+   */
+  const uploadNotation = async function uploadNotation(
+    paramsObj: UploadNotationParams,
+  ) {
+    if (!paramsObj.scorehash || typeof paramsObj.scorehash !== `string`) {
+      throw new Error(
+        `ERROR: The method \`uploadNotation\` requires a string \`scorehash\`.`,
+      );
+    }
+
+    let uploadUrl = ``;
+
+    {
+      const res1 = await getNotationUploadUrlByScorehash(paramsObj.scorehash);
+
+      if (
+        res1 &&
+        typeof res1 === `object` &&
+        res1.data &&
+        typeof res1.data === `object` &&
+        res1.data.url &&
+        typeof res1.data.url === `string`
+      ) {
+        uploadUrl = res1.data.url;
+      } else {
+        throw new Error(
+          `ERROR: The method \`uploadNotation\` failed to get an \`uploadUrl\` for the \`scorehash\` of "${paramsObj.scorehash}".`,
+        );
+      }
+    }
+
+    let res2;
+
+    if (
+      `pathToFile` in paramsObj &&
+      paramsObj.pathToFile &&
+      typeof paramsObj.pathToFile === `string`
+    ) {
+      res2 = await uploadFile({ pathToFile: paramsObj.pathToFile, uploadUrl });
+    } else if (
+      `rawString` in paramsObj &&
+      paramsObj.rawString &&
+      typeof paramsObj.rawString === `string`
+    ) {
+      res2 = await uploadFile({ rawString: paramsObj.rawString, uploadUrl });
+    } else {
+      throw new Error(
+        `ERROR: The method \`uploadNotation\` requires either a string \`pathToFile\` or a string \`rawString\`.`,
+      );
+    }
+
+    return res2;
+  };
+
   return {
     changeRecording,
     createFolder,
@@ -407,6 +496,7 @@ const getApiClientInstance = ({
 
     duplicateSliceByScorehash,
     getNotationUploadUrlByScorehash,
+    getNotationUploadUrlBySlug,
     getRecordingUploadUrlByRecordingId,
     getSliceByScorehash,
 
@@ -429,6 +519,7 @@ const getApiClientInstance = ({
     renameFolder,
     reorderSliceRecordings,
     uploadFile,
+    uploadNotation,
   };
 };
 
