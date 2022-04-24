@@ -1,4 +1,15 @@
 # Changelog
+
+## 2022-04-24
+
+- Published `v0.19.3`
+- Bumped dependencies
+- See https://github.com/ericcarraway/soundslice-data-api/pull/36
+
+## 2022-02-17
+
+- Published `v0.19.2`
+
 ## 2022-02-14
 
 - Published `v0.19.1`
@@ -18,6 +29,7 @@
 ## 2021-11-26
 
 - Published `v0.18.0`
+
   - See https://github.com/ericcarraway/soundslice-data-api/pull/27
   - Added `reorderSliceRecordings` to reorder a slice's recordings
   - Added `changeRecording` to change attributes of a recording
