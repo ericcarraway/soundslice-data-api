@@ -1,5 +1,11 @@
 # Changelog
 
+## 2022-05-24
+
+- Published `v0.19.4`
+- Bumped dependencies
+- See https://github.com/ericcarraway/soundslice-data-api/pull/37
+
 ## 2022-04-24
 
 - Published `v0.19.3`
